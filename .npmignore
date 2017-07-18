@@ -1,0 +1,11 @@
+**/.*/
+constants/
+node_modules/
+src/
+coverage/
+.idea/
+webpack.config.js
+webpack.config.prod.js
+.DS_Store
+yarn.lock
+example/
