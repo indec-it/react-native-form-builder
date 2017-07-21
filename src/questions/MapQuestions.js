@@ -1,11 +1,13 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-// import {
-//     Card,
-//     CardItem,
-//     View
-// } from 'native-base';
+import {Text, View} from 'react-native';
+import CheckBox from './CheckBox';
+import InputNumber from './InputNumber';
+import InputText from './InputText';
+import Select from './Select';
+import Radio from './Radio';
+import Title from './Title';
 import YesNoQuestion from './YesNoQuestion';
 import {types} from '../constants/constants';
 
@@ -19,26 +21,46 @@ const MapQuestions = ({chapter, question, onChange}) => {
     if (!section) {
         section = {};
     }
-    return (null);
-        {/*<Card key={question.id}>*/}
-            {/*<CardItem>*/}
-                {/*{!question.parentQuestion && <View>*/}
-                    {/*{question.type === types.YES_NO && <YesNoQuestion*/}
-                        {/*answer={section[question.name]}*/}
-                        {/*disabled={disabled}*/}
-                        {/*question={question}*/}
-                        {/*onChange={e => change(e, onChange)}*/}
-                    {/*/>}*/}
-                {/*</View>}*/}
-                {/*{question.parentQuestion && <View>*/}
-                    {/*{question.type === types.YES_NO && <YesNoQuestion*/}
-                        {/*answer={section[question.name]}*/}
-                        {/*question={question}*/}
-                        {/*onChange={e => change(e, onChange)}*/}
-                    {/*/>}*/}
-                {/*</View>}*/}
-            {/*</CardItem>*/}
-        {/*</Card>*/}
+    return (
+        <View>
+            {question.type === types.LABEL && <View>
+                <Text>
+                    {question.text}
+                </Text>
+            </View>}
+            {question.type === types.TITLE && <Title question={question}/>}
+            {question.type === types.YES_NO && <YesNoQuestion
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+            {question.type === types.RADIO && <Radio
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+            {question.type === types.CHECKBOX && <CheckBox
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+            {question.type === types.SELECT && <Select
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+            {question.type === types.TEXT && <InputText
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+            {question.type === types.NUMBER && <InputNumber
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+        </View>
+    );
 };
 
 MapQuestions.propTypes = {
