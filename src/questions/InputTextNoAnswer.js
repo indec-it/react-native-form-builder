@@ -1,7 +1,7 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View, Button} from 'react-native';
 
 const styles = StyleSheet.create({
     rowContainer: {
@@ -9,32 +9,40 @@ const styles = StyleSheet.create({
     }
 });
 
-const InputNumber = ({answer, question, onChange}) => {
+const InputTextNoAnswer = ({answer, question, onChange}) => {
+
     const change = (value, callback) => callback({target: {name: question.name, value}});
+
+    const setNoAnswer = (value, callback) => {
+        callback({target: {name: question.name, value}});
+        callback({target: {name: `${question.name}NoAnswer`, value: true}});
+    };
+
     return (
         <View style={styles.rowContainer}>
             <Text>{question.number ? `${question.number}` : ''}</Text>
             <Text>{question.text}</Text>
             <TextInput
-                max={question.max}
-                maxLength={question.maxLength}
-                min={question.min}
-                keyboardType={'numeric'}
                 value={answer}
                 onChangeText={text => change(text, onChange)}
+            />
+            <Button
+                title={question.buttonText}
+                color={question.buttonColor}
+                onPress={() => setNoAnswer(question.disableValue, onChange)}
             />
         </View>
     );
 };
 
-InputNumber.propTypes = {
+InputTextNoAnswer.propTypes = {
     answer: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     question: PropTypes.shape({}).isRequired
 };
 
-InputNumber.defaultProps = {
+InputTextNoAnswer.defaultProps = {
     answer: null
 };
 
-export default InputNumber;
+export default InputTextNoAnswer;

@@ -5,6 +5,7 @@ import {Text, View} from 'react-native';
 import CheckBox from './CheckBox';
 import InputNumber from './InputNumber';
 import InputText from './InputText';
+import InputTextNoAnswer from './InputTextNoAnswer';
 import Select from './Select';
 import Radio from './Radio';
 import Title from './Title';
@@ -53,6 +54,12 @@ const MapQuestions = ({chapter, question, onChange}) => {
                 answer={section[question.name]}
                 onChange={e => change(e, onChange)}
                 question={question}
+            />}
+            {question.type === types.TEXT_OR_NO_ANSWER && <InputTextNoAnswer
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+                noAnswer
             />}
             {question.type === types.NUMBER && <InputNumber
                 answer={section[question.name]}

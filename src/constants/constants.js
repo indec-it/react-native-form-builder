@@ -1,4 +1,4 @@
-export const types = {
+const types = {
     CHECKBOX: 'checkbox',
     DATE: 'date',
     EMAIL: 'email',
@@ -20,8 +20,13 @@ export const types = {
     SPACE: 'space',
     SUM: 'sum',
     TEXT: 'text',
+    TEXT_OR_NO_ANSWER: 'textNoAnswer',
     TEXT_AREA: 'textarea',
     TITLE: 'title',
     YEAR: 'Year',
     YES_NO: 'YesNoQuestion'
+};
+
+export {
+    types
 };
