@@ -8,6 +8,8 @@ import InputText from './InputText';
 import InputTextNoAnswer from './InputTextNoAnswer';
 import Select from './Select';
 import Radio from './Radio';
+import RadioTable from './RadioTable';
+import InputTextWithIgnore from './InputTextWithIgnore';
 import Title from './Title';
 import YesNoQuestion from './YesNoQuestion';
 import {types} from '../constants/constants';
@@ -61,6 +63,16 @@ const MapQuestions = ({chapter, question, onChange}) => {
                 question={question}
             />}
             {question.type === types.NUMBER && <InputNumber
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+            {question.type === types.RADIO_TABLE && <RadioTable
+                section={section}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+            {question.type === types.TEXT_WITH_IGNORE && <InputTextWithIgnore
                 answer={section[question.name]}
                 onChange={e => change(e, onChange)}
                 question={question}
