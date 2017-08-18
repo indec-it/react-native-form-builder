@@ -59,7 +59,6 @@ const MapQuestions = ({chapter, question, onChange}) => {
                 answer={section[question.name]}
                 onChange={e => change(e, onChange)}
                 question={question}
-                noAnswer
             />}
             {question.type === types.NUMBER && <InputNumber
                 answer={section[question.name]}
