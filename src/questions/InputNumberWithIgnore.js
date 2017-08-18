@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const InputTextWithIgnore = ({answer, question, onChange}) => {
+const InputNumberWithIgnore = ({answer, question, onChange}) => {
     let inputDisabled = answer === question.ignoreValue;
 
     const changeCheckbox = (value, callback) => {
@@ -32,7 +32,11 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
                 <Text>{question.inputText}</Text>
                 {inputDisabled
                     ? <Text>(Deshabilitado)</Text>
-                    : <TextInput
+                    :  <TextInput
+                        max={question.max}
+                        maxLength={question.maxLength}
+                        min={question.min}
+                        keyboardType={'numeric'}
                         value={answer}
                         onChangeText={text => changeInput(text, onChange)}
                     />
@@ -51,14 +55,14 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
     );
 };
 
-InputTextWithIgnore.propTypes = {
+InputNumberWithIgnore.propTypes = {
     answer: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
     question: PropTypes.shape({}).isRequired
 };
 
-InputTextWithIgnore.defaultProps = {
+InputNumberWithIgnore.defaultProps = {
     answer: null
 };
 
-export default InputTextWithIgnore;
+export default InputNumberWithIgnore;

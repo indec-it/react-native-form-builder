@@ -11,6 +11,7 @@ const types = {
     NUMBER: 'number',
     NUMBER_FORMAT: 'numberFormat',
     NUMBER_WITHOUT_LABEL: 'numberWithoutLabel',
+    NUMBER_WITH_IGNORE: 'numberWithIgnore',
     PERCENTAGE: 'percentage',
     RADIO: 'radio',
     RADIO_TABLE: 'radioTable',
