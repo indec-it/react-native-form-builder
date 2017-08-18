@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const InputText = ({answer, question, onChange}) => {
+const InputNumber = ({answer, question, onChange}) => {
     const change = (value, callback) => callback({target: {name: question.name, value}});
     return (
         <View style={styles.rowContainer}>
@@ -27,14 +27,14 @@ const InputText = ({answer, question, onChange}) => {
     );
 };
 
-InputText.propTypes = {
+InputNumber.propTypes = {
     answer: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     question: PropTypes.shape({}).isRequired
 };
 
-InputText.defaultProps = {
+InputNumber.defaultProps = {
     answer: null
 };
 
-export default InputText;
+export default InputNumber;
