@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/indec-it/react-native-form-builder#readme",
   "devDependencies": {
-    "babel-core": "^6.25.0",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "^7.1.2",
     "babel-plugin-lodash": "^3.2.11",
     "babel-preset-react-native": "^2.1.0"
   },
@@ -28,6 +28,7 @@
     "prop-types": "15.5.10",
     "react": "15.4.2",
     "react-native": "0.42.0",
+    "react-native-datepicker": "^1.6.0",
     "react-native-elements": "^0.15.0",
     "react-native-vector-icons": "^4.2.0"
   }

@@ -4,9 +4,9 @@ import {Text, TextInput, View, Button} from 'react-native';
 
 import styles from './styles';
 
-const handleChange = (value, callback) => callback({target: {name: question.name, value}});
+const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
 
-const setNoAnswer = (value, callback) => {
+const setNoAnswer = (value, callback, question) => {
     callback({target: {name: question.name, value}});
     callback({target: {name: `${question.name}NoAnswer`, value: true}});
 };
@@ -35,12 +35,12 @@ class InputTextNoAnswer extends Component {
                 <Text>{question.text}</Text>
                 {!this.state.block && <TextInput
                     value={answer}
-                    onChangeText={text => handleChange(text, onChange)}
+                    onChangeText={text => handleChange(text, onChange, question)}
                 />}
                 {this.state.block && <Text style={{color: 'grey'}}>{answer}</Text>}
                 <Button
                     title="S/N"
-                    onPress={() => setNoAnswer(question.disableValue, onChange)}
+                    onPress={() => setNoAnswer(question.disableValue, onChange, question)}
                 />
             </View>
         );

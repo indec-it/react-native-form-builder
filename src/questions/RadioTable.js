@@ -7,7 +7,7 @@ import {CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (value, callback) => callback({target: {name: questionName, value}});
+const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
 
 const renderQuestionRow = (section, options, parentQuestionName, questionRow, onChange) => {
     const questionName = parentQuestionName + questionRow.name;
@@ -23,7 +23,7 @@ const renderQuestionRow = (section, options, parentQuestionName, questionRow, on
                         key={option.value}
                         containerStyle={{borderWidth: 0, backgroundColor: null}}
                         checkedIcon='dot-circle-o'
-                        onPress={() => handleChange(option.value, onChange)}
+                        onPress={() => handleChange(option.value, onChange, question)}
                         uncheckedIcon='circle-o'
                         checked={answer === option.value}
                     />
