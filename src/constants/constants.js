@@ -15,6 +15,7 @@ const types = {
     PERCENTAGE: 'percentage',
     RADIO: 'radio',
     RADIO_TABLE: 'radioTable',
+    RADIO_SECTIONS: 'radioSections',
     SELECT: 'select',
     SELECT_DISABLED: 'selectDisabled',
     SELECT_MULTIPLE: 'selectMultiple',

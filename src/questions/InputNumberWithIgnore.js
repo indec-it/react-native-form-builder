@@ -1,44 +1,37 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import {Text, View, TextInput} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
-const styles = StyleSheet.create({
-    rowContainer: {
-        paddingHorizontal: 4,
-    }
-});
+import QuestionText from './QuestionText';
+import styles from './styles';
+
+const handleChangeCheckbox = (value, callback) => {
+    const isChecked = value === question.ignoreValue;
+    value = !isChecked;
+    const answerValue = value ? question.ignoreValue : null;
+    return callback({target: {name: question.name, value: answerValue}});
+};
+
+const handleChangeInput = (value, callback) => callback({target: {name: question.name, value}});
 
 const InputNumberWithIgnore = ({answer, question, onChange}) => {
-    let inputDisabled = answer === question.ignoreValue;
-
-    const changeCheckbox = (value, callback) => {
-        const isChecked = value === question.ignoreValue;
-        value = !isChecked;
-        const answerValue = value ? question.ignoreValue : null;
-        return callback({target: {name: question.name, value: answerValue}});
-    };
-
-    const changeInput = (value, callback) => {
-        return callback({target: {name: question.name, value}});
-    };
-
+    const inputDisabled = answer === question.ignoreValue;
     return (
         <View style={styles.rowContainer}>
-            <Text>{question.number ? `${question.number}` : ''}</Text>
-            <Text>{question.text}</Text>
+            <QuestionText question={question}/>
             <View>
                 <Text>{question.inputText}</Text>
                 {inputDisabled
                     ? <Text>(Deshabilitado)</Text>
-                    :  <TextInput
+                    : <TextInput
                         max={question.max}
                         maxLength={question.maxLength}
                         min={question.min}
                         keyboardType={'numeric'}
                         value={answer}
-                        onChangeText={text => changeInput(text, onChange)}
+                        onChangeText={text => handleChangeInput(text, onChange)}
                     />
                 }
                 {question.inputUnit && <Text>{question.inputUnit}</Text>}
@@ -47,7 +40,7 @@ const InputNumberWithIgnore = ({answer, question, onChange}) => {
                 <Text>{question.ignoreText}</Text>
                 <CheckBox
                     style={{width: 20}}
-                    onPress={() => changeCheckbox(answer, onChange)}
+                    onPress={() => handleChangeCheckbox(answer, onChange)}
                     checked={answer === question.ignoreValue}
                 />
             </View>

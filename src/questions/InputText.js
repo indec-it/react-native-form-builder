@@ -3,34 +3,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-const styles = StyleSheet.create({
-    rowContainer: {
-        paddingHorizontal: 4,
-    }
-});
+import QuestionText from './QuestionText';
+import styles from './styles';
 
-const InputText = ({answer, question, onChange}) => {
-    const change = (value, callback) => callback({target: {name: question.name, value}});
-    return (
-        <View style={styles.rowContainer}>
-            <Text>{question.number ? `${question.number}` : ''}</Text>
-            <Text>{question.text}</Text>
-            <TextInput
-                value={answer}
-                onChangeText={text => change(text, onChange)}
-            />
-        </View>
-    );
-};
+const handleChange = (value, callback) => callback({target: {name: question.name, value}});
 
-InputText.propTypes = {
+const InputNumber = ({answer, question, onChange}) => (
+    <View style={styles.rowContainer}>
+        <QuestionText question={question}/>
+        <TextInput
+            value={answer}
+            onChangeText={text => handleChange(text, onChange)}
+        />
+    </View>
+);
+
+InputNumber.propTypes = {
     answer: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     question: PropTypes.shape({}).isRequired
 };
 
-InputText.defaultProps = {
+InputNumber.defaultProps = {
     answer: null
 };
 
-export default InputText;
+export default InputNumber;

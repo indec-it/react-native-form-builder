@@ -1,15 +1,10 @@
-/* eslint jsx-a11y/label-has-for:"off" */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TextInput, View, Button} from 'react-native';
+import {Text, TextInput, View, Button} from 'react-native';
 
-const styles = StyleSheet.create({
-    rowContainer: {
-        paddingHorizontal: 4,
-    }
-});
+import styles from './styles';
 
-const change = (value, callback) => callback({target: {name: question.name, value}});
+const handleChange = (value, callback) => callback({target: {name: question.name, value}});
 
 const setNoAnswer = (value, callback) => {
     callback({target: {name: question.name, value}});
@@ -40,7 +35,7 @@ class InputTextNoAnswer extends Component {
                 <Text>{question.text}</Text>
                 {!this.state.block && <TextInput
                     value={answer}
-                    onChangeText={text => change(text, onChange)}
+                    onChangeText={text => handleChange(text, onChange)}
                 />}
                 {this.state.block && <Text style={{color: 'grey'}}>{answer}</Text>}
                 <Button
