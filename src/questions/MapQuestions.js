@@ -9,6 +9,7 @@ import InputTextNoAnswer from './InputTextNoAnswer';
 import Select from './Select';
 import Radio from './Radio';
 import RadioTable from './RadioTable';
+import RadioSections from './RadioSections';
 import InputTextWithIgnore from './InputTextWithIgnore';
 import InputNumberWithIgnore from './InputNumberWithIgnore';
 import Title from './Title';
@@ -39,6 +40,11 @@ const MapQuestions = ({chapter, question, onChange}) => {
                 question={question}
             />}
             {question.type === types.RADIO && <Radio
+                answer={section[question.name]}
+                onChange={e => change(e, onChange)}
+                question={question}
+            />}
+            {question.type === types.RADIO_SECTIONS && <RadioSections
                 answer={section[question.name]}
                 onChange={e => change(e, onChange)}
                 question={question}

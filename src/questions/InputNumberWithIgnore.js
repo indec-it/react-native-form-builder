@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {CheckBox} from 'react-native-elements';
+import QuestionText from './QuestionText';
 
 const styles = StyleSheet.create({
     rowContainer: {
@@ -26,8 +27,7 @@ const InputNumberWithIgnore = ({answer, question, onChange}) => {
 
     return (
         <View style={styles.rowContainer}>
-            <Text>{question.number ? `${question.number}` : ''}</Text>
-            <Text>{question.text}</Text>
+            <QuestionText question={question}/>
             <View>
                 <Text>{question.inputText}</Text>
                 {inputDisabled

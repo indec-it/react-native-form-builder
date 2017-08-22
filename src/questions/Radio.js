@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
+import QuestionText from './QuestionText';
+import InfoTextBox from './InfoTextBox';
 
 const styles = StyleSheet.create({
     rowContainer: {
@@ -14,8 +16,10 @@ const Radio = ({answer, question, onChange}) => {
     const change = (value, callback) => callback({target: {name: question.name, value}});
     return (
         <View style={styles.rowContainer}>
-            <Text>{question.number ? `${question.number}` : ''}</Text>
-            <Text>{question.text}</Text>
+            <QuestionText question={question}/>
+            {question.infoAfterText &&
+            <InfoTextBox text={question.infoAfterText}/>
+            }
             {question.options.map(option => (<CheckBox
                     key={option.value}
                     title={option.label}

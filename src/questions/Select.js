@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Picker, StyleSheet, Text, View } from 'react-native';
+import QuestionText from './QuestionText';
 
 const styles = StyleSheet.create({
     rowContainer: {
@@ -27,8 +28,7 @@ const Select = ({answer, question, onChange}) => {
     return (
         <View>
             <View>
-                <Text>{question.number ? `${question.number}` : ''}</Text>
-                <Text>{question.text}</Text>
+                <QuestionText question={question}/>
                 <Picker
                     selectedValue={answer}
                     onValueChange={itemValue => change(itemValue, onChange)}

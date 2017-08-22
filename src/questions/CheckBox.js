@@ -6,7 +6,7 @@ import {CheckBox} from 'react-native-elements';
 
 const styles = StyleSheet.create({
     rowContainer: {
-        paddingHorizontal: 4,
+        paddingHorizontal: 4
     }
 });
 

@@ -1,7 +1,8 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
+import QuestionText from './QuestionText';
 
 const styles = StyleSheet.create({
     rowContainer: {
@@ -9,12 +10,11 @@ const styles = StyleSheet.create({
     }
 });
 
-const InputNumber = ({answer, question, onChange}) => {
+const InputText = ({answer, question, onChange}) => {
     const change = (value, callback) => callback({target: {name: question.name, value}});
     return (
         <View style={styles.rowContainer}>
-            <Text>{question.number ? `${question.number}` : ''}</Text>
-            <Text>{question.text}</Text>
+            <QuestionText question={question}/>
             <TextInput
                 max={question.max}
                 maxLength={question.maxLength}
@@ -27,14 +27,14 @@ const InputNumber = ({answer, question, onChange}) => {
     );
 };
 
-InputNumber.propTypes = {
+InputText.propTypes = {
     answer: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     question: PropTypes.shape({}).isRequired
 };
 
-InputNumber.defaultProps = {
+InputText.defaultProps = {
     answer: null
 };
 
-export default InputNumber;
+export default InputText;

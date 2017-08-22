@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, Text, View} from 'react-native';
 import {Row, Col, Grid} from 'react-native-elements';
 import {CheckBox} from 'react-native-elements';
+import QuestionText from './QuestionText';
 
 const styles = StyleSheet.create({
     rowContainer: {
@@ -17,20 +18,20 @@ const renderQuestionRow = (section, options, parentQuestionName, questionRow, on
     const change = (value, callback) => callback({target: {name: questionName, value}});
     return (
         <Row>
-            <Col>
-                <Text>{questionRow.text}</Text>
+            <Col size={4}>
+                <Text style={{paddingTop: 15}}>{questionRow.text}</Text>
             </Col>
             {options.map(option => (
-                <Col>
-                    <CheckBox
-                        key={option.value}
-                        checkedIcon='dot-circle-o'
-                        onPress={() => change(option.value, onChange)}
-                        uncheckedIcon='circle-o'
-                        checked={answer === option.value}
-                    />
-                </Col>
-            ))}
+                <Col><CheckBox
+                    key={option.value}
+                    containerStyle={{borderWidth: 0, backgroundColor: null}}
+                    checkedIcon='dot-circle-o'
+                    onPress={() => change(option.value, onChange)}
+                    uncheckedIcon='circle-o'
+                    checked={answer === option.value}
+                />
+                </Col>)
+            )}
         </Row>
     )
 };
@@ -38,14 +39,15 @@ const renderQuestionRow = (section, options, parentQuestionName, questionRow, on
 const RadioTable = ({section, question, onChange}) => {
     return (
         <View style={styles.rowContainer}>
-            <Text>{question.number ? `${question.number}` : ''}</Text>
-            <Text>{question.text}</Text>
+            <QuestionText question={question}/>
             <Grid>
                 <Row>
-                    <Col/>
+                    <Col size={4}/>
                     {question.options.map(option => (
                         <Col>
-                            <Text>{option.text}</Text>
+                            <Text>
+                                {option.text}
+                            </Text>
                         </Col>
                     ))}
                 </Row>
