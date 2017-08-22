@@ -6,7 +6,7 @@ import styles from './styles';
 
 const handleChange = (value, callback) => callback({target: {name: question.name, value}});
 
-const InputText = ({answer, question, onChange}) => (
+const InputNumber = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
         <TextInput
@@ -20,14 +20,14 @@ const InputText = ({answer, question, onChange}) => (
     </View>
 );
 
-InputText.propTypes = {
+InputNumber.propTypes = {
     answer: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     question: PropTypes.shape({}).isRequired
 };
 
-InputText.defaultProps = {
+InputNumber.defaultProps = {
     answer: null
 };
 
-export default InputText;
+export default InputNumber;
