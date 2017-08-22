@@ -31,7 +31,7 @@ const getSelectedValue = (answer, question) => {
     }
 };
 
-const onPress = (index, callback, question) => {
+const handlePress = (index, callback, question) => {
     const value = getValue(index, question);
     return callback({target: {name: question.name, value}})
 };
@@ -46,7 +46,7 @@ const YesNoQuestion = ({answer, question, onChange}) => {
         <View>
             <QuestionText question={question}/>
             <ButtonGroup
-                onPress={index => onPress(index, onChange, question)}
+                onPress={index => handlePress(index, onChange, question)}
                 selectedIndex={getSelectedValue(answer, question)}
                 buttons={buttons}
                 containerStyle={{height: 100}}

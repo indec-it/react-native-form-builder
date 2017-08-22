@@ -1,31 +1,24 @@
-/* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, TextInput, View} from 'react-native';
 import QuestionText from './QuestionText';
+import styles from './styles';
 
-const styles = StyleSheet.create({
-    rowContainer: {
-        paddingHorizontal: 4,
-    }
-});
+const handleChange = (value, callback) => callback({target: {name: question.name, value}});
 
-const InputText = ({answer, question, onChange}) => {
-    const change = (value, callback) => callback({target: {name: question.name, value}});
-    return (
-        <View style={styles.rowContainer}>
-            <QuestionText question={question}/>
-            <TextInput
-                max={question.max}
-                maxLength={question.maxLength}
-                min={question.min}
-                keyboardType={'numeric'}
-                value={answer}
-                onChangeText={text => change(text, onChange)}
-            />
-        </View>
-    );
-};
+const InputText = ({answer, question, onChange}) => (
+    <View style={styles.rowContainer}>
+        <QuestionText question={question}/>
+        <TextInput
+            max={question.max}
+            maxLength={question.maxLength}
+            min={question.min}
+            keyboardType={'numeric'}
+            value={answer}
+            onChangeText={text => handleChange(text, onChange)}
+        />
+    </View>
+);
 
 InputText.propTypes = {
     answer: PropTypes.string,
