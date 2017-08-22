@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import CheckBox from './CheckBox';
+import Date from './Date';
 import InputNumber from './InputNumber';
 import InputText from './InputText';
 import InputTextNoAnswer from './InputTextNoAnswer';

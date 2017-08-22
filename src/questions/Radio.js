@@ -7,7 +7,7 @@ import QuestionText from './QuestionText';
 import InfoTextBox from './InfoTextBox';
 import styles from './styles';
 
-const handleChange = (value, callback) => callback({target: {name: question.name, value}});
+const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
 
 const Radio = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
@@ -18,7 +18,7 @@ const Radio = ({answer, question, onChange}) => (
                 key={option.value}
                 title={option.label}
                 checkedIcon='dot-circle-o'
-                onPress={() => handleChange(option.value, onChange)}
+                onPress={() => handleChange(option.value, onChange, question)}
                 uncheckedIcon='circle-o'
                 checked={answer === option.value}
             />

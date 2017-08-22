@@ -7,14 +7,14 @@ import {CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChangeCheckbox = (value, callback) => {
+const handleChangeCheckbox = (value, callback, question) => {
     const isChecked = value === question.ignoreValue;
     value = !isChecked;
     const answerValue = value ? question.ignoreValue : null;
     return callback({target: {name: question.name, value: answerValue}});
 };
 
-const handleChangeInput = (value, callback) => callback({target: {name: question.name, value}});
+const handleChangeInput = (value, callback, question) => callback({target: {name: question.name, value}});
 
 const InputNumberWithIgnore = ({answer, question, onChange}) => {
     const inputDisabled = answer === question.ignoreValue;
@@ -23,15 +23,14 @@ const InputNumberWithIgnore = ({answer, question, onChange}) => {
             <QuestionText question={question}/>
             <View>
                 <Text>{question.inputText}</Text>
-                {inputDisabled
-                    ? <Text>(Deshabilitado)</Text>
+                {inputDisabled ? <Text>(Deshabilitado)</Text>
                     : <TextInput
                         max={question.max}
                         maxLength={question.maxLength}
                         min={question.min}
                         keyboardType={'numeric'}
                         value={answer}
-                        onChangeText={text => handleChangeInput(text, onChange)}
+                        onChangeText={text => handleChangeInput(text, onChange, question)}
                     />
                 }
                 {question.inputUnit && <Text>{question.inputUnit}</Text>}
@@ -40,7 +39,7 @@ const InputNumberWithIgnore = ({answer, question, onChange}) => {
                 <Text>{question.ignoreText}</Text>
                 <CheckBox
                     style={{width: 20}}
-                    onPress={() => handleChangeCheckbox(answer, onChange)}
+                    onPress={() => handleChangeCheckbox(answer, onChange, question)}
                     checked={answer === question.ignoreValue}
                 />
             </View>

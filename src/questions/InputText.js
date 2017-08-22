@@ -6,14 +6,14 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (value, callback) => callback({target: {name: question.name, value}});
+const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
 
 const InputNumber = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
         <TextInput
             value={answer}
-            onChangeText={text => handleChange(text, onChange)}
+            onChangeText={text => handleChange(text, onChange, question)}
         />
     </View>
 );

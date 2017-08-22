@@ -5,7 +5,7 @@ import {CheckBox} from 'react-native-elements';
 
 import styles from './styles';
 
-const handleChange = (value, callback) => {
+const handleChange = (value, callback, question) => {
     value = !value;
     return callback({target: {name: question.name, value}});
 };
@@ -16,7 +16,7 @@ const Checkbox = ({answer, question, onChange}) => (
         <Text>{question.text}</Text>
         <CheckBox
             title={question.text}
-            onPress={() => handleChange(answer, onChange)}
+            onPress={() => handleChange(answer, onChange, question)}
             checked={answer}
         />
     </View>
