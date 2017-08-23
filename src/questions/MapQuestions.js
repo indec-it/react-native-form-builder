@@ -67,7 +67,7 @@ const MapQuestions = ({chapter, question, onChange}) => {
         section = {};
     }
 
-    const QuestionComponent = getQuestionComponent();
+    const QuestionComponent = getQuestionComponent(question.type);
     if (isText(question.type)) {
         return (<QuestionComponent question={question}/>);
     }
