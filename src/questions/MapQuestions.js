@@ -80,7 +80,7 @@ const MapQuestions = ({chapter, question, onChange}) => {
     }
     if (isSectionQuestion(question.type)) {
         return (<QuestionComponent
-            answer={section}
+            section={section}
             onChange={e => handleChange(e, onChange)}
             question={question}
         />);
