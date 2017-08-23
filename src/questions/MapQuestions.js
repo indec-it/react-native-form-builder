@@ -57,6 +57,7 @@ const getQuestionComponent = questionType => {
 };
 
 const isText = questionType => questionType === types.TITLE || questionType === types.LABEL;
+const isSectionQuestion = questionType => questionType === types.RADIO_TABLE;
 
 const MapQuestions = ({chapter, question, onChange}) => {
     let section = chapter;
@@ -70,6 +71,13 @@ const MapQuestions = ({chapter, question, onChange}) => {
     const QuestionComponent = getQuestionComponent(question.type);
     if (isText(question.type)) {
         return (<QuestionComponent question={question}/>);
+    }
+    if (isSectionQuestion(question.type)) {
+        return (<QuestionComponent
+            answer={section}
+            onChange={e => handleChange(e, onChange)}
+            question={question}
+        />);
     }
     return (<QuestionComponent
         answer={section[question.name]}
