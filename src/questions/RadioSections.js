@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
 import QuestionText from './QuestionText';
@@ -11,20 +11,21 @@ const handleChange = (value, callback, question) => callback({target: {name: que
 const RadioSections = ({answer, question, onChange}) => (
     <View style={styles.radioSections.rowContainer}>
         <QuestionText question={question}/>
-        {question.options.map(option => (<View>
+        {question.options.map(option => (
+            <View>
                 {option.section
                     ? <Text style={styles.radioSections.sectionSubTitle}>{option.section}</Text>
                     : <CheckBox
                         key={option.value}
                         title={option.label}
-                        checkedIcon='dot-circle-o'
+                        checkedIcon="dot-circle-o"
                         onPress={() => handleChange(option.value, onChange, question)}
-                        uncheckedIcon='circle-o'
+                        uncheckedIcon="circle-o"
                         checked={answer === option.value}
                     />
                 }
-            </View>)
-        )}
+            </View>
+        ))}
     </View>
 );
 

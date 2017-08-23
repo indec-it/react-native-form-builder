@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
-import {Row, Col, Grid} from 'react-native-elements';
-import {CheckBox} from 'react-native-elements';
+import {Text, View} from 'react-native';
+import {Row, Col, Grid, CheckBox} from 'react-native-elements';
 
 import QuestionText from './QuestionText';
 import styles from './styles';
@@ -22,15 +21,15 @@ const renderQuestionRow = (section, options, parentQuestionName, questionRow, on
                     <CheckBox
                         key={option.value}
                         containerStyle={{borderWidth: 0, backgroundColor: null}}
-                        checkedIcon='dot-circle-o'
+                        checkedIcon="dot-circle-o"
                         onPress={() => handleChange(option.value, onChange, question)}
-                        uncheckedIcon='circle-o'
+                        uncheckedIcon="circle-o"
                         checked={answer === option.value}
                     />
                 </Col>)
             )}
         </Row>
-    )
+    );
 };
 
 const RadioTable = ({section, question, onChange}) => (

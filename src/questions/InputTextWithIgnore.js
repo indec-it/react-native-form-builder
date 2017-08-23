@@ -1,21 +1,18 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import {Text, View, TextInput} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
 const handleChangeCheckbox = (value, callback, question) => {
     const isChecked = value === question.ignoreValue;
-    value = !isChecked;
-    const answerValue = value ? question.ignoreValue : null;
+    const answerValue = !isChecked ? question.ignoreValue : null;
     return callback({target: {name: question.name, value: answerValue}});
 };
 
-const handleChangeInput = (value, callback, question) => {
-    return callback({target: {name: question.name, value}});
-};
+const handleChangeInput = (value, callback, question) => callback({target: {name: question.name, value}});
 
 const InputTextWithIgnore = ({answer, question, onChange}) => {
     const inputDisabled = answer === question.ignoreValue;

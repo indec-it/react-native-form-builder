@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
 import styles from './styles';
 
-const handleChange = (value, callback, question) => {
-    value = !value;
-    return callback({target: {name: question.name, value}});
-};
+const handleChange = (value, callback, question) => callback({target: {name: question.name, value: !value}});
 
 const Checkbox = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>

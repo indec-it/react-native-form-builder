@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {TextInput, View} from 'react-native';
 import QuestionText from './QuestionText';
 import styles from './styles';
 

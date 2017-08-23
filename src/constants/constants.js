@@ -1,4 +1,5 @@
-const types = {
+// eslint-disable-next-line import/prefer-default-export
+export const types = {
     CHECKBOX: 'checkbox',
     DATE: 'date',
     EMAIL: 'email',
@@ -29,8 +30,4 @@ const types = {
     TITLE: 'title',
     YEAR: 'Year',
     YES_NO: 'YesNoQuestion'
-};
-
-export {
-    types
 };

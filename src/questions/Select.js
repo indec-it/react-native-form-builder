@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Picker, Text, View} from 'react-native';
+import {Picker, View} from 'react-native';
 import QuestionText from './QuestionText';
 
 const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
@@ -13,12 +13,13 @@ const Select = ({answer, question, onChange}) => (
                 selectedValue={answer}
                 onValueChange={itemValue => handleChange(itemValue, onChange, question)}
             >
-                {question.options.map(option => (<Picker.Item
+                {question.options.map(option => (
+                    <Picker.Item
                         key={option.value}
                         label={option.label}
                         value={option.value}
-                    />)
-                )}
+                    />
+                ))}
             </Picker>
         </View>
     </View>

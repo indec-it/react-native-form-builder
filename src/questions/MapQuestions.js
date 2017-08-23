@@ -1,23 +1,62 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, View} from 'react-native';
-import CheckBox from './CheckBox';
-import Date from './Date';
-import InputNumber from './InputNumber';
-import InputText from './InputText';
-import InputTextNoAnswer from './InputTextNoAnswer';
-import Select from './Select';
-import Radio from './Radio';
-import RadioTable from './RadioTable';
-import RadioSections from './RadioSections';
-import InputTextWithIgnore from './InputTextWithIgnore';
-import InputNumberWithIgnore from './InputNumberWithIgnore';
-import Title from './Title';
-import YesNoQuestion from './YesNoQuestion';
+
 import {types} from '../constants/constants';
 
+import CheckBox from './CheckBox';
+import InputDate from './InputDate';
+import InputNumber from './InputNumber';
+import InputNumberWithIgnore from './InputNumberWithIgnore';
+import InputText from './InputText';
+import InputTextNoAnswer from './InputTextNoAnswer';
+import InputTextWithIgnore from './InputTextWithIgnore';
+import Label from './Label';
+import Radio from './Radio';
+import RadioSections from './RadioSections';
+import RadioTable from './RadioTable';
+import Select from './Select';
+import Title from './Title';
+import YesNoQuestion from './YesNoQuestion';
+
 const handleChange = (event, callback) => callback(event);
+
+const getQuestionComponent = questionType => {
+    switch (questionType) {
+        case types.CHECKBOX:
+            return CheckBox;
+        case types.DATE:
+            return InputDate;
+        case types.LABEL:
+            return Label;
+        case types.NUMBER:
+            return InputNumber;
+        case types.NUMBER_WITH_IGNORE:
+            return InputNumberWithIgnore;
+        case types.RADIO:
+            return Radio;
+        case types.RADIO_SECTIONS:
+            return RadioSections;
+        case types.RADIO_TABLE:
+            return RadioTable;
+        case types.SELECT:
+            return Select;
+        case types.TEXT:
+            return InputText;
+        case types.TEXT_OR_NO_ANSWER:
+            return InputTextNoAnswer;
+        case types.TEXT_WITH_IGNORE:
+            return InputTextWithIgnore;
+        case types.TITLE:
+            return Title;
+        case types.YES_NO:
+            return YesNoQuestion;
+        default:
+            throw Error(`Question type not implemented: ${questionType}`);
+    }
+};
+
+const isText = questionType => questionType === types.TITLE || questionType === types.LABEL;
 
 const MapQuestions = ({chapter, question, onChange}) => {
     let section = chapter;
@@ -27,71 +66,16 @@ const MapQuestions = ({chapter, question, onChange}) => {
     if (!section) {
         section = {};
     }
-    return (
-        <View>
-            {question.type === types.LABEL && <View>
-                <Text>
-                    {question.text}
-                </Text>
-            </View>}
-            {question.type === types.TITLE && <Title question={question}/>}
-            {question.type === types.YES_NO && <YesNoQuestion
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.RADIO && <Radio
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.RADIO_SECTIONS && <RadioSections
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.CHECKBOX && <CheckBox
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.SELECT && <Select
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.TEXT && <InputText
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.TEXT_OR_NO_ANSWER && <InputTextNoAnswer
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.NUMBER && <InputNumber
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.RADIO_TABLE && <RadioTable
-                section={section}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.TEXT_WITH_IGNORE && <InputTextWithIgnore
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-            {question.type === types.NUMBER_WITH_IGNORE && <InputNumberWithIgnore
-                answer={section[question.name]}
-                onChange={e => handleChange(e, onChange)}
-                question={question}
-            />}
-        </View>
-    );
+
+    const QuestionComponent = getQuestionComponent();
+    if (isText(question.type)) {
+        return (<QuestionComponent question={question}/>);
+    }
+    return (<QuestionComponent
+        answer={section[question.name]}
+        onChange={e => handleChange(e, onChange)}
+        question={question}
+    />);
 };
 
 MapQuestions.propTypes = {

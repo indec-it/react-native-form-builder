@@ -1,14 +1,14 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
-import style from './styles';
+import styles from './styles';
 
 const handleChange = (question, value, callback) => callback({target: {name: question.name, value}});
 
-const Date = ({answer, question, onChange}) => (
+const InputDate = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <Text>{question.number ? `${question.number}` : ''}</Text>
         <Text>{question.text}</Text>
@@ -26,14 +26,14 @@ const Date = ({answer, question, onChange}) => (
     </View>
 );
 
-Date.propTypes = {
+InputDate.propTypes = {
     answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     onChange: PropTypes.func.isRequired,
     question: PropTypes.shape({}).isRequired
 };
 
-Date.defaultProps = {
+InputDate.defaultProps = {
     answer: null
 };
 
-export default Date;
+export default InputDate;

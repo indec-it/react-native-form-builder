@@ -24,7 +24,7 @@ class InputTextNoAnswer extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {block: false}
+        this.state = {block: false};
     }
 
     render() {

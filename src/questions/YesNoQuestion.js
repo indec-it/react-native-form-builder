@@ -33,13 +33,16 @@ const getSelectedValue = (answer, question) => {
 
 const handlePress = (index, callback, question) => {
     const value = getValue(index, question);
-    return callback({target: {name: question.name, value}})
+    return callback({target: {name: question.name, value}});
 };
 
 const YesNoQuestion = ({answer, question, onChange}) => {
-    const buttons = [{element: () => <Text>SI</Text>}, {element: () => <Text>NO</Text>}];
+    const buttons = [
+        {element: () => <Text>SI</Text>},
+        {element: () => <Text>NO</Text>}
+    ];
     if (question.dkValue) {
-        buttons.push({element: () => <Text>{question.dkLabel}</Text>})
+        buttons.push({element: () => <Text>{question.dkLabel}</Text>});
     }
 
     return (

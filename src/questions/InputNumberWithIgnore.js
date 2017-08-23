@@ -9,8 +9,7 @@ import styles from './styles';
 
 const handleChangeCheckbox = (value, callback, question) => {
     const isChecked = value === question.ignoreValue;
-    value = !isChecked;
-    const answerValue = value ? question.ignoreValue : null;
+    const answerValue = !isChecked ? question.ignoreValue : null;
     return callback({target: {name: question.name, value: answerValue}});
 };
 

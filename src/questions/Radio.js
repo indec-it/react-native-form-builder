@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
+import {View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
 import QuestionText from './QuestionText';
@@ -17,9 +17,9 @@ const Radio = ({answer, question, onChange}) => (
             <CheckBox
                 key={option.value}
                 title={option.label}
-                checkedIcon='dot-circle-o'
+                checkedIcon="dot-circle-o"
                 onPress={() => handleChange(option.value, onChange, question)}
-                uncheckedIcon='circle-o'
+                uncheckedIcon="circle-o"
                 checked={answer === option.value}
             />
         ))}
