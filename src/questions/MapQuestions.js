@@ -12,6 +12,7 @@ import InputText from './InputText';
 import InputTextNoAnswer from './InputTextNoAnswer';
 import InputTextWithIgnore from './InputTextWithIgnore';
 import Label from './Label';
+import QuestionText from './QuestionText';
 import Radio from './Radio';
 import RadioSections from './RadioSections';
 import RadioTable from './RadioTable';
@@ -33,6 +34,8 @@ const getQuestionComponent = questionType => {
             return InputNumber;
         case types.NUMBER_WITH_IGNORE:
             return InputNumberWithIgnore;
+        case types.QUESTION_WITHOUT_ANSWER:
+            return QuestionText;
         case types.RADIO:
             return Radio;
         case types.RADIO_SECTIONS:
@@ -56,7 +59,10 @@ const getQuestionComponent = questionType => {
     }
 };
 
-const isText = questionType => questionType === types.TITLE || questionType === types.LABEL;
+const isText = questionType =>
+    questionType === types.TITLE
+    || questionType === types.LABEL
+    || questionType === types.QUESTION_WITHOUT_ANSWER;
 const isSectionQuestion = questionType => questionType === types.RADIO_TABLE;
 
 const MapQuestions = ({chapter, question, onChange}) => {
@@ -74,7 +80,7 @@ const MapQuestions = ({chapter, question, onChange}) => {
     }
     if (isSectionQuestion(question.type)) {
         return (<QuestionComponent
-            answer={section}
+            section={section}
             onChange={e => handleChange(e, onChange)}
             question={question}
         />);
