@@ -1,5 +1,5 @@
-# react-native-questions
+# react-native-form-builder
 
 ## Instalation
 
-    npm install react-native-questions
+    npm install @indec/react-native-form-builder

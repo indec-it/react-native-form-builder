@@ -1,7 +1,6 @@
 **/.*/
 constants/
 node_modules/
-src/
 coverage/
 webpack.config.js
 webpack.config.prod.js

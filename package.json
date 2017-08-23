@@ -1,5 +1,5 @@
 {
-  "name": "react-native-questions",
+  "name": "@indec/react-native-form-builder",
   "version": "0.1.0",
   "description": "A library to generate forms in react native based on a json description",
   "private": false,
@@ -48,10 +48,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/indec-it/react-native-questions.git"
+    "url": "https://github.com/indec-it/react-native-form-builder.git"
   },
   "bugs": {
-    "url": "https://github.com/indec-it/react-native-questions/issues"
+    "url": "https://github.com/indec-it/react-native-form-builder/issues"
   },
-  "homepage": "https://github.com/indec-it/react-native-questions"
+  "homepage": "https://github.com/indec-it/react-native-form-builder"
 }
