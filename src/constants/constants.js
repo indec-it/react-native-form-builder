@@ -14,6 +14,7 @@ export const types = {
     NUMBER_WITHOUT_LABEL: 'numberWithoutLabel',
     NUMBER_WITH_IGNORE: 'numberWithIgnore',
     PERCENTAGE: 'percentage',
+    QUESTION_WITHOUT_ANSWER: 'questionW',
     RADIO: 'radio',
     RADIO_TABLE: 'radioTable',
     RADIO_SECTIONS: 'radioSections',
