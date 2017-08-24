@@ -4,6 +4,7 @@ export const types = {
     DATE: 'date',
     EMAIL: 'email',
     INT: 'int',
+    INFO_TEXT_BOX: 'infoTextBox',
     INT_ALLOW_ZERO: 'intAllowZero',
     LABEL: 'label',
     LINE: 'line',
