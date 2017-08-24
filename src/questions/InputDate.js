@@ -10,8 +10,7 @@ const handleChange = (question, value, callback) => callback({target: {name: que
 
 const InputDate = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
-        <Text>{question.number ? `${question.number}` : ''}</Text>
-        <Text>{question.text}</Text>
+        <QuestionText question={question}/>
         <DatePicker
             style={{width: 200}}
             date={answer}
