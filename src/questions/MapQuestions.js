@@ -8,6 +8,7 @@ import CheckBox from './CheckBox';
 import InputDate from './InputDate';
 import InputNumber from './InputNumber';
 import InputNumberWithIgnore from './InputNumberWithIgnore';
+import InfoTextBoxQuestion from './InfoTextBoxQuestion';
 import InputText from './InputText';
 import InputTextNoAnswer from './InputTextNoAnswer';
 import InputTextWithIgnore from './InputTextWithIgnore';
@@ -28,6 +29,8 @@ const getQuestionComponent = questionType => {
             return CheckBox;
         case types.DATE:
             return InputDate;
+        case types.INFO_TEXT_BOX:
+            return InfoTextBoxQuestion;
         case types.LABEL:
             return Label;
         case types.NUMBER:
@@ -61,6 +64,7 @@ const getQuestionComponent = questionType => {
 
 const isText = questionType =>
     questionType === types.TITLE
+    || questionType === types.INFO_TEXT_BOX
     || questionType === types.LABEL
     || questionType === types.QUESTION_WITHOUT_ANSWER;
 const isSectionQuestion = questionType => questionType === types.RADIO_TABLE;
