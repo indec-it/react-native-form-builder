@@ -12,8 +12,9 @@ const InputText = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
         <TextInput
-            value={answer}
+            maxLength={question.maxLength}
             onChangeText={text => handleChange(text, onChange, question)}
+            value={answer}
         />
     </View>
 );

@@ -8,13 +8,14 @@ import styles from './styles';
 
 const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
 
-const renderQuestionRow = (section, options, parentQuestionName, questionRow, onChange) => {
-    const questionName = parentQuestionName + questionRow.name;
+const renderRow = (section, options, parentQuestionName, question, onChange) => {
+    const questionName = parentQuestionName + question.name;
     const answer = section[questionName];
+    // TODO add key attribute to Row component for better loop render.
     return (
         <Row>
             <Col size={4}>
-                <Text style={{paddingTop: 15}}>{questionRow.text}</Text>
+                <Text style={{paddingTop: 15}}>{question.text}</Text>
             </Col>
             {options.map(option => (
                 <Col>
@@ -46,21 +47,17 @@ const RadioTable = ({section, question, onChange}) => (
                     </Col>
                 ))}
             </Row>
-            {question.questions.map(questionRow => (
-                renderQuestionRow(section, question.options, question.name, questionRow, onChange)
-            ))}
+            {question.questions.map(questionRow =>
+                renderRow(section, question.options, question.name, questionRow, onChange)
+            )}
         </Grid>
     </View>
 );
 
 RadioTable.propTypes = {
-    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     onChange: PropTypes.func.isRequired,
+    section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired
-};
-
-RadioTable.defaultProps = {
-    answer: null
 };
 
 export default RadioTable;
