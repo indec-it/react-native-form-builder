@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {Text, View} from 'react-native';
 import InfoTextBox from './InfoTextBox';
 
 const InfoTextBoxQuestion = ({question}) => (
