@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
+import QuestionText from './QuestionText';
 import styles from './styles';
 
 const handleChange = (question, value, callback) => callback({target: {name: question.name, value}});
