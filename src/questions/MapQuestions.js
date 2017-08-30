@@ -67,7 +67,6 @@ const isText = questionType =>
     || questionType === types.INFO_TEXT_BOX
     || questionType === types.LABEL
     || questionType === types.QUESTION_WITHOUT_ANSWER;
-const isSectionQuestion = questionType => questionType === types.RADIO_TABLE;
 
 const MapQuestions = ({chapter, question, onChange}) => {
     let section = chapter;
@@ -82,15 +81,8 @@ const MapQuestions = ({chapter, question, onChange}) => {
     if (isText(question.type)) {
         return (<QuestionComponent question={question}/>);
     }
-    if (isSectionQuestion(question.type)) {
-        return (<QuestionComponent
-            section={section}
-            onChange={e => handleChange(e, onChange)}
-            question={question}
-        />);
-    }
     return (<QuestionComponent
-        answer={section[question.name]}
+        section={section}
         onChange={e => handleChange(e, onChange)}
         question={question}
     />);

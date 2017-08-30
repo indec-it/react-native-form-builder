@@ -1,5 +1,8 @@
 import MapQuestions from './questions/MapQuestions';
-import {types} from './constants/constants';
+import {types, typesParentValue} from './constants/constants';
 
-export {types};
-export {MapQuestions};
+export {
+    MapQuestions,
+    types,
+    typesParentValue
+};

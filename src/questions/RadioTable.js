@@ -6,7 +6,7 @@ import {Row, Col, Grid, CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (value, callback, questionName) => callback({target: {name: questionName, value}});
+const handleChange = (obj, section, callback) => callback({[section]: obj});
 
 const renderRow = (section, options, parentQuestionName, question, onChange) => {
     const questionName = parentQuestionName + question.name;
@@ -23,7 +23,7 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
                         key={option.value}
                         containerStyle={{borderWidth: 0, backgroundColor: null}}
                         checkedIcon="dot-circle-o"
-                        onPress={() => handleChange(option.value, onChange, questionName)}
+                        onPress={() => handleChange({[questionName]: option.value}, section.name, onChange)}
                         uncheckedIcon="circle-o"
                         checked={answer === option.value}
                     />
@@ -55,9 +55,9 @@ const RadioTable = ({section, question, onChange}) => (
 );
 
 RadioTable.propTypes = {
-    onChange: PropTypes.func.isRequired,
     section: PropTypes.shape({}).isRequired,
-    question: PropTypes.shape({}).isRequired
+    question: PropTypes.shape({}).isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default RadioTable;

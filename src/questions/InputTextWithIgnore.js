@@ -6,15 +6,10 @@ import {CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChangeCheckbox = (value, callback, question) => {
-    const isChecked = value === question.ignoreValue;
-    const answerValue = !isChecked ? question.ignoreValue : null;
-    return callback({target: {name: question.name, value: answerValue}});
-};
+const handleChange = (obj, section, callback) => callback({[section]: obj});
 
-const handleChangeInput = (value, callback, question) => callback({target: {name: question.name, value}});
-
-const InputTextWithIgnore = ({answer, question, onChange}) => {
+const InputTextWithIgnore = ({section, question, onChange}) => {
+    const answer = section[question.name];
     const inputDisabled = answer === question.ignoreValue;
     return (
         <View style={styles.rowContainer}>
@@ -25,7 +20,7 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
                     ? <Text>(Deshabilitado)</Text>
                     : <TextInput
                         value={answer}
-                        onChangeText={text => handleChangeInput(text, onChange, question)}
+                        onChangeText={text => handleChange({[question.name]: text}, section.name, onChange)}
                     />
                 }
                 {question.inputUnit && <Text>{question.inputUnit}</Text>}
@@ -34,7 +29,11 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
                 <Text>{question.ignoreText}</Text>
                 <CheckBox
                     style={{width: 20}}
-                    onPress={() => handleChangeCheckbox(answer, onChange, question)}
+                    onPress={() => handleChange(
+                        {[question.name]: answer !== question.ignoreValue ? question.ignoreValue : null},
+                        section.name,
+                        onChange
+                    )}
                     checked={answer === question.ignoreValue}
                 />
             </View>
@@ -43,13 +42,9 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
 };
 
 InputTextWithIgnore.propTypes = {
-    answer: PropTypes.bool,
-    onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
-};
-
-InputTextWithIgnore.defaultProps = {
-    answer: null
+    section: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({}).isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default InputTextWithIgnore;

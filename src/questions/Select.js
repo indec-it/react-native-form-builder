@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import {Picker, View} from 'react-native';
 import QuestionText from './QuestionText';
 
-const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
+const handleChange = (obj, section, callback) => callback({[section]: obj});
 
-const Select = ({answer, question, onChange}) => (
+const Select = ({section, question, onChange}) => (
     <View>
         <View>
             <QuestionText question={question}/>
             <Picker
-                selectedValue={answer}
-                onValueChange={itemValue => handleChange(itemValue, onChange, question)}
+                selectedValue={section[question.name]}
+                onValueChange={itemValue => handleChange({[question.name]: itemValue}, section.name, onChange)}
             >
                 {question.options.map(option => (
                     <Picker.Item
@@ -26,13 +26,9 @@ const Select = ({answer, question, onChange}) => (
 );
 
 Select.propTypes = {
-    answer: PropTypes.number,
-    onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
-};
-
-Select.defaultProps = {
-    answer: null
+    section: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({}).isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default Select;

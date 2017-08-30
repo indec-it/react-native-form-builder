@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export const types = {
+const types = {
     CHECKBOX: 'checkbox',
     DATE: 'date',
     EMAIL: 'email',
@@ -32,4 +32,20 @@ export const types = {
     TITLE: 'title',
     YEAR: 'Year',
     YES_NO: 'YesNoQuestion'
+};
+
+// Types Parent Value is a temporal enum in this package.
+const typesParentValue = {
+    EQUALS: 'equals',
+    NOT_EQUALS: 'notEquals',
+    GREATER_THAN: 'greaterThan',
+    GREATER_OR_EQUAL_THAN: 'greaterOrEqualThan',
+    LESS_THAN: 'lessThan',
+    LESS_OR_EQUAL_THAN: 'lessOrEqualThan',
+    VOID: 'void'
+};
+
+export {
+    types,
+    typesParentValue
 };

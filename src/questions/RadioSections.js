@@ -6,9 +6,9 @@ import {CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
+const handleChange = (obj, section, callback) => callback({[section]: obj});
 
-const RadioSections = ({answer, question, onChange}) => (
+const RadioSections = ({section, question, onChange}) => (
     <View style={styles.radioSections.rowContainer}>
         <QuestionText question={question}/>
         {question.options.map(option => (
@@ -19,9 +19,9 @@ const RadioSections = ({answer, question, onChange}) => (
                         key={option.value}
                         title={option.label}
                         checkedIcon="dot-circle-o"
-                        onPress={() => handleChange(option.value, onChange, question)}
+                        onPress={() => handleChange({[question.name]: option.value}, section.name, onChange)}
                         uncheckedIcon="circle-o"
-                        checked={answer === option.value}
+                        checked={section[question.name] === option.value}
                     />
                 }
             </View>
@@ -30,13 +30,9 @@ const RadioSections = ({answer, question, onChange}) => (
 );
 
 RadioSections.propTypes = {
-    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
-};
-
-RadioSections.defaultProps = {
-    answer: null
+    section: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({}).isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default RadioSections;

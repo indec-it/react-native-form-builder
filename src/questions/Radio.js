@@ -7,9 +7,9 @@ import QuestionText from './QuestionText';
 import InfoTextBox from './InfoTextBox';
 import styles from './styles';
 
-const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
+const handleChange = (obj, section, callback) => callback({[section]: obj});
 
-const Radio = ({answer, question, onChange}) => (
+const Radio = ({section, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
@@ -18,22 +18,18 @@ const Radio = ({answer, question, onChange}) => (
                 key={option.value}
                 title={option.label}
                 checkedIcon="dot-circle-o"
-                onPress={() => handleChange(option.value, onChange, question)}
+                onPress={() => handleChange({[question.name]: option.value}, section.name, onChange)}
                 uncheckedIcon="circle-o"
-                checked={answer === option.value}
+                checked={section[question.name] === option.value}
             />
         ))}
     </View>
 );
 
 Radio.propTypes = {
-    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
-};
-
-Radio.defaultProps = {
-    answer: null
+    section: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({}).isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default Radio;
