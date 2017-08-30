@@ -4,9 +4,7 @@ import {TextInput, View} from 'react-native';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (obj, section, callback) => callback({[section]: obj});
-
-const InputNumber = ({section, question, onChange}) => (
+const InputNumber = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
         <TextInput
@@ -14,16 +12,20 @@ const InputNumber = ({section, question, onChange}) => (
             maxLength={question.maxLength}
             min={question.min}
             keyboardType={'numeric'}
-            value={section[question.name]}
-            onChangeText={text => handleChange({[question.name]: text}, section.name, onChange)}
+            value={answer}
+            onChangeText={text => onChange({[question.name]: text})}
         />
     </View>
 );
 
 InputNumber.propTypes = {
-    section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    answer: PropTypes.string
+};
+
+InputNumber.defaultProps = {
+    answer: null
 };
 
 export default InputNumber;

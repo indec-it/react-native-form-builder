@@ -21,7 +21,7 @@ import Select from './Select';
 import Title from './Title';
 import YesNoQuestion from './YesNoQuestion';
 
-const handleChange = (event, callback) => callback(event);
+const handleChange = (obj, section, callback) => callback({[section]: obj});
 
 const getQuestionComponent = questionType => {
     switch (questionType) {
@@ -67,6 +67,7 @@ const isText = questionType =>
     || questionType === types.INFO_TEXT_BOX
     || questionType === types.LABEL
     || questionType === types.QUESTION_WITHOUT_ANSWER;
+const isSectionQuestion = questionType => questionType === types.RADIO_TABLE;
 
 const MapQuestions = ({chapter, question, onChange}) => {
     let section = chapter;
@@ -81,9 +82,16 @@ const MapQuestions = ({chapter, question, onChange}) => {
     if (isText(question.type)) {
         return (<QuestionComponent question={question}/>);
     }
+    if (isSectionQuestion(question.type)) {
+        return (<QuestionComponent
+            section={section}
+            onChange={obj => handleChange(obj, section.name, onChange)}
+            question={question}
+        />);
+    }
     return (<QuestionComponent
-        section={section}
-        onChange={e => handleChange(e, onChange)}
+        answer={section[question.name]}
+        onChange={obj => handleChange(obj, section.name, onChange)}
         question={question}
     />);
 };

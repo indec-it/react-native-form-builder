@@ -31,9 +31,7 @@ const getSelectedValue = (answer, question) => {
     }
 };
 
-const handlePress = (obj, section, callback) => callback({[section]: obj});
-
-const YesNoQuestion = ({section, question, onChange}) => {
+const YesNoQuestion = ({answer, question, onChange}) => {
     const buttons = [
         {element: () => <Text>SI</Text>},
         {element: () => <Text>NO</Text>}
@@ -46,8 +44,8 @@ const YesNoQuestion = ({section, question, onChange}) => {
         <View>
             <QuestionText question={question}/>
             <ButtonGroup
-                onPress={index => handlePress({[question.name]: getValue(index, question)}, section.name, onChange)}
-                selectedIndex={getSelectedValue(section[question.name], question)}
+                onPress={index => onChange({[question.name]: getValue(index, question)})}
+                selectedIndex={getSelectedValue(answer, question)}
                 buttons={buttons}
                 containerStyle={{height: 100}}
                 selectedBackgroundColor="#41B5FF"
@@ -57,9 +55,13 @@ const YesNoQuestion = ({section, question, onChange}) => {
 };
 
 YesNoQuestion.propTypes = {
-    section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    answer: PropTypes.oneOfType([PropTypes.bool, PropTypes.number])
+};
+
+YesNoQuestion.defaultProps = {
+    answer: null
 };
 
 export default YesNoQuestion;

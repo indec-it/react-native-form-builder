@@ -6,9 +6,13 @@ import styles from './styles';
 
 class InputTextNoAnswer extends Component {
     static propTypes = {
-        section: PropTypes.shape({}).isRequired,
         question: PropTypes.shape({}).isRequired,
-        onChange: PropTypes.func.isRequired
+        onChange: PropTypes.func.isRequired,
+        answer: PropTypes.string
+    };
+
+    static defaultProps = {
+        answer: null
     };
 
     constructor(props) {
@@ -17,14 +21,13 @@ class InputTextNoAnswer extends Component {
     }
 
     handleChange(obj) {
-        const {onChange, section, question} = this.props;
+        const {onChange, question} = this.props;
         if (Object.keys(obj)[0] !== question.name) this.setState({block: !this.state.block});
-        return onChange({[section.name]: obj});
+        return onChange(obj);
     }
 
     render() {
-        const {question, section} = this.props;
-        const answer = section[question.name];
+        const {question, answer} = this.props;
         return (
             <View style={styles.rowContainer}>
                 <Text>{question.number ? `${question.number}` : ''}</Text>

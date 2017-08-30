@@ -6,10 +6,7 @@ import {CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (obj, section, callback) => callback({[section]: obj});
-
-const InputTextWithIgnore = ({section, question, onChange}) => {
-    const answer = section[question.name];
+const InputTextWithIgnore = ({answer, question, onChange}) => {
     const inputDisabled = answer === question.ignoreValue;
     return (
         <View style={styles.rowContainer}>
@@ -20,7 +17,7 @@ const InputTextWithIgnore = ({section, question, onChange}) => {
                     ? <Text>(Deshabilitado)</Text>
                     : <TextInput
                         value={answer}
-                        onChangeText={text => handleChange({[question.name]: text}, section.name, onChange)}
+                        onChangeText={text => onChange({[question.name]: text})}
                     />
                 }
                 {question.inputUnit && <Text>{question.inputUnit}</Text>}
@@ -29,10 +26,8 @@ const InputTextWithIgnore = ({section, question, onChange}) => {
                 <Text>{question.ignoreText}</Text>
                 <CheckBox
                     style={{width: 20}}
-                    onPress={() => handleChange(
-                        {[question.name]: answer !== question.ignoreValue ? question.ignoreValue : null},
-                        section.name,
-                        onChange
+                    onPress={() => onChange(
+                        {[question.name]: answer !== question.ignoreValue ? question.ignoreValue : null}
                     )}
                     checked={answer === question.ignoreValue}
                 />
@@ -42,9 +37,13 @@ const InputTextWithIgnore = ({section, question, onChange}) => {
 };
 
 InputTextWithIgnore.propTypes = {
-    section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    answer: PropTypes.bool
+};
+
+InputTextWithIgnore.defaultProps = {
+    answer: null
 };
 
 export default InputTextWithIgnore;

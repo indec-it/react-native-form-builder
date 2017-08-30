@@ -7,29 +7,31 @@ import DatePicker from 'react-native-datepicker';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (obj, section, callback) => callback({[section]: obj});
-
-const InputDate = ({section, question, onChange}) => (
+const InputDate = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
         <DatePicker
             style={{width: 200}}
-            date={section[question.name]}
+            date={answer}
             placeholder={question.placeholder}
             format={question.format}
             minDate={question.minDate}
             maxDate={question.maxDate}
             confirmBtnText="Confirmar"
             cancelBtnText="Cancelar"
-            onDateChange={date => handleChange({[question.name]: date}, section.name, onChange)}
+            onDateChange={date => onChange({[question.name]: date})}
         />
     </View>
 );
 
 InputDate.propTypes = {
-    section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+};
+
+InputDate.defaultProps = {
+    answer: null
 };
 
 export default InputDate;
