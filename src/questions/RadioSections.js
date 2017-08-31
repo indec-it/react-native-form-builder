@@ -6,8 +6,6 @@ import {CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
-
 const RadioSections = ({answer, question, onChange}) => (
     <View style={styles.radioSections.rowContainer}>
         <QuestionText question={question}/>
@@ -19,7 +17,7 @@ const RadioSections = ({answer, question, onChange}) => (
                         key={option.value}
                         title={option.label}
                         checkedIcon="dot-circle-o"
-                        onPress={() => handleChange(option.value, onChange, question)}
+                        onPress={() => onChange({[question.name]: option.value})}
                         uncheckedIcon="circle-o"
                         checked={answer === option.value}
                     />
@@ -30,9 +28,9 @@ const RadioSections = ({answer, question, onChange}) => (
 );
 
 RadioSections.propTypes = {
-    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
+    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 RadioSections.defaultProps = {

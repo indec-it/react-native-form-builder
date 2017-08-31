@@ -7,8 +7,6 @@ import DatePicker from 'react-native-datepicker';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (question, value, callback) => callback({target: {name: question.name, value}});
-
 const InputDate = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
@@ -21,15 +19,15 @@ const InputDate = ({answer, question, onChange}) => (
             maxDate={question.maxDate}
             confirmBtnText="Confirmar"
             cancelBtnText="Cancelar"
-            onDateChange={date => handleChange(question, date, onChange)}
+            onDateChange={date => onChange({[question.name]: date})}
         />
     </View>
 );
 
 InputDate.propTypes = {
-    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
+    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 InputDate.defaultProps = {

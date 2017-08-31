@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const types = {
     CHECKBOX: 'checkbox',
     DATE: 'date',
@@ -32,4 +31,15 @@ export const types = {
     TITLE: 'title',
     YEAR: 'Year',
     YES_NO: 'YesNoQuestion'
+};
+
+// operator enum will be moved to another package in a future.
+export const operator = {
+    EQUALS: 'eq',
+    NOT_EQUALS: 'ne',
+    GREATER_THAN: 'gt',
+    GREATER_OR_EQUAL_THAN: 'gte',
+    LESS_THAN: 'lt',
+    LESS_OR_EQUAL_THAN: 'lte',
+    EXISTS: 'exists'
 };

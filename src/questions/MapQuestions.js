@@ -21,7 +21,7 @@ import Select from './Select';
 import Title from './Title';
 import YesNoQuestion from './YesNoQuestion';
 
-const handleChange = (event, callback) => callback(event);
+const handleChange = (obj, section, callback) => callback({[section]: obj});
 
 const getQuestionComponent = questionType => {
     switch (questionType) {
@@ -85,13 +85,13 @@ const MapQuestions = ({chapter, question, onChange}) => {
     if (isSectionQuestion(question.type)) {
         return (<QuestionComponent
             section={section}
-            onChange={e => handleChange(e, onChange)}
+            onChange={obj => handleChange(obj, section.name, onChange)}
             question={question}
         />);
     }
     return (<QuestionComponent
         answer={section[question.name]}
-        onChange={e => handleChange(e, onChange)}
+        onChange={obj => handleChange(obj, section.name, onChange)}
         question={question}
     />);
 };

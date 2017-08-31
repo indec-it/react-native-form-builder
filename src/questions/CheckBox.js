@@ -5,24 +5,22 @@ import {CheckBox} from 'react-native-elements';
 
 import styles from './styles';
 
-const handleChange = (value, callback, question) => callback({target: {name: question.name, value: !value}});
-
 const Checkbox = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <Text>{question.number ? `${question.number}` : ''}</Text>
         <Text>{question.text}</Text>
         <CheckBox
             title={question.text}
-            onPress={() => handleChange(answer, onChange, question)}
+            onPress={() => onChange({[question.name]: !answer})}
             checked={answer}
         />
     </View>
 );
 
 Checkbox.propTypes = {
-    answer: PropTypes.bool,
+    question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
+    answer: PropTypes.bool
 };
 
 Checkbox.defaultProps = {

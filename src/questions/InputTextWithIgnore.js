@@ -6,14 +6,6 @@ import {CheckBox} from 'react-native-elements';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChangeCheckbox = (value, callback, question) => {
-    const isChecked = value === question.ignoreValue;
-    const answerValue = !isChecked ? question.ignoreValue : null;
-    return callback({target: {name: question.name, value: answerValue}});
-};
-
-const handleChangeInput = (value, callback, question) => callback({target: {name: question.name, value}});
-
 const InputTextWithIgnore = ({answer, question, onChange}) => {
     const inputDisabled = answer === question.ignoreValue;
     return (
@@ -25,7 +17,7 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
                     ? <Text>(Deshabilitado)</Text>
                     : <TextInput
                         value={answer}
-                        onChangeText={text => handleChangeInput(text, onChange, question)}
+                        onChangeText={text => onChange({[question.name]: text})}
                     />
                 }
                 {question.inputUnit && <Text>{question.inputUnit}</Text>}
@@ -34,7 +26,9 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
                 <Text>{question.ignoreText}</Text>
                 <CheckBox
                     style={{width: 20}}
-                    onPress={() => handleChangeCheckbox(answer, onChange, question)}
+                    onPress={() => onChange(
+                        {[question.name]: answer !== question.ignoreValue ? question.ignoreValue : null}
+                    )}
                     checked={answer === question.ignoreValue}
                 />
             </View>
@@ -43,9 +37,9 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
 };
 
 InputTextWithIgnore.propTypes = {
-    answer: PropTypes.bool,
+    question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
+    answer: PropTypes.bool
 };
 
 InputTextWithIgnore.defaultProps = {

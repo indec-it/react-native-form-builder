@@ -6,23 +6,21 @@ import {TextInput, View} from 'react-native';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
-
 const InputText = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
         <TextInput
             maxLength={question.maxLength}
-            onChangeText={text => handleChange(text, onChange, question)}
+            onChangeText={text => onChange({[question.name]: text})}
             value={answer}
         />
     </View>
 );
 
 InputText.propTypes = {
-    answer: PropTypes.string,
+    question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
+    answer: PropTypes.string
 };
 
 InputText.defaultProps = {

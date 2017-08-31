@@ -4,18 +4,11 @@ import {Text, TextInput, View, Button} from 'react-native';
 
 import styles from './styles';
 
-const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
-
-const setNoAnswer = (value, callback, question) => {
-    callback({target: {name: question.name, value}});
-    callback({target: {name: `${question.name}NoAnswer`, value: true}});
-};
-
 class InputTextNoAnswer extends Component {
     static propTypes = {
-        answer: PropTypes.string,
+        question: PropTypes.shape({}).isRequired,
         onChange: PropTypes.func.isRequired,
-        question: PropTypes.shape({}).isRequired
+        answer: PropTypes.string
     };
 
     static defaultProps = {
@@ -27,20 +20,26 @@ class InputTextNoAnswer extends Component {
         this.state = {block: false};
     }
 
+    handleChange(obj) {
+        const {onChange, question} = this.props;
+        if (Object.keys(obj)[0] !== question.name) this.setState({block: !this.state.block});
+        return onChange(obj);
+    }
+
     render() {
-        const {question, answer, onChange} = this.props;
+        const {question, answer} = this.props;
         return (
             <View style={styles.rowContainer}>
                 <Text>{question.number ? `${question.number}` : ''}</Text>
                 <Text>{question.text}</Text>
                 {!this.state.block && <TextInput
                     value={answer}
-                    onChangeText={text => handleChange(text, onChange, question)}
+                    onChangeText={text => this.handleChange({[question.name]: text})}
                 />}
-                {this.state.block && <Text style={{color: 'grey'}}>{answer}</Text>}
+                {this.state.block && <Text style={{color: 'grey'}}>(Sin Nombre)</Text>}
                 <Button
                     title="S/N"
-                    onPress={() => setNoAnswer(question.disableValue, onChange, question)}
+                    onPress={() => this.handleChange({[`${question.name}NoAnswer`]: !this.state.block})}
                 />
             </View>
         );

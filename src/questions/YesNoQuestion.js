@@ -31,11 +31,6 @@ const getSelectedValue = (answer, question) => {
     }
 };
 
-const handlePress = (index, callback, question) => {
-    const value = getValue(index, question);
-    return callback({target: {name: question.name, value}});
-};
-
 const YesNoQuestion = ({answer, question, onChange}) => {
     const buttons = [
         {element: () => <Text>SI</Text>},
@@ -49,7 +44,7 @@ const YesNoQuestion = ({answer, question, onChange}) => {
         <View>
             <QuestionText question={question}/>
             <ButtonGroup
-                onPress={index => handlePress(index, onChange, question)}
+                onPress={index => onChange({[question.name]: getValue(index, question)})}
                 selectedIndex={getSelectedValue(answer, question)}
                 buttons={buttons}
                 containerStyle={{height: 100}}
@@ -60,9 +55,9 @@ const YesNoQuestion = ({answer, question, onChange}) => {
 };
 
 YesNoQuestion.propTypes = {
-    answer: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+    question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    question: PropTypes.shape({}).isRequired
+    answer: PropTypes.oneOfType([PropTypes.bool, PropTypes.number])
 };
 
 YesNoQuestion.defaultProps = {
