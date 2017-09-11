@@ -41,13 +41,13 @@ const YesNoQuestion = ({answer, question, onChange}) => {
     }
 
     return (
-        <View>
+        <View style={{flex: 1, flexDirection: 'row', alignContent: 'center'}}>
             <QuestionText question={question}/>
             <ButtonGroup
                 onPress={index => onChange({[question.name]: getValue(index, question)})}
                 selectedIndex={getSelectedValue(answer, question)}
                 buttons={buttons}
-                containerStyle={{height: 100}}
+                containerStyle={{flex: 1}}
                 selectedBackgroundColor="#41B5FF"
             />
         </View>

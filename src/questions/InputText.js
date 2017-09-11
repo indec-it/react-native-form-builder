@@ -13,6 +13,7 @@ const InputText = ({answer, question, onChange}) => (
             maxLength={question.maxLength}
             onChangeText={text => onChange({[question.name]: text})}
             value={answer}
+            style={styles.testText}
         />
     </View>
 );

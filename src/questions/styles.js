@@ -1,6 +1,8 @@
 export default {
     rowContainer: {
-        paddingHorizontal: 4
+        paddingHorizontal: 4,
+        flex: 1,
+        flexDirection: 'row'
     },
     infoTextBox: {
         container: {
@@ -25,8 +27,7 @@ export default {
             flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
-            marginTop: 8,
-            marginBottom: 10
+            justifyContent: 'flex-start'
         },
         text: {
             marginLeft: 5
@@ -45,5 +46,13 @@ export default {
             fontWeight: 'bold',
             padding: 10
         }
+    },
+    testText: {
+        borderColor: '#F00',
+        borderBottomWidth: 1,
+        flex: 1
+    },
+    testInline: {
+        backgrundColor: 'red'
     }
 };

@@ -8,7 +8,7 @@ import styles from './styles';
 
 const InputNumber = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
-        <QuestionText question={question}/>
+        {question.text && <QuestionText question={question}/>}
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
         <TextInput
             max={question.max}
@@ -17,6 +17,7 @@ const InputNumber = ({answer, question, onChange}) => (
             keyboardType={'numeric'}
             value={answer}
             onChangeText={text => onChange({[question.name]: text})}
+            style={styles.testText}
         />
     </View>
 );
