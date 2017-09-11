@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
-import {CheckBox} from 'react-native-elements';
 
 import QuestionText from './QuestionText';
 import InfoTextBox from './InfoTextBox';
