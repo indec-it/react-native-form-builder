@@ -21,8 +21,6 @@ import Select from './Select';
 import Title from './Title';
 import YesNoQuestion from './YesNoQuestion';
 
-const handleChange = (obj, section, callback) => callback({[section]: obj});
-
 const getQuestionComponent = questionType => {
     switch (questionType) {
         case types.CHECKBOX:
@@ -69,6 +67,29 @@ const isText = questionType =>
     || questionType === types.QUESTION_WITHOUT_ANSWER;
 const isSectionQuestion = questionType => questionType === types.RADIO_TABLE;
 
+/**
+ * Set new answer inside a chapter copy.
+ * @param {Object} chapter
+ * @param {Object} question
+ * @param {Object} answer
+ * @returns {Object} A chapter clone with the new answer.
+ */
+const handleChange = (chapter, question, answer) => {
+    const newChapter = Object.assign({}, chapter);
+
+    let section = question.subSection ? Object.assign({}, chapter[question.subSection]) : newChapter;
+    if (!section) {
+        section = {};
+    }
+
+    Object.assign(section, answer);
+    if (question.subSection) {
+        // I need to assign the new subSection into the new chapter.
+        newChapter[question.subSection] = section;
+    }
+    return newChapter;
+};
+
 const MapQuestions = ({chapter, question, onChange}) => {
     let section = chapter;
     if (question.subSection) {
@@ -85,13 +106,13 @@ const MapQuestions = ({chapter, question, onChange}) => {
     if (isSectionQuestion(question.type)) {
         return (<QuestionComponent
             section={section}
-            onChange={obj => handleChange(obj, section.name, onChange)}
+            onChange={answer => onChange(handleChange(chapter, question, answer))}
             question={question}
         />);
     }
     return (<QuestionComponent
         answer={section[question.name]}
-        onChange={obj => handleChange(obj, section.name, onChange)}
+        onChange={answer => onChange(handleChange(chapter, question, answer))}
         question={question}
     />);
 };
