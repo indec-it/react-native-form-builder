@@ -2,8 +2,7 @@
 constants/
 node_modules/
 coverage/
-webpack.config.js
-webpack.config.prod.js
+commitlint.config.js
 .npmignore
 .yarnignore
 .babelrc
