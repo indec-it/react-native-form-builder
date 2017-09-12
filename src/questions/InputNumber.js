@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {TextInput, View} from 'react-native';
+
+import InfoTextBox from './InfoTextBox';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
@@ -9,6 +11,7 @@ const handleChange = (value, callback, question) => callback({target: {name: que
 const InputNumber = ({answer, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
+        {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
         <TextInput
             max={question.max}
             maxLength={question.maxLength}

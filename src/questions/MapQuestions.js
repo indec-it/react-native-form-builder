@@ -13,7 +13,7 @@ import InputText from './InputText';
 import InputTextNoAnswer from './InputTextNoAnswer';
 import InputTextWithIgnore from './InputTextWithIgnore';
 import Label from './Label';
-import QuestionText from './QuestionText';
+import QuestionTextWithoutAnswer from './QuestionTextWithoutAnswer';
 import Radio from './Radio';
 import RadioSections from './RadioSections';
 import RadioTable from './RadioTable';
@@ -38,7 +38,7 @@ const getQuestionComponent = questionType => {
         case types.NUMBER_WITH_IGNORE:
             return InputNumberWithIgnore;
         case types.QUESTION_WITHOUT_ANSWER:
-            return QuestionText;
+            return QuestionTextWithoutAnswer;
         case types.RADIO:
             return Radio;
         case types.RADIO_SECTIONS:
