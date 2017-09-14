@@ -1,12 +1,6 @@
 **/.*/
-constants/
 node_modules/
 coverage/
+.*
 commitlint.config.js
-.npmignore
-.yarnignore
-.babelrc
-.DS_Store
 yarn.lock
-example/
-ex1/

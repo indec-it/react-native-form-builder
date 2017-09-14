@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Picker, View} from 'react-native';
+import {View} from 'react-native';
 import QuestionText from './QuestionText';
 
 const Select = ({answer, question, onChange}) => (
