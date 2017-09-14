@@ -2,6 +2,7 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
+import {assign} from 'lodash';
 
 import {types} from '../constants/constants';
 
@@ -82,14 +83,14 @@ const isSectionQuestion = questionType =>
  * @returns {Object} A chapter clone with the new answer.
  */
 const handleChange = (chapter, question, answer) => {
-    const newChapter = Object.assign({}, chapter);
+    const newChapter = assign({}, chapter);
 
-    let section = question.subSection ? Object.assign({}, chapter[question.subSection]) : newChapter;
+    let section = question.subSection ? assign({}, chapter[question.subSection]) : newChapter;
     if (!section) {
         section = {};
     }
 
-    Object.assign(section, answer);
+    assign(section, answer);
     if (question.subSection) {
         // I need to assign the new subSection into the new chapter.
         newChapter[question.subSection] = section;

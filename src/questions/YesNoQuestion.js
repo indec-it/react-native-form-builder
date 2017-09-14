@@ -34,10 +34,10 @@ const getSelectedValue = (answer, question) => {
     }
 };
 
-const getRadioButtonStyle = (answer, questionValue) => {
-    return [styles.yesNoQuestion.radioButton,
+const getRadioButtonStyle = (answer, questionValue) => (
+    [styles.yesNoQuestion.radioButton,
         answer === questionValue ? {color: colors.white} : {color: colors.black}]
-}
+);
 
 const YesNoQuestion = ({answer, question, onChange}) => {
     const buttons = [
@@ -45,8 +45,11 @@ const YesNoQuestion = ({answer, question, onChange}) => {
         {element: () => <Text style={getRadioButtonStyle(answer, question.falseValue)}>NO</Text>}
     ];
     if (question.dkValue) {
-        buttons.push({element: () => <Text style={getRadioButtonStyle(answer, question.dkValue)}>
-            {question.dkLabel}</Text>});
+        buttons.push({
+            element: () => (
+                <Text style={getRadioButtonStyle(answer, question.dkValue)}>{question.dkLabel}</Text>
+            )
+        });
     }
 
     return (

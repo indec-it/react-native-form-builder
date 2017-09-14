@@ -52,8 +52,7 @@ export default {
     },
     testText: {
         borderColor: '#F00',
-        borderBottomWidth: 1,
-        flex: 1
+        borderBottomWidth: 1
     },
     testInline: {
         backgrundColor: 'red'
@@ -67,6 +66,6 @@ export default {
             height: 32,
             backgroundColor: colors.gray,
             borderRadius: 24
-        },
+        }
     }
 };
