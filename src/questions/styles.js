@@ -1,3 +1,5 @@
+import colors from './colors';
+
 export default {
     rowContainer: {
         paddingHorizontal: 4,
@@ -9,14 +11,14 @@ export default {
             flex: 1,
             flexDirection: 'row',
             borderWidth: 2,
-            borderColor: '#32727a',
+            borderColor: colors.primary,
             padding: 10,
             marginLeft: 10,
             marginRight: 10,
             marginTop: 15,
             marginBottom: 15,
             alignItems: 'center',
-            backgroundColor: '#4fb3bf'
+            backgroundColor: colors.accent
         },
         text: {
             color: '#FFF'
@@ -24,17 +26,18 @@ export default {
     },
     questionText: {
         questionHeader: {
-            flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'flex-start'
         },
         text: {
-            marginLeft: 5
+            marginLeft: 5,
+            fontSize: 18
         },
         questionBadge: {
-            backgroundColor: '#4fb3bf',
-            color: '#FFF'
+            backgroundColor: colors.primary,
+            color: '#FFF',
+            fontSize: 16
         }
     },
     radioSections: {
@@ -54,5 +57,16 @@ export default {
     },
     testInline: {
         backgrundColor: 'red'
+    },
+    yesNoQuestion: {
+        radioButton: {
+            fontSize: 12
+        },
+        radioGroup: {
+            width: 155,
+            height: 32,
+            backgroundColor: colors.gray,
+            borderRadius: 24
+        },
     }
 };

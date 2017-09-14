@@ -5,6 +5,9 @@ import {Text, View} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
 import QuestionText from './QuestionText';
 
+import styles from './styles';
+import colors from './colors';
+
 const getValue = (index, question) => {
     switch (index) {
         case 0:
@@ -31,24 +34,30 @@ const getSelectedValue = (answer, question) => {
     }
 };
 
+const getRadioButtonStyle = (answer, questionValue) => {
+    return [styles.yesNoQuestion.radioButton,
+        answer === questionValue ? {color: colors.white} : {color: colors.black}]
+}
+
 const YesNoQuestion = ({answer, question, onChange}) => {
     const buttons = [
-        {element: () => <Text>SI</Text>},
-        {element: () => <Text>NO</Text>}
+        {element: () => <Text style={getRadioButtonStyle(answer, question.trueValue)}>SI</Text>},
+        {element: () => <Text style={getRadioButtonStyle(answer, question.falseValue)}>NO</Text>}
     ];
     if (question.dkValue) {
-        buttons.push({element: () => <Text>{question.dkLabel}</Text>});
+        buttons.push({element: () => <Text style={getRadioButtonStyle(answer, question.dkValue)}>
+            {question.dkLabel}</Text>});
     }
 
     return (
-        <View style={{flex: 1, flexDirection: 'row', alignContent: 'center'}}>
+        <View style={{flexDirection: 'row'}}>
             <QuestionText question={question}/>
             <ButtonGroup
                 onPress={index => onChange({[question.name]: getValue(index, question)})}
                 selectedIndex={getSelectedValue(answer, question)}
                 buttons={buttons}
-                containerStyle={{flex: 1}}
-                selectedBackgroundColor="#41B5FF"
+                containerStyle={styles.yesNoQuestion.radioGroup}
+                selectedBackgroundColor={colors.primary}
             />
         </View>
     );
