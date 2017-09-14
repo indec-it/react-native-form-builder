@@ -1,6 +1,6 @@
 {
   "name": "@indec/react-native-form-builder",
-  "version": "0.2.0-beta.0",
+  "version": "0.2.0-beta.1",
   "description": "A library to generate forms in react native based on a json description",
   "private": false,
   "main": "src/index.js",
@@ -14,9 +14,9 @@
     "react-native-datepicker": "^1.6.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^3.1.3",
+    "@commitlint/cli": "^3.2.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.0",
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-lodash": "^3.2.11",
