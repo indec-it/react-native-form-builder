@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {TextInput, View} from 'react-native';
+import {View} from 'react-native';
 import TextField from 'react-native-md-textinput';
 
 import InfoTextBox from './InfoTextBox';
