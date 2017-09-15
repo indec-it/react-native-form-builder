@@ -11,6 +11,7 @@
     "commitmsg": "commitlint -e"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "react-native-datepicker": "^1.6.0"
   },
   "devDependencies": {
