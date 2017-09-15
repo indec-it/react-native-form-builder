@@ -53,8 +53,9 @@ const YesNoQuestion = ({answer, question, onChange}) => {
     }
 
     return (
-        <View style={{flexDirection: 'row'}}>
-            <QuestionText question={question}/>
+        <View style={styles.rowContainer}>
+            <QuestionText question={question} style={{flex: 1}}/>
+
             <ButtonGroup
                 onPress={index => onChange({[question.name]: getValue(index, question)})}
                 selectedIndex={getSelectedValue(answer, question)}
@@ -62,6 +63,8 @@ const YesNoQuestion = ({answer, question, onChange}) => {
                 containerStyle={styles.yesNoQuestion.radioGroup}
                 selectedBackgroundColor={colors.primary}
             />
+
+
         </View>
     );
 };

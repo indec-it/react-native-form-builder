@@ -2,9 +2,14 @@ import colors from './colors';
 
 export default {
     rowContainer: {
-        paddingHorizontal: 4,
+        padding: 8,
         flex: 1,
         flexDirection: 'row'
+    },
+    columnContainer: {
+        padding: 8,
+        flex: 1,
+        flexDirection: 'column'
     },
     infoTextBox: {
         container: {
@@ -15,8 +20,8 @@ export default {
             padding: 10,
             marginLeft: 10,
             marginRight: 10,
-            marginTop: 15,
-            marginBottom: 15,
+            marginTop: 16,
+            marginBottom: 16,
             alignItems: 'center',
             backgroundColor: colors.accent
         },
@@ -37,6 +42,11 @@ export default {
         questionBadge: {
             backgroundColor: colors.primary,
             color: '#FFF',
+            fontSize: 16
+        },
+        secondaryQuestionBadge: {
+            backgroundColor: colors.gray,
+            color: '#666',
             fontSize: 16
         }
     },
