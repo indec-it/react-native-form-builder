@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Text, TextInput, View, Button} from 'react-native';
+import {keys} from 'lodash';
 
 import styles from './styles';
 
@@ -22,7 +23,7 @@ class InputTextNoAnswer extends Component {
 
     handleChange(obj) {
         const {onChange, question} = this.props;
-        if (Object.keys(obj)[0] !== question.name) this.setState({block: !this.state.block});
+        if (keys(obj)[0] !== question.name) this.setState({block: !this.state.block});
         return onChange(obj);
     }
 

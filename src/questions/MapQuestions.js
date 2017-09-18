@@ -1,3 +1,4 @@
+/* eslint-disable lodash/prefer-lodash-method */
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,6 +21,7 @@ import RadioTable from './RadioTable';
 import Select from './Select';
 import Title from './Title';
 import YesNoQuestion from './YesNoQuestion';
+import Total from './Total';
 
 const getQuestionComponent = questionType => {
     switch (questionType) {
@@ -55,6 +57,8 @@ const getQuestionComponent = questionType => {
             return Title;
         case types.YES_NO:
             return YesNoQuestion;
+        case types.SUM:
+            return Total;
         default:
             throw Error(`Question type not implemented: ${questionType}`);
     }
@@ -65,7 +69,10 @@ const isText = questionType =>
     || questionType === types.INFO_TEXT_BOX
     || questionType === types.LABEL
     || questionType === types.QUESTION_WITHOUT_ANSWER;
-const isSectionQuestion = questionType => questionType === types.RADIO_TABLE;
+
+const isSectionQuestion = questionType =>
+    questionType === types.RADIO_TABLE
+    || questionType === types.SUM;
 
 /**
  * Set new answer inside a chapter copy.
