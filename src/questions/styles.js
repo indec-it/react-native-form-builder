@@ -30,7 +30,7 @@ export default {
         }
     },
     questionText: {
-        questionHeader: {
+        header: {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'flex-start'
@@ -39,15 +39,23 @@ export default {
             marginLeft: 5,
             fontSize: 18
         },
-        questionBadge: {
-            backgroundColor: colors.primary,
-            color: '#FFF',
-            fontSize: 16
+        primaryBadge: {
+            container: {
+                backgroundColor: colors.primary
+            },
+            text: {
+                color: '#FFF',
+                fontSize: 16
+            }
         },
-        secondaryQuestionBadge: {
-            backgroundColor: colors.gray,
-            color: '#666',
-            fontSize: 16
+        secondaryBadge: {
+            container: {
+                backgroundColor: colors.gray
+            },
+            text: {
+                color: '#666',
+                fontSize: 16
+            }
         }
     },
     radioSections: {
@@ -65,7 +73,7 @@ export default {
         borderBottomWidth: 1
     },
     testInline: {
-        backgrundColor: 'red'
+        backgroundColor: 'red'
     },
     yesNoQuestion: {
         radioButton: {

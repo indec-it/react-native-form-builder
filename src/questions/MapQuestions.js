@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {assign} from 'lodash';
 
 import {types} from '../constants/constants';
-
 import CheckBox from './CheckBox';
 import InputDate from './InputDate';
 import InputNumber from './InputNumber';

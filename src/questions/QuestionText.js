@@ -7,14 +7,16 @@ import {includes} from 'lodash';
 import styles from './styles';
 
 const QuestionText = ({question}) => (
-    <View style={styles.questionText.questionHeader}>
+    <View style={styles.questionText.header}>
         {question.number && <Badge
-            textStyle={includes(question.number, '.') ?
-                styles.questionText.secondaryQuestionBadge :
-                styles.questionText.questionBadge}
-            containerStyle={includes(question.number, '.') ?
-                styles.questionText.secondaryQuestionBadge :
-                styles.questionText.questionBadge}
+            containerStyle={
+                includes(question.number, '.') ?
+                    styles.questionText.secondaryBadge.container : styles.questionText.primaryBadge.container
+            }
+            textStyle={
+                includes(question.number, '.') ?
+                    styles.questionText.secondaryBadge.text : styles.questionText.primaryBadge.text
+            }
             value={question.number}
         />}
         <Text style={styles.questionText.text}>{question.text}</Text>

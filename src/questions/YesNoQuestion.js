@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
-import QuestionText from './QuestionText';
 
+import QuestionText from './QuestionText';
 import styles from './styles';
 import colors from './colors';
 
@@ -55,7 +55,6 @@ const YesNoQuestion = ({answer, question, onChange}) => {
     return (
         <View style={styles.rowContainer}>
             <QuestionText question={question} style={{flex: 1}}/>
-
             <ButtonGroup
                 onPress={index => onChange({[question.name]: getValue(index, question)})}
                 selectedIndex={getSelectedValue(answer, question)}
@@ -63,8 +62,6 @@ const YesNoQuestion = ({answer, question, onChange}) => {
                 containerStyle={styles.yesNoQuestion.radioGroup}
                 selectedBackgroundColor={colors.primary}
             />
-
-
         </View>
     );
 };
