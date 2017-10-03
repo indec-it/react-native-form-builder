@@ -8,15 +8,14 @@ import styles from './styles';
 
 const QuestionText = ({question}) => (
     <View style={styles.questionText.header}>
-        {question.number && <Badge
-            containerStyle={
-                includes(question.number, '.') ?
-                    styles.questionText.secondaryBadge.container : styles.questionText.primaryBadge.container
-            }
-            textStyle={
-                includes(question.number, '.') ?
-                    styles.questionText.secondaryBadge.text : styles.questionText.primaryBadge.text
-            }
+        {question.number && !includes(question.number, '.') && <Badge
+            containerStyle={styles.questionText.primaryBadge.container}
+            textStyle={styles.questionText.primaryBadge.text}
+            value={question.number}
+        />}
+        {question.number && includes(question.number, '.') && <Badge
+            containerStyle={styles.questionText.secondaryBadge.container}
+            textStyle={styles.questionText.secondaryBadge.text}
             value={question.number}
         />}
         <Text style={styles.questionText.text}>{question.text}</Text>

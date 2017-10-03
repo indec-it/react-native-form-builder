@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "eslint ./",
-    "install-peers": "yarn add --peer prop-types react@^15.4.2 react-native@0.42.3 react-native-elements react-native-vector-icons",
+    "install-peers": "yarn add --peer prop-types react react-native react-native-elements react-native-vector-icons lodash",
     "precommit": "npm test",
     "commitmsg": "commitlint -e"
   },
@@ -30,10 +30,10 @@
     "husky": "^0.14.3"
   },
   "peerDependencies": {
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.0",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-native": "0.42.3",
+    "react": "^15.6.1 || >=16.0.0",
+    "react-native": ">=0.42.3",
     "react-native-elements": "^0.16.0",
     "react-native-vector-icons": "^4.2.0"
   },

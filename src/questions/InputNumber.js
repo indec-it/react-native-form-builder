@@ -9,7 +9,7 @@ import colors from './colors';
 import styles from './styles';
 
 const InputNumber = ({answer, question, onChange}) => (
-    <View style={[styles.columnContainer, {paddingBottom: 0, paddingTop: 0}]}>
+    <View style={styles.inputNumber.container}>
         {question.text && <QuestionText question={question}/>}
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
         <TextField

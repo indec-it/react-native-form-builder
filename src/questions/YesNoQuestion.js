@@ -54,7 +54,7 @@ const YesNoQuestion = ({answer, question, onChange}) => {
 
     return (
         <View style={styles.rowContainer}>
-            <QuestionText question={question} style={{flex: 1}}/>
+            <QuestionText question={question} style={styles.yesNoQuestion.text}/>
             <ButtonGroup
                 onPress={index => onChange({[question.name]: getValue(index, question)})}
                 selectedIndex={getSelectedValue(answer, question)}

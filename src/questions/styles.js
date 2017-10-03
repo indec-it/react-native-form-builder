@@ -84,6 +84,18 @@ export default {
             height: 32,
             backgroundColor: colors.gray,
             borderRadius: 24
+        },
+        text: {
+            flex: 1
+        }
+    },
+    inputNumber: {
+        container: {
+            padding: 8,
+            flex: 1,
+            flexDirection: 'column',
+            paddingBottom: 0,
+            paddingTop: 0
         }
     }
 };
