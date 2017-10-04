@@ -1,23 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {TextInput, View} from 'react-native';
+import {View, Text} from 'react-native';
+import TextField from 'react-native-md-textinput';
 
 import InfoTextBox from './InfoTextBox';
 import QuestionText from './QuestionText';
+import colors from './colors';
 import styles from './styles';
 
 const InputNumber = ({answer, question, onChange}) => (
-    <View style={styles.rowContainer}>
-        <QuestionText question={question}/>
+    <View style={styles.inputNumber.container}>
+        {question.text && <QuestionText question={question}/>}
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
-        <TextInput
+        <TextField
             max={question.max}
             maxLength={question.maxLength}
             min={question.min}
             keyboardType={'numeric'}
-            value={answer}
+            value={answer !== null ? answer : ''}
             onChangeText={text => onChange({[question.name]: text})}
+            label={question.floatingLabel ? question.floatingLabel : ''}
+            highlightColor={colors.accent}
         />
+        {question.textAfterInput && <Text>{question.textAfterInput}</Text>}
     </View>
 );
 

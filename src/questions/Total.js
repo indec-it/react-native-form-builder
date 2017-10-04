@@ -7,24 +7,32 @@ import {filter, toNumber, isNil, sum, isNaN} from 'lodash';
 import QuestionText from './QuestionText';
 import styles from './styles';
 
-const getTotal = (section, question) => {
-    const toAdd = [];
-    const questions = filter(question.fieldsToAdd, q => !isNil(section[q]));
-    questions.map(q => toAdd.push(toNumber(section[q])));
-    const total = sum(toAdd);
-    return isNaN(total) ? 0 : total;
+const getTotal = (section, question, callback) => {
+    const addends = filter(
+        question.fieldsToAdd,
+        field => !isNil(section[field])
+    ).map(
+        field => toNumber(section[field])
+    );
+    let total = sum(addends);
+    if (isNaN(total)) {
+        total = 0;
+    }
+    callback({[question.name]: total});
+    return total;
 };
 
-const Total = ({section, question}) => (
+const Total = ({section, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
-        <Text>{getTotal(section, question)}</Text>
+        <Text>{getTotal(section, question, onChange)}</Text>
     </View>
 );
 
 Total.propTypes = {
     section: PropTypes.shape({}).isRequired,
-    question: PropTypes.shape({}).isRequired
+    question: PropTypes.shape({}).isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default Total;
