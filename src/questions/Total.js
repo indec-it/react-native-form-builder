@@ -18,6 +18,9 @@ const getTotal = (section, question, callback) => {
     if (isNaN(total)) {
         total = 0;
     }
+
+    if (section[question.name] === total) return total;
+
     callback({[question.name]: total});
     return total;
 };
