@@ -11,7 +11,8 @@ const QuestionText = ({question}) => (
             containerStyle={styles.questionText.questionBadge}
             value={question.number}
         />}
-        <Text style={styles.questionText.text}>{question.text}</Text>
+        {question.number && <Text style={styles.questionText.textBadge}>{question.text}</Text>}
+        {!question.number && <Text style={styles.questionText.text}>{question.text}</Text>}
     </View>
 );
 

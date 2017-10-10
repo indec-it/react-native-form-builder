@@ -34,6 +34,11 @@ export default {
         questionBadge: {
             backgroundColor: '#4fb3bf',
             color: '#FFF'
+        },
+        textBadge: {
+            marginLeft: 5,
+            fontSize: 18,
+            color: '#32727a'
         }
     },
     radioSections: {
