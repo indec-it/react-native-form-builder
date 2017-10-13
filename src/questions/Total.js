@@ -19,7 +19,9 @@ const getTotal = (section, question, callback) => {
         total = 0;
     }
 
-    if (section[question.name] === total) return total;
+    if (section[question.name] === total) {
+        return total;
+    }
 
     callback({[question.name]: total});
     return total;
