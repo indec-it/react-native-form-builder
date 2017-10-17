@@ -1,20 +1,26 @@
-/* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {TextInput, View} from 'react-native';
+import {View, Text} from 'react-native';
+import InputField from '@indec/react-native-md-textinput';
 
+import InfoTextBox from './InfoTextBox';
 import QuestionText from './QuestionText';
+import colors from './colors';
 import styles from './styles';
 
 const InputText = ({answer, question, onChange}) => (
-    <View style={styles.rowContainer}>
-        <QuestionText question={question}/>
-        <TextInput
+    <View style={styles.input.container}>
+        {question.text && <QuestionText question={question}/>}
+        {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
+        <InputField
             maxLength={question.maxLength}
+            keyboardType="default"
+            value={answer !== null ? answer : ''}
             onChangeText={text => onChange({[question.name]: text})}
-            value={answer}
-            style={styles.testText}
+            label={question.floatingLabel ? question.floatingLabel : ''}
+            highlightColor={colors.accent}
         />
+        {question.textAfterInput && <Text>{question.textAfterInput}</Text>}
     </View>
 );
 

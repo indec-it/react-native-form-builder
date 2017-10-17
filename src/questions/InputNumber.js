@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
-import TextField from 'react-native-md-textinput';
+import InputField from '@indec/react-native-md-textinput';
 
 import InfoTextBox from './InfoTextBox';
 import QuestionText from './QuestionText';
@@ -9,16 +9,16 @@ import colors from './colors';
 import styles from './styles';
 
 const InputNumber = ({answer, question, onChange}) => (
-    <View style={styles.inputNumber.container}>
+    <View style={styles.input.container}>
         {question.text && <QuestionText question={question}/>}
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
-        <TextField
+        <InputField
             max={question.max}
             maxLength={question.maxLength}
             min={question.min}
-            keyboardType={'numeric'}
+            keyboardType="numeric"
             value={answer !== null ? answer : ''}
-            onChangeText={text => onChange({[question.name]: text})}
+            onChangeText={num => onChange({[question.name]: num})}
             label={question.floatingLabel ? question.floatingLabel : ''}
             highlightColor={colors.accent}
         />

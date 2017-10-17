@@ -89,7 +89,7 @@ export default {
             flex: 1
         }
     },
-    inputNumber: {
+    input: {
         container: {
             padding: 8,
             flex: 1,
