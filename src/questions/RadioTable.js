@@ -33,7 +33,7 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
 };
 
 const RadioTable = ({section, question, onChange}) => (
-    <View style={styles.rowContainer}>
+    <View style={styles.columnContainer}>
         <QuestionText question={question}/>
         <Grid>
             <Row>

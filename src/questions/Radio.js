@@ -9,7 +9,7 @@ import InfoTextBox from './InfoTextBox';
 import styles from './styles';
 
 const Radio = ({answer, question, onChange}) => (
-    <View style={styles.rowContainer}>
+    <View style={styles.columnContainer}>
         <QuestionText question={question}/>
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
         {question.options.map(option => (
