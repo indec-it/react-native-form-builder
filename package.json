@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "react-native-datepicker": "^1.6.0",
-    "@indec/react-native-md-textinput": "https://github.com/indec-it/react-native-md-textinput"
+    "@indec/react-native-md-textinput": "^3.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^3.2.0",

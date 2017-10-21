@@ -97,5 +97,12 @@ export default {
             paddingBottom: 0,
             paddingTop: 0
         }
+    },
+    radio: {
+        text: {
+            fontWeight: 'bold',
+            padding: 15,
+            fontSize: 16
+        }
     }
 };
