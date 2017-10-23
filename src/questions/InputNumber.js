@@ -17,7 +17,7 @@ const InputNumber = ({answer, question, onChange}) => (
             maxLength={question.maxLength}
             min={question.min}
             keyboardType={'numeric'}
-            value={answer}
+            value={String(answer)}
             onChangeText={text => handleChange(text, onChange, question)}
         />
     </View>
@@ -30,7 +30,7 @@ InputNumber.propTypes = {
 };
 
 InputNumber.defaultProps = {
-    answer: null
+    answer: ''
 };
 
 export default InputNumber;
