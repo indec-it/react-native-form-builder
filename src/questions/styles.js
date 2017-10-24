@@ -89,13 +89,20 @@ export default {
             flex: 1
         }
     },
-    inputNumber: {
+    input: {
         container: {
             padding: 8,
             flex: 1,
             flexDirection: 'column',
             paddingBottom: 0,
             paddingTop: 0
+        }
+    },
+    radio: {
+        text: {
+            fontWeight: 'bold',
+            padding: 15,
+            fontSize: 16
         }
     }
 };

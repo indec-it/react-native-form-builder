@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Text, TextInput, View, Button} from 'react-native';
+import {Text, View, Button} from 'react-native';
 import {keys} from 'lodash';
+import InputField from '@indec/react-native-md-textinput';
 
+import colors from './colors';
 import styles from './styles';
 
 class InputTextNoAnswer extends Component {
@@ -33,9 +35,14 @@ class InputTextNoAnswer extends Component {
             <View style={styles.rowContainer}>
                 <Text>{question.number ? `${question.number}` : ''}</Text>
                 <Text>{question.text}</Text>
-                {!this.state.block && <TextInput
-                    value={answer}
+                {!this.state.block && <InputField
+                    maxLength={question.maxLength}
+                    style={styles.testText}
+                    keyboardType="default"
+                    value={answer !== null ? answer : ''}
                     onChangeText={text => this.handleChange({[question.name]: text})}
+                    label={question.floatingLabel ? question.floatingLabel : ''}
+                    highlightColor={colors.accent}
                 />}
                 {this.state.block && <Text style={{color: 'grey'}}>(Sin Nombre)</Text>}
                 <Button

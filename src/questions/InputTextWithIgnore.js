@@ -1,10 +1,12 @@
 /* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, View, TextInput} from 'react-native';
+import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
+import InputField from '@indec/react-native-md-textinput';
 
 import QuestionText from './QuestionText';
+import colors from './colors';
 import styles from './styles';
 
 const InputTextWithIgnore = ({answer, question, onChange}) => {
@@ -16,9 +18,14 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
                 <Text>{question.inputText}</Text>
                 {inputDisabled
                     ? <Text>(Deshabilitado)</Text>
-                    : <TextInput
-                        value={answer}
+                    : <InputField
+                        maxLength={question.maxLength}
+                        style={styles.testText}
+                        keyboardType="default"
+                        value={answer !== null ? answer : ''}
                         onChangeText={text => onChange({[question.name]: text})}
+                        label={question.floatingLabel ? question.floatingLabel : ''}
+                        highlightColor={colors.accent}
                     />
                 }
                 {question.inputUnit && <Text>{question.inputUnit}</Text>}
