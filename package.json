@@ -1,18 +1,17 @@
 {
   "name": "@indec/react-native-form-builder",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A library to generate forms in react native based on a json description",
   "private": false,
   "main": "src/index.js",
   "scripts": {
     "test": "eslint ./",
-    "install-peers": "yarn add --peer prop-types react react-native react-native-elements react-native-vector-icons lodash",
     "precommit": "npm test",
     "commitmsg": "commitlint -e"
   },
   "dependencies": {
-    "react-native-datepicker": "^1.6.0",
-    "@indec/react-native-md-textinput": "^3.0.0"
+    "@indec/react-native-md-textinput": "^3.0.0",
+    "react-native-datepicker": "^1.6.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^3.2.0",
@@ -27,7 +26,12 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.4.0",
-    "husky": "^0.14.3"
+    "husky": "^0.14.3",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-native": "^0.49.3",
+    "react-native-elements": "^0.17.0",
+    "react-native-vector-icons": "^4.4.2"
   },
   "peerDependencies": {
     "lodash": "^4.17.0",
