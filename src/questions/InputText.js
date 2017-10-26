@@ -13,6 +13,9 @@ const InputText = ({answer, question, onChange}) => (
         {question.text && <QuestionText question={question}/>}
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
         <InputField
+            inputStyle={styles.input.field}
+            wrapperStyle={styles.input.wrapper}
+            labelStyle={styles.input.label}
             maxLength={question.maxLength}
             keyboardType="default"
             value={answer !== null ? answer : ''}

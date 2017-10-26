@@ -7,7 +7,7 @@ import InfoTextBox from './InfoTextBox';
 import styles from './styles';
 
 const QuestionTextWithoutAnswer = ({question}) => (
-    <View style={styles.rowContainer}>
+    <View style={styles.columnContainer}>
         <QuestionText question={question}/>
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
     </View>

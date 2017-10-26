@@ -30,10 +30,12 @@ export default {
         }
     },
     questionText: {
-        header: {
+        container: {
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-start',
+            paddingBottom: 0,
+            marginBottom: 0
         },
         text: {
             marginLeft: 5,
@@ -68,13 +70,6 @@ export default {
             padding: 10
         }
     },
-    testText: {
-        borderColor: '#F00',
-        borderBottomWidth: 1
-    },
-    testInline: {
-        backgroundColor: 'red'
-    },
     yesNoQuestion: {
         radioButton: {
             fontSize: 12
@@ -96,6 +91,17 @@ export default {
             flexDirection: 'column',
             paddingBottom: 0,
             paddingTop: 0
+        },
+        field: {
+            height: 40
+        },
+        wrapper: {
+            paddingTop: 5,
+            position: 'relative'
+        },
+        label: {
+            height: 50,
+            marginTop: -15
         }
     },
     radio: {

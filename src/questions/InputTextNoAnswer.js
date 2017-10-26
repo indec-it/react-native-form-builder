@@ -36,8 +36,10 @@ class InputTextNoAnswer extends Component {
                 <Text>{question.number ? `${question.number}` : ''}</Text>
                 <Text>{question.text}</Text>
                 {!this.state.block && <InputField
+                    inputStyle={styles.input.field}
+                    wrapperStyle={styles.input.wrapper}
+                    labelStyle={styles.input.label}
                     maxLength={question.maxLength}
-                    style={styles.testText}
                     keyboardType="default"
                     value={answer !== null ? answer : ''}
                     onChangeText={text => this.handleChange({[question.name]: text})}
