@@ -19,8 +19,10 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
                 {inputDisabled
                     ? <Text>(Deshabilitado)</Text>
                     : <InputField
+                        inputStyle={styles.input.field}
+                        wrapperStyle={styles.input.wrapper}
+                        labelStyle={styles.input.label}
                         maxLength={question.maxLength}
-                        style={styles.testText}
                         keyboardType="default"
                         value={answer !== null ? answer : ''}
                         onChangeText={text => onChange({[question.name]: text})}

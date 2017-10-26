@@ -7,7 +7,7 @@ import {includes} from 'lodash';
 import styles from './styles';
 
 const QuestionText = ({question}) => (
-    <View style={styles.questionText.header}>
+    <View style={styles.questionText.container}>
         {question.number && !includes(question.number, '.') && <Badge
             containerStyle={styles.questionText.primaryBadge.container}
             textStyle={styles.questionText.primaryBadge.text}

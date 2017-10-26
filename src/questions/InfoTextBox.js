@@ -11,7 +11,7 @@ const InfoTextBox = ({text}) => (
 );
 
 InfoTextBox.propTypes = {
-    text: PropTypes.shape({}).isRequired
+    text: PropTypes.string.isRequired
 };
 
 export default InfoTextBox;
