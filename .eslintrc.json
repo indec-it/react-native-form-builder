@@ -25,6 +25,7 @@
         ]
       }
     ],
+    "function-paren-newline": "off",
     "object-curly-spacing": [
       "error",
       "never"
