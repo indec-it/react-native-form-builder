@@ -1,8 +1,7 @@
-/* eslint-disable lodash/prefer-lodash-method */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-native';
-import {Row, Col} from 'react-native-elements';
+import {Row, Col} from 'react-native-easy-grid';
 import {find, get} from 'lodash';
 
 import MapQuestions from './MapQuestions';
@@ -62,11 +61,12 @@ export default class AddOnList extends Component {
     }
 
     deleteRow(index) {
-        Alert.alert(
+        return Alert.alert(
             'Eliminar',
             '¿Desea eliminar esta declaración?',
             [{
-                text: 'Cancelar'
+                text: 'Cancelar',
+                style: 'cancel'
             }, {
                 text: 'Eliminar',
                 onPress: () => {
@@ -74,6 +74,7 @@ export default class AddOnList extends Component {
                     this.props.onChange({[this.props.question.name]: this.state.answer});
                 }
             }],
+            {cancelable: false}
         );
     }
 
@@ -86,7 +87,7 @@ export default class AddOnList extends Component {
                             key={question.name.toString()}
                             chapter={this.state.componentAnswers}
                             question={question}
-                            onChange={newValues => this.componentOnChange(newValues)}
+                            onChange={componentAnswers => this.setState(() => ({componentAnswers}))}
                         />
                     ))}
                 </View>
@@ -97,8 +98,13 @@ export default class AddOnList extends Component {
                 <View style={{marginTop: 16}}>
                     {this.state.answer && this.state.answer.map((answerRow, index) => (
                         <TouchableOpacity onPress={() => this.deleteRow(index)}>
-                            <Row containerStyle={[{paddingTop: 8, paddingBottom: 8},
-                                index % 2 === 0 ? {backgroundColor: '#e4e4e4'} : {}]}
+                            <Row
+                                containerStyle={[
+                                    {
+                                        paddingTop: 8,
+                                        paddingBottom: 8
+                                    }, index % 2 === 0 ? {backgroundColor: '#e4e4e4'} : {}
+                                ]}
                             >
                                 {this.props.question.childQuestions.map(question => (
                                     <Col>

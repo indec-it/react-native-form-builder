@@ -110,5 +110,14 @@ export default {
             padding: 15,
             fontSize: 16
         }
+    },
+    radioTable: {
+        rowText: {
+            paddingTop: 15
+        },
+        colAlign: {
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
     }
 };

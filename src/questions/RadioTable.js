@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
-import {Row, Col, Grid, CheckBox} from 'react-native-elements';
+import {CheckBox} from 'react-native-elements';
+import {Grid, Row, Col} from 'react-native-easy-grid';
 
 import QuestionText from './QuestionText';
 import styles from './styles';
@@ -14,10 +15,10 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
     return (
         <Row>
             <Col size={4}>
-                <Text style={{paddingTop: 15}}>{question.text}</Text>
+                <Text style={styles.radioTable.rowText}>{question.text}</Text>
             </Col>
             {options.map(option => (
-                <Col>
+                <Col style={styles.radioTable.colAlign}>
                     <CheckBox
                         key={option.value}
                         containerStyle={{borderWidth: 0, backgroundColor: null}}
@@ -39,7 +40,7 @@ const RadioTable = ({section, question, onChange}) => (
             <Row>
                 <Col size={4}/>
                 {question.options.map(option => (
-                    <Col>
+                    <Col style={styles.radioTable.colAlign}>
                         <Text>
                             {option.text}
                         </Text>
