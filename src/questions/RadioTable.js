@@ -3,11 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
+import {Grid, Row, Col} from 'react-native-easy-grid';
 
 import QuestionText from './QuestionText';
-import Col from './Col';
-import Row from './Row';
-import Grid from './Grid';
 import styles from './styles';
 
 const renderRow = (section, options, parentQuestionName, question, onChange) => {
@@ -16,11 +14,11 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
     // TODO add key attribute to Row component for better loop render.
     return (
         <Row>
-            <Col flexSize={4}>
-                <Text style={{paddingTop: 15}}>{question.text}</Text>
+            <Col size={4}>
+                <Text style={styles.radioTable.rowText}>{question.text}</Text>
             </Col>
             {options.map(option => (
-                <Col>
+                <Col style={styles.radioTable.colAlign}>
                     <CheckBox
                         key={option.value}
                         containerStyle={{borderWidth: 0, backgroundColor: null}}
@@ -40,9 +38,9 @@ const RadioTable = ({section, question, onChange}) => (
         <QuestionText question={question}/>
         <Grid>
             <Row>
-                <Col flexSize={4}/>
+                <Col size={4}/>
                 {question.options.map(option => (
-                    <Col>
+                    <Col style={styles.radioTable.colAlign}>
                         <Text>
                             {option.text}
                         </Text>

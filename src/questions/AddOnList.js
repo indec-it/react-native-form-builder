@@ -1,16 +1,19 @@
-/* eslint-disable lodash/prefer-lodash-method */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Button, TouchableOpacity, Alert} from 'react-native';
+import {Row, Col} from 'react-native-easy-grid';
 import {find} from 'lodash';
 
 import MapQuestions from './MapQuestions';
 import {types} from '../constants/constants';
-import Row from './Row';
-import Col from './Col';
 
-export default class AddOnList extends Component {
-    propTypes = {
+const getFieldValue = (answerRow, question) => {
+    const value = answerRow[question.name];
+    return question.type === types.SELECT ? find(question.options, {value}).label : value;
+};
+
+class AddOnList extends Component {
+    static propTypes = {
         answer: PropTypes.shape({}).isRequired,
         question: PropTypes.shape({
             name: PropTypes.string,
@@ -19,28 +22,12 @@ export default class AddOnList extends Component {
         onChange: PropTypes.func.isRequired
     };
 
-    defaultProps = {};
-
     constructor(props) {
         super(props);
         this.state = {
             componentAnswers: {},
             answer: props.answer ? props.answer : []
         };
-    }
-
-    getFieldValue(answerRow, question) {
-        const value = answerRow[question.name];
-        switch (question.type) {
-            case types.SELECT:
-                return find(question.options, {value}).label;
-            default:
-                return value;
-        }
-    }
-
-    componentOnChange(componentAnswers) {
-        this.setState({componentAnswers});
     }
 
     addToList() {
@@ -77,7 +64,7 @@ export default class AddOnList extends Component {
                             key={question.name.toString()}
                             chapter={this.state.componentAnswers}
                             question={question}
-                            onChange={newValues => this.componentOnChange(newValues)}
+                            onChange={componentAnswers => this.setState(() => ({componentAnswers}))}
                         />
                     ))}
                 </View>
@@ -88,13 +75,18 @@ export default class AddOnList extends Component {
                 <View style={{marginTop: 16}}>
                     {this.state.answer && this.state.answer.map((answerRow, index) => (
                         <TouchableOpacity onPress={() => this.deleteRow(index)}>
-                            <Row containerStyle={[{paddingTop: 8, paddingBottom: 8},
-                                index % 2 === 0 ? {backgroundColor: '#e4e4e4'} : {}]}
+                            <Row
+                                containerStyle={[
+                                    {
+                                        paddingTop: 8,
+                                        paddingBottom: 8
+                                    }, index % 2 === 0 ? {backgroundColor: '#e4e4e4'} : {}
+                                ]}
                             >
                                 {this.props.question.childQuestions.map(question => (
                                     <Col>
                                         <Text style={{fontSize: 16}}>
-                                            {answerRow[question.name] ? this.getFieldValue(answerRow, question) : '-'}
+                                            {answerRow[question.name] ? getFieldValue(answerRow, question) : '-'}
                                         </Text>
                                     </Col>
                                 ))}
@@ -106,3 +98,5 @@ export default class AddOnList extends Component {
         );
     }
 }
+
+export default AddOnList;
