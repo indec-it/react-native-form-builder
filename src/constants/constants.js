@@ -1,4 +1,5 @@
 export const types = {
+    ADDON_LIST: 'AddOnList',
     CHECKBOX: 'checkbox',
     DATE: 'date',
     EMAIL: 'email',
