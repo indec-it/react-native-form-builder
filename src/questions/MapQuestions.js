@@ -21,6 +21,7 @@ import Select from './Select';
 import Title from './Title';
 import YesNoQuestion from './YesNoQuestion';
 import Total from './Total';
+import AddOnList from './AddOnList';
 
 const getQuestionComponent = questionType => {
     switch (questionType) {
@@ -58,6 +59,9 @@ const getQuestionComponent = questionType => {
             return YesNoQuestion;
         case types.SUM:
             return Total;
+        case types.AddOnList:
+            return AddOnList;
+
         default:
             throw Error(`Question type not implemented: ${questionType}`);
     }
