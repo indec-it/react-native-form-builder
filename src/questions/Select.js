@@ -6,22 +6,20 @@ import {Picker, View} from 'react-native';
 import QuestionText from './QuestionText';
 
 const Select = ({answer, question, onChange}) => (
-    <View>
-        <View>
-            <QuestionText question={question}/>
-            <Picker
-                selectedValue={answer}
-                onValueChange={itemValue => onChange({[question.name]: itemValue})}
-            >
-                {question.options.map(option => (
-                    <Picker.Item
-                        key={option.value}
-                        label={option.label}
-                        value={option.value}
-                    />
-                ))}
-            </Picker>
-        </View>
+    <View style={{flex: 1}}>
+        <QuestionText question={question}/>
+        <Picker
+            selectedValue={answer}
+            onValueChange={itemValue => onChange({[question.name]: itemValue})}
+        >
+            {question.options.map(option => (
+                <Picker.Item
+                    key={option.value}
+                    label={option.label}
+                    value={option.value}
+                />
+            ))}
+        </Picker>
     </View>
 );
 
