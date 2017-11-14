@@ -38,13 +38,12 @@ class AddOnList extends Component {
     }
 
     deleteRow(index) {
-        Alert.alert(
+        return Alert.alert(
             'Eliminar',
             '¿Desea eliminar esta declaracion?',
             [{
                 text: 'Cancelar',
-                onPress: () => {
-                }
+                style: 'cancel'
             }, {
                 text: 'Eliminar',
                 onPress: () => {
@@ -52,6 +51,7 @@ class AddOnList extends Component {
                     this.props.onChange({[this.props.question.name]: this.state.answer});
                 }
             }],
+            {cancelable: false}
         );
     }
 

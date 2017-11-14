@@ -61,7 +61,6 @@ const getQuestionComponent = questionType => {
             return Total;
         case types.AddOnList:
             return AddOnList;
-
         default:
             throw Error(`Question type not implemented: ${questionType}`);
     }
