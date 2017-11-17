@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
+import {toNumber} from 'lodash';
 import InputField from '@indec/react-native-md-textinput';
 
 import QuestionText from './QuestionText';
@@ -25,7 +26,7 @@ const InputNumberWithIgnore = ({answer, question, onChange}) => {
                         min={question.min}
                         keyboardType="numeric"
                         value={answer !== null ? answer : ''}
-                        onChangeText={num => onChange({[question.name]: num})}
+                        onChangeText={num => onChange({[question.name]: toNumber(num)})}
                         label={question.floatingLabel ? question.floatingLabel : ''}
                         highlightColor={colors.accent}
                     />
