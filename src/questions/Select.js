@@ -2,8 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Picker, View} from 'react-native';
+import {concat} from 'lodash';
 
 import QuestionText from './QuestionText';
+
+const addPlaceholder = (options, placeholder) =>
+    (placeholder ? concat({label: placeholder, value: null}, options) : options);
 
 const Select = ({answer, question, onChange}) => (
     <View style={{flex: 1}}>
@@ -12,7 +16,7 @@ const Select = ({answer, question, onChange}) => (
             selectedValue={answer}
             onValueChange={itemValue => onChange({[question.name]: itemValue})}
         >
-            {question.options.map(option => (
+            {addPlaceholder(question.options, question.placeholder).map(option => (
                 <Picker.Item
                     key={option.value}
                     label={option.label}
