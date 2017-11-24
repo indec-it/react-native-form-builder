@@ -1,9 +1,9 @@
 /* eslint-disable lodash/prefer-lodash-method */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, Button, TouchableOpacity, Alert} from 'react-native';
+import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-native';
 import {Row, Col} from 'react-native-elements';
-import {find} from 'lodash';
+import {find, get} from 'lodash';
 
 import MapQuestions from './MapQuestions';
 import {types} from '../constants/constants';
@@ -42,7 +42,21 @@ export default class AddOnList extends Component {
         this.setState({componentAnswers});
     }
 
+    canAddToList() {
+        const questions = this.props.question.childQuestions;
+        // eslint-disable-next-line
+        for (let question of questions) {
+            const answer = get(this.state.componentAnswers, question.name, null);
+            if (answer === null) {
+                ToastAndroid.show('Seleccione todos los elementos', ToastAndroid.SHORT);
+                return false;
+            }
+        }
+        return true;
+    }
+
     addToList() {
+        if (!this.canAddToList()) return;
         this.state.answer.push(this.state.componentAnswers);
         this.props.onChange({[this.props.question.name]: this.state.answer});
         const componentAnswers = {};
@@ -54,9 +68,7 @@ export default class AddOnList extends Component {
             'Eliminar',
             '¿Desea eliminar esta declaracion?',
             [{
-                text: 'Cancelar',
-                onPress: () => {
-                }
+                text: 'Cancelar'
             }, {
                 text: 'Eliminar',
                 onPress: () => {
