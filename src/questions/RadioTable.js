@@ -2,9 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
-import {Row, Col, Grid, CheckBox} from 'react-native-elements';
+import {CheckBox} from 'react-native-elements';
 
 import QuestionText from './QuestionText';
+import Col from './Col';
+import Row from './Row';
+import Grid from './Grid';
 import styles from './styles';
 
 const renderRow = (section, options, parentQuestionName, question, onChange) => {
@@ -13,7 +16,7 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
     // TODO add key attribute to Row component for better loop render.
     return (
         <Row>
-            <Col size={4}>
+            <Col flexSize={4}>
                 <Text style={{paddingTop: 15}}>{question.text}</Text>
             </Col>
             {options.map(option => (
@@ -37,7 +40,7 @@ const RadioTable = ({section, question, onChange}) => (
         <QuestionText question={question}/>
         <Grid>
             <Row>
-                <Col size={4}/>
+                <Col flexSize={4}/>
                 {question.options.map(option => (
                     <Col>
                         <Text>
