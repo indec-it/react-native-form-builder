@@ -26,7 +26,8 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
-    "husky": "^0.14.3"
+    "husky": "^0.14.3",
+    "react-bootstrap": "^0.31.5"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
