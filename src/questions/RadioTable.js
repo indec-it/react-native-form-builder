@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
-import {Row, Col, Grid, CheckBox} from 'react-native-elements';
+import {CheckBox} from 'react-native-elements';
+import {Row, Col, Grid} from 'react-bootstrap';
 
 import QuestionText from './QuestionText';
 import styles from './styles';
