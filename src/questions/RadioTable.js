@@ -15,11 +15,11 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
     // TODO add key attribute to Row component for better loop render.
     return (
         <Row>
-            <Col size={4}>
+            <Col sm={3}>
                 <Text style={{paddingTop: 15}}>{question.text}</Text>
             </Col>
             {options.map(option => (
-                <Col>
+                <Col sm={1}>
                     <CheckBox
                         key={option.value}
                         containerStyle={{borderWidth: 0, backgroundColor: null}}
