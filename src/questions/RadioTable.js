@@ -37,22 +37,20 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
 const RadioTable = ({section, question, onChange}) => (
     <View style={styles.rowContainer}>
         <QuestionText question={question}/>
-        <Grid>
-            <Row>
-                <Col sm={4}>
+        <Row>
+            <Col sm={4}>
+            </Col>
+            {question.options.map(option => (
+                <Col sm={1}>
+                    <Text>
+                        {option.text}
+                    </Text>
                 </Col>
-                {question.options.map(option => (
-                    <Col sm={1}>
-                        <Text>
-                            {option.text}
-                        </Text>
-                    </Col>
-                ))}
-            </Row>
-            {question.questions.map(questionRow =>
-                renderRow(section, question.options, question.name, questionRow, onChange)
-            )}
-        </Grid>
+            ))}
+        </Row>
+        {question.questions.map(questionRow =>
+            renderRow(section, question.options, question.name, questionRow, onChange)
+        )}
     </View>
 );
 
