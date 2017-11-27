@@ -1,5 +1,6 @@
 export default {
     rowContainer: {
+        flex: 1,
         paddingHorizontal: 4
     },
     infoTextBox: {

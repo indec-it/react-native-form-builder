@@ -15,7 +15,7 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
     // TODO add key attribute to Row component for better loop render.
     return (
         <Row>
-            <Col sm={3}>
+            <Col sm={4}>
                 <Text style={{paddingTop: 15}}>{question.text}</Text>
             </Col>
             {options.map(option => (
@@ -39,9 +39,10 @@ const RadioTable = ({section, question, onChange}) => (
         <QuestionText question={question}/>
         <Grid>
             <Row>
-                <Col size={4}/>
+                <Col sm={4}>
+                </Col>
                 {question.options.map(option => (
-                    <Col>
+                    <Col sm={1}>
                         <Text>
                             {option.text}
                         </Text>
