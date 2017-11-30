@@ -13,6 +13,7 @@ const InputNumber = ({answer, question, onChange}) => (
         <QuestionText question={question}/>
         {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
         <TextInput
+            style={styles.inputReact}
             max={question.max}
             maxLength={question.maxLength}
             min={question.min}

@@ -16,7 +16,7 @@ const Radio = ({answer, question, onChange}) => (
         {question.options.map(option => (
             <CheckBox
                 key={option.value}
-                title={option.label}
+                title={'(' + option.value + ') ' + option.label}
                 checkedIcon="dot-circle-o"
                 onPress={() => handleChange(option.value, onChange, question)}
                 uncheckedIcon="circle-o"

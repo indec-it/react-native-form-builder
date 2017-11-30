@@ -51,5 +51,11 @@ export default {
             fontWeight: 'bold',
             padding: 10
         }
+    },
+    inputReact: {
+        backgroundColor: '#ffffff',
+        borderBottomColor: '#b9b9b9',
+        borderBottomWidth: 1,
+        height: 26
     }
 };

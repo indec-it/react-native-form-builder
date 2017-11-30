@@ -21,6 +21,7 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
             {options.map(option => (
                 <Col sm={1}>
                     <CheckBox
+                        title={'(' + option.value + ')'}
                         key={option.value}
                         containerStyle={{borderWidth: 0, backgroundColor: null}}
                         checkedIcon="dot-circle-o"
