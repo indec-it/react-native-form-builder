@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
-import {Row, Col, Grid} from 'react-bootstrap';
+import {Button, Row, Col} from 'react-bootstrap';
 
 import QuestionText from './QuestionText';
+import FontAwesome from 'react-fontawesome';
 import styles from './styles';
 
 const handleChange = (value, callback, questionName) => callback({target: {name: questionName, value}});
@@ -31,6 +32,30 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
                     />
                 </Col>
             ))}
+            <Col sm={2}>
+                <Button
+                    onClick={() => handleChange('*', onChange, questionName)}
+                    bsStyle="primary"
+                    className="btn btn-group-justified"
+                >
+                    Blanco &nbsp;
+                    {answer === '*' &&
+                    <FontAwesome name="check"/>
+                    }
+                </Button>
+            </Col>
+            <Col sm={2}>
+                <Button
+                    onClick={() => handleChange('#', onChange, questionName)}
+                    bsStyle="primary"
+                    className="btn btn-group-justified"
+                >
+                    Multimarca &nbsp;
+                    {answer === '#' &&
+                    <FontAwesome name="check"/>
+                    }
+                </Button>
+            </Col>
         </Row>
     );
 };

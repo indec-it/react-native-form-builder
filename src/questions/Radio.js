@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
+import {Button, Row, Col} from 'react-bootstrap';
 import {CheckBox} from 'react-native-elements';
 
 import QuestionText from './QuestionText';
@@ -23,6 +24,33 @@ const Radio = ({answer, question, onChange}) => (
                 checked={answer === option.value}
             />
         ))}
+        <Row>
+            <Col sm={4}></Col>
+            <Col sm={2}>
+                <Button
+                    onClick={() => handleChange('*', onChange, question)}
+                    bsStyle="primary"
+                    className="btn btn-group-justified"
+                >
+                    Blanco &nbsp;
+                    {answer === '*' &&
+                    <FontAwesome name="check"/>
+                    }
+                </Button>
+            </Col>
+            <Col sm={2}>
+                <Button
+                    onClick={() => handleChange('#', onChange, question)}
+                    bsStyle="primary"
+                    className="btn btn-group-justified"
+                >
+                    Multimarca &nbsp;
+                    {answer === '#' &&
+                    <FontAwesome name="check"/>
+                    }
+                </Button>
+            </Col>
+        </Row>
     </View>
 );
 
