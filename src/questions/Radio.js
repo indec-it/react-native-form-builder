@@ -6,6 +6,7 @@ import {CheckBox} from 'react-native-elements';
 
 import QuestionText from './QuestionText';
 import InfoTextBox from './InfoTextBox';
+import FontAwesome from 'react-fontawesome';
 import styles from './styles';
 
 const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
