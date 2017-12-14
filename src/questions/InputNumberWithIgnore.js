@@ -24,6 +24,7 @@ const InputNumberWithIgnore = ({answer, question, onChange}) => {
                 <Text>{question.inputText}</Text>
                 {inputDisabled ? <Text>(Deshabilitado)</Text>
                     : <TextInput
+                        style={styles.inputReact}
                         max={question.max}
                         maxLength={question.maxLength}
                         min={question.min}
