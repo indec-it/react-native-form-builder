@@ -1,0 +1,20 @@
+export default {
+    ADD_ON_LIST: 'addOnList',
+    CHECKBOX: 'checkbox',
+    INFO_TEXT_BOX: 'infoTextBox',
+    DATE: 'date',
+    NUMBER: 'number',
+    NUMBER_WITH_IGNORE: 'numberWithIgnore',
+    TEXT: 'text',
+    TEXT_OR_NO_ANSWER: 'textNoAnswer',
+    TEXT_WITH_IGNORE: 'textWithIgnore',
+    LABEL: 'label',
+    QUESTION_WITHOUT_ANSWER: 'questionWithoutAnswer',
+    RADIO: 'radio',
+    RADIO_SECTIONS: 'radioSections',
+    RADIO_TABLE: 'radioTable',
+    SELECT: 'select',
+    TITLE: 'title',
+    TOTAL: 'total',
+    YES_NO: 'yesNo'
+};
