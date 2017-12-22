@@ -1,8 +1,6 @@
-import MapQuestions from './questions/MapQuestions';
-import {types, operator} from './constants/constants';
+import MapQuestions from './MapQuestions';
+import {operators, types} from './enums';
 
-export {
-    MapQuestions,
-    types,
-    operator
-};
+export {MapQuestions};
+export {operators};
+export {types};
