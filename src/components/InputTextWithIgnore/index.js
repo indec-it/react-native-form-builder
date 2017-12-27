@@ -1,4 +1,3 @@
-/* eslint jsx-a11y/label-has-for:"off" */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';

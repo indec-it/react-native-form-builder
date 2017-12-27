@@ -17,21 +17,46 @@ import Title from './Title';
 import Total from './Total';
 import YesNo from './YesNo';
 
-export {AddOnList};
-export {CheckBox};
-export {InfoTextBox};
-export {InputDate};
-export {InputNumber};
-export {InputNumberWithIgnore};
-export {InputText};
-export {InputTextNoAnswer};
-export {InputTextWithIgnore};
-export {Label};
-export {TextWithoutAnswer};
-export {Radio};
-export {RadioSections};
-export {RadioTable};
-export {Select};
-export {Title};
-export {Total};
-export {YesNo};
+export default {
+    addOnList: AddOnList,
+    checkBox: CheckBox,
+    InfoTextBox,
+    InputDate,
+    InputNumber,
+    InputNumberWithIgnore,
+    InputText,
+    InputTextNoAnswer,
+    InputTextWithIgnore,
+    Label,
+    TextWithoutAnswer,
+    Radio,
+    RadioSections,
+    RadioTable,
+    Select,
+    Title,
+    Total,
+    YesNo
+};
+
+/*
+export default [
+    AddOnList,
+    CheckBox,
+    InfoTextBox,
+    InputDate,
+    InputNumber,
+    InputNumberWithIgnore,
+    InputText,
+    InputTextNoAnswer,
+    InputTextWithIgnore,
+    Label,
+    TextWithoutAnswer,
+    Radio,
+    RadioSections,
+    RadioTable,
+    Select,
+    Title,
+    Total,
+    YesNo
+];
+*/

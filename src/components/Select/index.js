@@ -1,4 +1,3 @@
-/* eslint-disable lodash/prefer-lodash-method */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Picker, View} from 'react-native';

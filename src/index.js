@@ -1,6 +1,6 @@
-import MapQuestions from './MapQuestions';
+import ComponentsMapper from './ComponentsMapper';
 import {operators, types} from './enums';
 
-export {MapQuestions};
+export {ComponentsMapper};
 export {operators};
 export {types};
