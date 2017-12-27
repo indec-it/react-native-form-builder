@@ -1,23 +1,19 @@
-/* eslint-disable lodash/prefer-lodash-method */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-native';
 import {Row, Col} from 'react-native-elements';
-import {find, get} from 'lodash';
+import {find, get, isNil, some} from 'lodash';
 
-import MapQuestions from '../../MapQuestions';
+import ComponentsMapper from '../../ComponentsMapper';
 import styles from './styles';
 import {types} from '../../enums';
 
 const getFieldValue = (answerRow, question) => {
     const value = answerRow[question.name];
-    switch (question.type) {
-        case types.SELECT:
-            return find(question.options, {value}).label;
-        default:
-            return value;
-    }
+    return question.type === types.SELECT ? find(question.options, {value}).label : value;
 };
+
+// TODO Refactor ComponentsMapper implementation
 
 export default class AddOnList extends Component {
     propTypes = {
@@ -37,27 +33,21 @@ export default class AddOnList extends Component {
         };
     }
 
-    componentOnChange(componentAnswers) {
-        this.setState({componentAnswers});
-    }
-
-    canAddToList() {
-        const questions = this.props.question.childQuestions;
-        // eslint-disable-next-line
-        for (let question of questions) {
-            const answer = get(this.state.componentAnswers, question.name, null);
-            if (answer === null) {
-                ToastAndroid.show('Seleccione todos los elementos', ToastAndroid.SHORT);
-                return false;
-            }
-        }
-        return true;
+    someQuestionsAreNil() {
+        return some(this.props.question.childQuestions, question => isNil(
+            get(this.state.componentAnswers, question.name, null)
+        ));
     }
 
     addToList() {
-        if (!this.canAddToList()) return;
+        if (this.someQuestionsAreNil()) {
+            ToastAndroid.show('Seleccione todos los elementos', ToastAndroid.SHORT);
+            return;
+        }
+
         this.state.answer.push(this.state.componentAnswers);
         this.props.onChange({[this.props.question.name]: this.state.answer});
+
         const componentAnswers = {};
         this.setState({componentAnswers});
     }
@@ -74,7 +64,7 @@ export default class AddOnList extends Component {
                     this.state.answer.splice(index, 1);
                     this.props.onChange({[this.props.question.name]: this.state.answer});
                 }
-            }],
+            }]
         );
     }
 
@@ -83,11 +73,11 @@ export default class AddOnList extends Component {
             <View style={styles.container}>
                 <Row>
                     {this.props.question.childQuestions.map(question => (
-                        <MapQuestions
+                        <ComponentsMapper
                             key={question.name.toString()}
                             chapter={this.state.componentAnswers}
                             question={question}
-                            onChange={newValues => this.componentOnChange(newValues)}
+                            onChange={componentAnswers => this.setState(() => ({componentAnswers}))}
                         />
                     ))}
                 </Row>
