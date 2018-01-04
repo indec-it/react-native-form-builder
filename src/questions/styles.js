@@ -57,5 +57,11 @@ export default {
         borderBottomColor: '#b9b9b9',
         borderBottomWidth: 1,
         height: 26
+    },
+    inputReactDisabled: {
+        backgroundColor: '#B1AF98',
+        borderBottomColor: '#b9b9b9',
+        borderBottomWidth: 1,
+        height: 26
     }
 };
