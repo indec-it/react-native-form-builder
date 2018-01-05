@@ -7,7 +7,7 @@ import InputField from '@indec/react-native-md-textinput';
 import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
-const InputTextWithIgnore = ({answer, question, onChange}) => {
+const TextInputOrIgnore = ({answer, question, onChange}) => {
     const inputDisabled = answer === question.ignoreValue;
     return (
         <View style={styles.container}>
@@ -44,14 +44,14 @@ const InputTextWithIgnore = ({answer, question, onChange}) => {
     );
 };
 
-InputTextWithIgnore.propTypes = {
+TextInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.bool
 };
 
-InputTextWithIgnore.defaultProps = {
+TextInputOrIgnore.defaultProps = {
     answer: null
 };
 
-export default InputTextWithIgnore;
+export default TextInputOrIgnore;

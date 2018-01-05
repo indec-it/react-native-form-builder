@@ -6,7 +6,7 @@ import {keys} from 'lodash';
 
 import styles from './styles';
 
-class InputTextNoAnswer extends Component {
+class TextInputOrNoAnswer extends Component {
     static propTypes = {
         question: PropTypes.shape({}).isRequired,
         onChange: PropTypes.func.isRequired,
@@ -24,7 +24,9 @@ class InputTextNoAnswer extends Component {
 
     handleChange(obj) {
         const {onChange, question} = this.props;
-        if (keys(obj)[0] !== question.name) this.setState({block: !this.state.block});
+        if (keys(obj)[0] !== question.name) {
+            this.setState(() => ({block: !this.state.block}));
+        }
         return onChange(obj);
     }
 
@@ -55,4 +57,4 @@ class InputTextNoAnswer extends Component {
     }
 }
 
-export default InputTextNoAnswer;
+export default TextInputOrNoAnswer;

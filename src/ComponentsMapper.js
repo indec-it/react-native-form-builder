@@ -13,6 +13,7 @@ export default class ComponentsMapper {
             return;
         }
         const preMadeComponent = mapKeys(preMadeComponents, (value, key) => type === key);
+        console.log('preMadeComponent', preMadeComponent);
         this.components[type] = preMadeComponent;
     }
 

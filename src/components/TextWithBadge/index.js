@@ -4,7 +4,7 @@ import {Text, View} from 'react-native';
 import {Badge} from 'react-native-elements';
 import {includes} from 'lodash';
 
-import InfoTextBox from '../InfoTextBox';
+import InfoTextBox from '../TextBox';
 import styles from './styles';
 
 const getBadge = number => (

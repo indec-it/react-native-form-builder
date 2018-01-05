@@ -6,7 +6,7 @@ import InputField from '@indec/react-native-md-textinput';
 import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
-const InputText = ({answer, question, onChange}) => (
+const TextInput = ({answer, question, onChange}) => (
     <View style={styles.container}>
         {question.text && <TextWithBadge question={question}/>}
         <InputField
@@ -24,14 +24,14 @@ const InputText = ({answer, question, onChange}) => (
     </View>
 );
 
-InputText.propTypes = {
+TextInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.string
 };
 
-InputText.defaultProps = {
+TextInput.defaultProps = {
     answer: null
 };
 
-export default InputText;
+export default TextInput;

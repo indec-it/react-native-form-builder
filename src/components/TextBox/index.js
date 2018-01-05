@@ -4,14 +4,14 @@ import {Text, View} from 'react-native';
 
 import styles from './styles';
 
-const InfoTextBox = ({text}) => (
+const TextBox = ({text}) => (
     <View style={styles.container}>
         <Text style={styles.text}>{text}</Text>
     </View>
 );
 
-InfoTextBox.propTypes = {
+TextBox.propTypes = {
     text: PropTypes.string.isRequired
 };
 
-export default InfoTextBox;
+export default TextBox;

@@ -6,7 +6,7 @@ import DatePicker from 'react-native-datepicker';
 import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
-const InputDate = ({answer, question, onChange}) => (
+const DateInput = ({answer, question, onChange}) => (
     <View style={styles.container}>
         <TextWithBadge question={question}/>
         <DatePicker
@@ -23,14 +23,14 @@ const InputDate = ({answer, question, onChange}) => (
     </View>
 );
 
-InputDate.propTypes = {
+DateInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
-InputDate.defaultProps = {
+DateInput.defaultProps = {
     answer: null
 };
 
-export default InputDate;
+export default DateInput;
