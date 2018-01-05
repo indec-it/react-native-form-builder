@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
 
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 
 const Select = ({answer, question, onChange}) => (
     <View>
         <View>
-            <QuestionText question={question}/>
+            <TextWithBadge question={question}/>
             <select
                 value={answer}
                 onChange={e => onChange({[question.name]: e.target.value})}

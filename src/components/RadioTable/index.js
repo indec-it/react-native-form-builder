@@ -4,7 +4,7 @@ import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const renderRow = (section, options, parentQuestionName, question, onChange) => {
@@ -34,7 +34,7 @@ const renderRow = (section, options, parentQuestionName, question, onChange) => 
 
 const RadioTable = ({section, question, onChange}) => (
     <View style={styles.container}>
-        <QuestionText question={question}/>
+        <TextWithBadge question={question}/>
         <Grid>
             <Row>
                 <Col size={4}/>

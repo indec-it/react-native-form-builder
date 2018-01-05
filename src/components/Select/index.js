@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Picker, View} from 'react-native';
 import {concat} from 'lodash';
 
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const addPlaceholder = (options, placeholder) => (
@@ -12,7 +12,7 @@ const addPlaceholder = (options, placeholder) => (
 
 const Select = ({answer, question, onChange}) => (
     <View style={styles.container}>
-        <QuestionText question={question}/>
+        <TextWithBadge question={question}/>
         <Picker
             selectedValue={answer}
             onValueChange={itemValue => onChange({[question.name]: itemValue})}

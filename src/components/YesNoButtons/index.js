@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
 
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const getValue = (index, question) => {
@@ -36,22 +36,20 @@ const getRadioButtonStyle = (answer, questionValue) => (
     [styles.radioButton, answer === questionValue ? {color: '#ffffff'} : {color: '#000000'}]
 );
 
-const YesNoQuestion = ({answer, question, onChange}) => {
+const YesNoButtons = ({answer, question, onChange}) => {
     const buttons = [
         {element: () => <Text style={getRadioButtonStyle(answer, question.trueValue)}>SI</Text>},
         {element: () => <Text style={getRadioButtonStyle(answer, question.falseValue)}>NO</Text>}
     ];
     if (question.dkValue) {
         buttons.push({
-            element: () => (
-                <Text style={getRadioButtonStyle(answer, question.dkValue)}>{question.dkLabel}</Text>
-            )
+            element: () => <Text style={getRadioButtonStyle(answer, question.dkValue)}>{question.dkLabel}</Text>
         });
     }
 
     return (
         <View style={styles.container}>
-            <QuestionText question={question} style={styles.text}/>
+            <TextWithBadge question={question} style={styles.text}/>
             <ButtonGroup
                 onPress={index => onChange({[question.name]: getValue(index, question)})}
                 selectedIndex={getSelectedValue(answer, question)}
@@ -63,14 +61,14 @@ const YesNoQuestion = ({answer, question, onChange}) => {
     );
 };
 
-YesNoQuestion.propTypes = {
+YesNoButtons.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([PropTypes.bool, PropTypes.number])
 };
 
-YesNoQuestion.defaultProps = {
+YesNoButtons.defaultProps = {
     answer: null
 };
 
-export default YesNoQuestion;
+export default YesNoButtons;

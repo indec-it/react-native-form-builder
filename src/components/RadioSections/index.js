@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const RadioSections = ({answer, question, onChange}) => (
     <View style={styles.container}>
-        <QuestionText question={question}/>
+        <TextWithBadge question={question}/>
         {question.options.map(option => (
             <View>
                 {option.section
