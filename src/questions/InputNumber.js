@@ -33,7 +33,7 @@ const InputNumber = ({answer, question, onChange}) => {
                         ?
                         <View>
                             <TextInput
-                                style={style.inputReactDisabled}
+                                style={styles.inputReactDisabled}
                                 value={'(Blanco)'}
                                 editable={false}
                             />

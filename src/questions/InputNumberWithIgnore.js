@@ -39,7 +39,7 @@ const InputNumberWithIgnore = ({answer, question, onChange}) => {
                         ?
                         <View>
                             <TextInput
-                                style={style.inputReactDisabled} //TODO!!! : Setear color de fondo a gris
+                                style={styles.inputReactDisabled} //TODO!!! : Setear color de fondo a gris
                                 value={'(Blanco)'}
                                 editable={false}
                             />

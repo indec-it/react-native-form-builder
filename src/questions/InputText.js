@@ -18,16 +18,7 @@ const handleChangeBlankButton = (currentAnswerValue, callback, question) => {
     } else {
         callback({target: {name: question.name, value: BLANK_VALUE}});
     }
-}
-
-const styleAux = {
-    inputReactDisabled: {
-        backgroundColor: '#B1AF98',
-        borderBottomColor: '#b9b9b9',
-        borderBottomWidth: 1,
-        height: 26
-    }
-}
+};
 
 const InputText = ({answer, question, onChange}) => {
     const inputDisabled = answer === BLANK_VALUE;
@@ -41,7 +32,7 @@ const InputText = ({answer, question, onChange}) => {
                     {inputDisabled
                         ?
                         <TextInput
-                            style={style.inputReactDisabled}
+                            style={styles.inputReactDisabled}
                             value={'(Blanco)'}
                             editable={false}
                         />
