@@ -7,56 +7,31 @@ import InputNumberWithIgnore from './InputNumberWithIgnore';
 import InputText from './InputText';
 import InputTextNoAnswer from './InputTextNoAnswer';
 import InputTextWithIgnore from './InputTextWithIgnore';
-import Label from './Label';
-import TextWithoutAnswer from './TextWithoutAnswer';
 import Radio from './Radio';
 import RadioSections from './RadioSections';
 import RadioTable from './RadioTable';
 import Select from './Select';
+import TextWithBadge from './TextWithBadge';
 import Title from './Title';
 import Total from './Total';
-import YesNo from './YesNo';
+import YesNo from './YesNoButtons';
 
 export default {
     addOnList: AddOnList,
     checkBox: CheckBox,
-    InfoTextBox,
-    InputDate,
-    InputNumber,
-    InputNumberWithIgnore,
-    InputText,
-    InputTextNoAnswer,
-    InputTextWithIgnore,
-    Label,
-    TextWithoutAnswer,
-    Radio,
-    RadioSections,
-    RadioTable,
-    Select,
-    Title,
-    Total,
-    YesNo
+    infoTextBox: InfoTextBox,
+    inputDate: InputDate,
+    inputNumber: InputNumber,
+    inputNumberWithIgnore: InputNumberWithIgnore,
+    inputText: InputText,
+    inputTextNoAnswer: InputTextNoAnswer,
+    inputTextWithIgnore: InputTextWithIgnore,
+    radio: Radio,
+    radioSections: RadioSections,
+    radioTable: RadioTable,
+    select: Select,
+    textWithoutAnswer: TextWithBadge,
+    title: Title,
+    total: Total,
+    yesNo: YesNo
 };
-
-/*
-export default [
-    AddOnList,
-    CheckBox,
-    InfoTextBox,
-    InputDate,
-    InputNumber,
-    InputNumberWithIgnore,
-    InputText,
-    InputTextNoAnswer,
-    InputTextWithIgnore,
-    Label,
-    TextWithoutAnswer,
-    Radio,
-    RadioSections,
-    RadioTable,
-    Select,
-    Title,
-    Total,
-    YesNo
-];
-*/

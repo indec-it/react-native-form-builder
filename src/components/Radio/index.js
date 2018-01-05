@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
-import QuestionText from '../Text';
-import InfoTextBox from '../InfoTextBox';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const Radio = ({answer, question, onChange}) => (
     <View style={styles.container}>
-        <QuestionText question={question}/>
-        {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
+        <TextWithBadge question={question}/>
         {question.options.map(
             option => (option.text ? (
                 <Text key={option.text} style={styles.text}>

@@ -4,14 +4,14 @@ import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import InputField from '@indec/react-native-md-textinput';
 
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const InputTextWithIgnore = ({answer, question, onChange}) => {
     const inputDisabled = answer === question.ignoreValue;
     return (
         <View style={styles.container}>
-            <QuestionText question={question}/>
+            <TextWithBadge question={question}/>
             <View>
                 <Text>{question.inputText}</Text>
                 {inputDisabled

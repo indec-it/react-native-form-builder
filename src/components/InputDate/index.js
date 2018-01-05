@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import {View} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const InputDate = ({answer, question, onChange}) => (
     <View style={styles.container}>
-        <QuestionText question={question}/>
+        <TextWithBadge question={question}/>
         <DatePicker
             style={styles.datePicker}
             date={answer}

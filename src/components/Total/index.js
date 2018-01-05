@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {filter, toNumber, isNil, sum, isNaN} from 'lodash';
 
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const getTotal = (section, question, callback) => {
@@ -29,7 +29,7 @@ const getTotal = (section, question, callback) => {
 
 const Total = ({section, question, onChange}) => (
     <View style={styles.container}>
-        <QuestionText question={question}/>
+        <TextWithBadge question={question}/>
         <Text>{getTotal(section, question, onChange)}</Text>
     </View>
 );

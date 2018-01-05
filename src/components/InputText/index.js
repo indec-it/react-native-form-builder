@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 import InputField from '@indec/react-native-md-textinput';
 
-import InfoTextBox from '../InfoTextBox';
-import QuestionText from '../Text';
+import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
 const InputText = ({answer, question, onChange}) => (
     <View style={styles.container}>
-        {question.text && <QuestionText question={question}/>}
-        {question.infoAfterText && <InfoTextBox text={question.infoAfterText}/>}
+        {question.text && <TextWithBadge question={question}/>}
         <InputField
             inputStyle={styles.field}
             wrapperStyle={styles.wrapper}
