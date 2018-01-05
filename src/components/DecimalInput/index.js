@@ -7,7 +7,7 @@ import {toNumber, toString} from 'lodash';
 import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
-const InputNumber = ({answer, question, onChange}) => (
+const DecimalInput = ({answer, question, onChange}) => (
     <View style={styles.container}>
         {question.text && <TextWithBadge question={question}/>}
         <InputField
@@ -27,14 +27,14 @@ const InputNumber = ({answer, question, onChange}) => (
     </View>
 );
 
-InputNumber.propTypes = {
+DecimalInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.number
 };
 
-InputNumber.defaultProps = {
+DecimalInput.defaultProps = {
     answer: null
 };
 
-export default InputNumber;
+export default DecimalInput;

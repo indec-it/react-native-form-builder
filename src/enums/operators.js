@@ -1,4 +1,4 @@
-// operator enum will be moved to another package in a future.
+// Operators enum will be moved to validator package in a future.
 export default {
     EQUALS: 'eq',
     NOT_EQUALS: 'ne',

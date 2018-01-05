@@ -8,7 +8,7 @@ import {toNumber, toString} from 'lodash';
 import TextWithBadge from '../TextWithBadge';
 import styles from './styles';
 
-const InputNumberWithIgnore = ({answer, question, onChange}) => {
+const DecimalInputOrIgnore = ({answer, question, onChange}) => {
     const inputDisabled = answer === question.ignoreValue;
     return (
         <View style={styles.container}>
@@ -46,7 +46,7 @@ const InputNumberWithIgnore = ({answer, question, onChange}) => {
     );
 };
 
-InputNumberWithIgnore.propTypes = {
+DecimalInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
@@ -55,8 +55,8 @@ InputNumberWithIgnore.propTypes = {
     ])
 };
 
-InputNumberWithIgnore.defaultProps = {
+DecimalInputOrIgnore.defaultProps = {
     answer: null
 };
 
-export default InputNumberWithIgnore;
+export default DecimalInputOrIgnore;
