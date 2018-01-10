@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-native';
-import {Row, Col} from 'react-native-elements';
 import {find, get, isNil, some} from 'lodash';
 
 import ComponentsMapper from '../../ComponentsMapper';
+import {Row, Col} from '../../common';
 import styles from './styles';
 import {types} from '../../enums';
 
@@ -89,7 +89,7 @@ export default class AddOnList extends Component {
                     {this.state.answer && this.state.answer.map((answerRow, index) => (
                         <TouchableOpacity onPress={() => this.deleteRow(index)}>
                             <Row
-                                containerStyle={[
+                                rowStyle={[
                                     {paddingTop: 8, paddingBottom: 8},
                                     index % 2 === 0 ? {backgroundColor: '#e4e4e4'} : {}
                                 ]}
