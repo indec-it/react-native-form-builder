@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
-import {Grid, Row, Col} from 'react-native-easy-grid';
+import {Grid, Row, Col} from '../../common';
 
 import TextWithBadge from '../TextWithBadge';
 import styles from './styles';

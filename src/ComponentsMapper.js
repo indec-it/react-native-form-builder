@@ -1,20 +1,12 @@
-import {mapKeys} from 'lodash';
-
 import preMadeComponents from './components';
 
 export default class ComponentsMapper {
     constructor() {
-        this.components = {};
+        this.components = preMadeComponents;
     }
 
     registerComponent(type, component) {
-        if (component) {
-            this.components[type] = component;
-            return;
-        }
-        const preMadeComponent = mapKeys(preMadeComponents, (value, key) => type === key);
-        console.log('preMadeComponent', preMadeComponent);
-        this.components[type] = preMadeComponent;
+        this.components[type] = component;
     }
 
     getComponent(key) {
