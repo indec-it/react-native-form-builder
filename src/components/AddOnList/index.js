@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-native';
+import {Row, Col} from '@indec/react-native-commons';
 import {find, get, isNil, some} from 'lodash';
 
 import ComponentsMapper from '../../ComponentsMapper';
-import {Row, Col} from '../../common';
 import styles from './styles';
 import {types} from '../../enums';
 
