@@ -19,7 +19,7 @@ const getFieldValue = (answerRow, question) => {
 };
 
 export default class AddOnList extends Component {
-    propTypes = {
+    static propTypes = {
         answer: PropTypes.shape({}).isRequired,
         question: PropTypes.shape({
             name: PropTypes.string,
@@ -27,8 +27,6 @@ export default class AddOnList extends Component {
         }).isRequired,
         onChange: PropTypes.func.isRequired
     };
-
-    defaultProps = {};
 
     constructor(props) {
         super(props);
@@ -56,7 +54,7 @@ export default class AddOnList extends Component {
     }
 
     addToList() {
-        if (!this.canAddToList()) return;
+        if (!this.canAddToList()) { return; }
         this.state.answer.push(this.state.componentAnswers);
         this.props.onChange({[this.props.question.name]: this.state.answer});
         const componentAnswers = {};
@@ -66,7 +64,7 @@ export default class AddOnList extends Component {
     deleteRow(index) {
         Alert.alert(
             'Eliminar',
-            '¿Desea eliminar esta declaracion?',
+            '¿Desea eliminar esta declaración?',
             [{
                 text: 'Cancelar'
             }, {
