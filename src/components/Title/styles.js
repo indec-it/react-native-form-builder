@@ -1,4 +1,7 @@
-// TODO Define Total's styles with designer.
+// TODO Define Total's defaultStyles with designer.
 import {StyleSheet} from 'react-native';
 
-export default StyleSheet.create({});
+export default StyleSheet.create({
+    container: {},
+    text: {}
+});

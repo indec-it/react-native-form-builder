@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import {View} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
+import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
-import styles from './styles';
+import defaultStyles from './styles';
 
-const DateInput = ({answer, question, onChange}) => (
-    <View style={styles.container}>
+const DateInput = ({answer, question, onChange, style}) => (
+    <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
         <TextWithBadge question={question}/>
         <DatePicker
-            style={styles.datePicker}
+            style={Utilities.setStyle(defaultStyles, style, 'datePicker')}
             date={answer}
             placeholder={question.placeholder}
             format={question.format}
@@ -18,19 +19,28 @@ const DateInput = ({answer, question, onChange}) => (
             maxDate={question.maxDate}
             confirmBtnText="Confirmar"
             cancelBtnText="Cancelar"
-            onDateChange={date => onChange({[question.name]: date})}
+            onDateChange={date => Utilities.handleChange(question.name, date, onChange)}
         />
     </View>
 );
 
 DateInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired,
-    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    style: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ]),
+    answer: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
+    onChange: PropTypes.func.isRequired
 };
 
 DateInput.defaultProps = {
-    answer: null
+    answer: null,
+    style: null
 };
 
 export default DateInput;

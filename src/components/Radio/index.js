@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
+import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
-import styles from './styles';
+import defaultStyles from './styles';
 
-const Radio = ({answer, question, onChange}) => (
-    <View style={styles.container}>
+const Radio = ({answer, question, onChange, style}) => (
+    <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
         <TextWithBadge question={question}/>
         {question.options.map(
             option => (option.text ? (
-                <Text key={option.text} style={styles.text}>
+                <Text key={option.text} style={Utilities.setStyle(defaultStyles, style, 'text')}>
                     {option.text}
                 </Text>
             ) : (
@@ -19,9 +20,9 @@ const Radio = ({answer, question, onChange}) => (
                     key={option.value}
                     title={option.label}
                     checkedIcon="dot-circle-o"
-                    onPress={() => onChange({[question.name]: option.value})}
+                    onPress={() => Utilities.handleChange(question.name, option.value, onChange)}
                     uncheckedIcon="circle-o"
-                    checked={answer === option.value}
+                    checked={Utilities.isChecked(answer, option.value)}
                 />
             ))
         )}
@@ -30,12 +31,21 @@ const Radio = ({answer, question, onChange}) => (
 
 Radio.propTypes = {
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired,
-    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    answer: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
+    style: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ]),
+    onChange: PropTypes.func.isRequired
 };
 
 Radio.defaultProps = {
-    answer: null
+    answer: null,
+    style: null
 };
 
 export default Radio;

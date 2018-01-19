@@ -18,5 +18,8 @@ export default StyleSheet.create({
     label: {
         height: 50,
         marginTop: -15
+    },
+    textAfterInput: {
+
     }
 });

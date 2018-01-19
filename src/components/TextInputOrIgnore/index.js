@@ -2,56 +2,65 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
-import InputField from '@indec/react-native-md-textinput';
 
+import Utilities from '../util';
+import TextInput from '../TextInput';
 import TextWithBadge from '../TextWithBadge';
-import styles from './styles';
+import defaultStyles from './styles';
 
-const TextInputOrIgnore = ({answer, question, onChange}) => {
-    const inputDisabled = answer === question.ignoreValue;
-    return (
-        <View style={styles.container}>
-            <TextWithBadge question={question}/>
+const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
+    [name]: answer !== ignoreValue ? ignoreValue : null
+}));
+
+const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
+
+const TextInputOrIgnore = ({answer, question, onChange, style, inputStyle}) => (
+    <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
+        {isIgnored(question, answer) ?
             <View>
-                <Text>{question.inputText}</Text>
-                {inputDisabled
-                    ? <Text>(Deshabilitado)</Text>
-                    : <InputField
-                        inputStyle={styles.field}
-                        wrapperStyle={styles.wrapper}
-                        labelStyle={styles.label}
-                        maxLength={question.maxLength}
-                        keyboardType="default"
-                        value={answer !== null ? answer : ''}
-                        onChangeText={text => onChange({[question.name]: text})}
-                        label={question.floatingLabel ? question.floatingLabel : ''}
-                        highlightColor="#ff4281"
-                    />
-                }
-                {question.inputUnit && <Text>{question.inputUnit}</Text>}
+                {question.text && <TextWithBadge question={question}/>}
+                <Text>(Deshabilitado)</Text>
             </View>
-            <View>
-                <Text>{question.ignoreText}</Text>
-                <CheckBox
-                    style={styles.checkBox}
-                    onPress={() => onChange(
-                        {[question.name]: answer !== question.ignoreValue ? question.ignoreValue : null}
-                    )}
-                    checked={answer === question.ignoreValue}
-                />
-            </View>
-        </View>
-    );
-};
+            :
+            <TextInput
+                answer={answer}
+                question={question}
+                onChange={num => onChange(num)}
+                style={inputStyle}
+            />
+        }
+        {question.inputUnit && <Text>{question.inputUnit}</Text>}
+        <CheckBox
+            style={Utilities.setStyle(defaultStyles, style, 'checkBox')}
+            onPress={() => handlePress(question, answer, onChange)}
+            checked={isIgnored(question, answer)}
+        />
+    </View>
+);
 
 TextInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired,
-    answer: PropTypes.bool
+    answer: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.number
+    ]),
+    style: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ]),
+    inputStyle: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ]),
+    onChange: PropTypes.func.isRequired
 };
 
 TextInputOrIgnore.defaultProps = {
-    answer: null
+    answer: null,
+    style: null,
+    inputStyle: null
 };
 
 export default TextInputOrIgnore;

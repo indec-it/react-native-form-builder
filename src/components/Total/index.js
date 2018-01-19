@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {filter, toNumber, isNil, sum, isNaN} from 'lodash';
 
+import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
-import styles from './styles';
+import defaultStyles from './styles';
 
 const getTotal = (section, question, callback) => {
     const addends = filter(
@@ -27,17 +28,28 @@ const getTotal = (section, question, callback) => {
     return total;
 };
 
-const Total = ({section, question, onChange}) => (
-    <View style={styles.container}>
+const Total = ({section, question, onChange, style}) => (
+    <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
         <TextWithBadge question={question}/>
-        <Text>{getTotal(section, question, onChange)}</Text>
+        <Text style={Utilities.setStyle(defaultStyles, style, 'totalLabel')}>
+            {getTotal(section, question, onChange)}
+        </Text>
     </View>
 );
 
 Total.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    style: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ])
+};
+
+Total.defaultProps = {
+    style: null
 };
 
 export default Total;

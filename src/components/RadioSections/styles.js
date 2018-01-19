@@ -5,7 +5,7 @@ export default StyleSheet.create({
         flex: 1,
         paddingHorizontal: 4
     },
-    sectionSubTitle: {
+    sectionTitle: {
         fontWeight: 'bold',
         padding: 10
     }
