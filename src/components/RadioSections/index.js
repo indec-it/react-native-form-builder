@@ -3,38 +3,48 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
+import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
-import styles from './styles';
+import defaultStyles from './styles';
 
-const RadioSections = ({answer, question, onChange}) => (
-    <View style={styles.container}>
+const RadioSections = ({answer, question, onChange, style}) => (
+    <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
         <TextWithBadge question={question}/>
         {question.options.map(option => (
-            <View>
-                {option.section
-                    ? <Text style={styles.sectionSubTitle}>{option.section}</Text>
-                    : <CheckBox
-                        key={option.value}
-                        title={option.label}
-                        checkedIcon="dot-circle-o"
-                        onPress={() => onChange({[question.name]: option.value})}
-                        uncheckedIcon="circle-o"
-                        checked={answer === option.value}
-                    />
-                }
-            </View>
+            option.section ?
+                <Text style={Utilities.setStyle(defaultStyles, style, 'sectionTitle')}>
+                    {option.section}
+                </Text>
+                :
+                <CheckBox
+                    key={option.value}
+                    title={option.label}
+                    checkedIcon="dot-circle-o"
+                    onPress={() => Utilities.handleChange(question.name, option.value, onChange)}
+                    uncheckedIcon="circle-o"
+                    checked={Utilities.isChecked(answer, option.value)}
+                />
         ))}
     </View>
 );
 
 RadioSections.propTypes = {
     question: PropTypes.shape({}).isRequired,
-    onChange: PropTypes.func.isRequired,
-    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    answer: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
+    style: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ]),
+    onChange: PropTypes.func.isRequired
 };
 
 RadioSections.defaultProps = {
-    answer: null
+    answer: null,
+    style: null
 };
 
 export default RadioSections;

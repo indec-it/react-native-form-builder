@@ -17,5 +17,11 @@ export default StyleSheet.create({
     },
     text: {
         flex: 1
+    },
+    buttonColorPressed: {
+        color: '#ffffff'
+    },
+    buttonColorDefault: {
+        color: '#000000'
     }
 });

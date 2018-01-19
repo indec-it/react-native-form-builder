@@ -5,7 +5,7 @@ import {Row, Col} from '@indec/react-native-commons';
 import {find, get, isNil, some} from 'lodash';
 
 import ComponentsMapper from '../../ComponentsMapper';
-import styles from './styles';
+import defaultStyles from './styles';
 import {types} from '../../enums';
 
 const getFieldValue = (answerRow, question) => {
@@ -70,7 +70,7 @@ export default class AddOnList extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <Row>
                     {this.props.question.childQuestions.map(question => (
                         <ComponentsMapper

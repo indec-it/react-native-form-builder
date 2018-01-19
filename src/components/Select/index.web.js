@@ -6,19 +6,17 @@ import TextWithBadge from '../TextWithBadge';
 
 const Select = ({answer, question, onChange}) => (
     <View>
-        <View>
-            <TextWithBadge question={question}/>
-            <select
-                value={answer}
-                onChange={e => onChange({[question.name]: e.target.value})}
-            >
-                {question.options.map(option => (
-                    <option key={option.value} value={option.value}>
-                        {option.label}
-                    </option>
-                ))}
-            </select>
-        </View>
+        <TextWithBadge question={question}/>
+        <select
+            value={answer}
+            onChange={e => onChange({[question.name]: e.target.value})}
+        >
+            {question.options.map(option => (
+                <option key={option.value} value={option.value}>
+                    {option.label}
+                </option>
+            ))}
+        </select>
     </View>
 );
 

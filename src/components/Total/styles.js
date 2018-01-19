@@ -5,5 +5,6 @@ export default StyleSheet.create({
         padding: 8,
         flex: 1,
         flexDirection: 'row'
-    }
+    },
+    totalLabel: {}
 });
