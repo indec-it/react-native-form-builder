@@ -14,32 +14,38 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const TextInputOrIgnore = ({answer, question, onChange, style, inputStyle}) => (
-    <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
-        {isIgnored(question, answer) ?
-            <View>
-                {question.text && <TextWithBadge question={question}/>}
-                <Text>(Deshabilitado)</Text>
-            </View>
-            :
-            <TextInput
-                answer={answer}
-                question={question}
-                onChange={num => onChange(num)}
-                style={inputStyle}
+const TextInputOrIgnore = ({answer, question, onChange, style, inputStyle, badgeStyle, textStyle}) => {
+    const styles = Utilities.setStyles(defaultStyles, style);
+    return (
+        <View style={styles.container}>
+            {isIgnored(question, answer) ?
+                <View>
+                    {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+                    <Text>(Deshabilitado)</Text>
+                </View>
+                :
+                <TextInput
+                    answer={answer}
+                    question={question}
+                    onChange={num => onChange(num)}
+                    style={inputStyle}
+                    textStyle={textStyle}
+                    badgeStyle={badgeStyle}
+                />
+            }
+            {question.inputUnit && <Text>{question.inputUnit}</Text>}
+            <CheckBox
+                style={styles.checkBox}
+                onPress={() => handlePress(question, !answer, onChange)}
+                checked={isIgnored(question, answer)}
             />
-        }
-        {question.inputUnit && <Text>{question.inputUnit}</Text>}
-        <CheckBox
-            style={Utilities.setStyle(defaultStyles, style, 'checkBox')}
-            onPress={() => handlePress(question, answer, onChange)}
-            checked={isIgnored(question, answer)}
-        />
-    </View>
-);
+        </View>
+    );
+};
 
 TextInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
+    onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number
@@ -54,13 +60,24 @@ TextInputOrIgnore.propTypes = {
         PropTypes.array,
         PropTypes.number
     ]),
-    onChange: PropTypes.func.isRequired
+    badgeStyle: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ]),
+    textStyle: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ])
 };
 
 TextInputOrIgnore.defaultProps = {
     answer: null,
     style: null,
-    inputStyle: null
+    inputStyle: null,
+    badgeStyle: null,
+    textStyle: null
 };
 
 export default TextInputOrIgnore;

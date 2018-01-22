@@ -8,31 +8,37 @@ import Utilities from '../util';
 import TextBox from '../TextBox';
 import defaultStyles from './styles';
 
-const getBadge = (number, badgeStyle) => (
-    !includes(number, '.') ?
-        <Badge
-            containerStyle={Utilities.setStyle(defaultStyles, badgeStyle, 'primaryBadgeContainer')}
-            textStyle={Utilities.setStyle(defaultStyles, badgeStyle, 'primaryBadgeText')}
-            value={number}
-        /> :
-        <Badge
-            containerStyle={Utilities.setStyle(defaultStyles, badgeStyle, 'secondaryBadgeContainer')}
-            textStyle={Utilities.setStyle(defaultStyles, badgeStyle, 'secondaryBadgeText')}
-            value={number}
-        />
-);
+const getBadge = (number, badgeStyle) => {
+    const styles = Utilities.setStyles(defaultStyles, badgeStyle);
+    return (
+        !includes(number, '.') ?
+            <Badge
+                containerStyle={styles.primaryBadgeContainer}
+                textStyle={styles.primaryBadgeText}
+                value={number}
+            /> :
+            <Badge
+                containerStyle={styles.secondaryBadgeContainer}
+                textStyle={styles.secondaryBadgeText}
+                value={number}
+            />
+    );
+};
 
-const TextWithBadge = ({question: {number, text, infoAfterText}, style, badgeStyle}) => (
-    <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
-        <View style={Utilities.setStyle(defaultStyles, style, 'textWithBadgeContainer')}>
-            {number && getBadge(number, badgeStyle)}
-            <Text style={Utilities.setStyle(defaultStyles, style, 'text')}>
-                {text}
-            </Text>
+const TextWithBadge = ({question: {number, text, infoAfterText}, style, badgeStyle}) => {
+    const styles = Utilities.setStyles(defaultStyles, style);
+    return (
+        <View style={styles.container}>
+            <View style={styles.textWithBadgeContainer}>
+                {number && getBadge(number, badgeStyle)}
+                <Text style={styles.text}>
+                    {text}
+                </Text>
+            </View>
+            {infoAfterText && <TextBox text={infoAfterText}/>}
         </View>
-        {infoAfterText && <TextBox text={infoAfterText}/>}
-    </View>
-);
+    );
+};
 
 TextWithBadge.propTypes = {
     question: PropTypes.shape({

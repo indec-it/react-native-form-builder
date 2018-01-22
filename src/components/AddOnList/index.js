@@ -2,18 +2,17 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-native';
 import {Row, Col} from '@indec/react-native-commons';
-import {find, get, isNil, some} from 'lodash';
+import {find, get, isNil, some, toNumber} from 'lodash';
 
 import ComponentsMapper from '../../ComponentsMapper';
+import Utilities from '../util';
+import TextWithBadge from '../TextWithBadge';
 import defaultStyles from './styles';
 import {types} from '../../enums';
 
-const getFieldValue = (answerRow, question) => {
-    const value = answerRow[question.name];
-    return question.type === types.SELECT ? find(question.options, {value}).label : value;
-};
-
-// TODO Refactor ComponentsMapper implementation
+const getFieldValue = (answerRow, {name, options, type}) => (
+    type === types.SELECT ? find(options, option => option.value === toNumber(answerRow[name])).label : answerRow[name]
+);
 
 export default class AddOnList extends Component {
     static propTypes = {
@@ -22,14 +21,35 @@ export default class AddOnList extends Component {
             name: PropTypes.string,
             childQuestions: PropTypes.arrayOf(PropTypes.shape({}))
         }).isRequired,
-        onChange: PropTypes.func.isRequired
+        onChange: PropTypes.func.isRequired,
+        style: PropTypes.oneOfType([
+            PropTypes.shape({}),
+            PropTypes.array,
+            PropTypes.number
+        ]),
+        badgeStyle: PropTypes.oneOfType([
+            PropTypes.shape({}),
+            PropTypes.array,
+            PropTypes.number
+        ]),
+        textStyle: PropTypes.oneOfType([
+            PropTypes.shape({}),
+            PropTypes.array,
+            PropTypes.number
+        ])
+    };
+
+    static defaultProps = {
+        style: null,
+        badgeStyle: null,
+        textStyle: null
     };
 
     constructor(props) {
         super(props);
         this.state = {
             componentAnswers: {},
-            answer: props.answer ? props.answer : []
+            answer: props.answer || []
         };
     }
 
@@ -46,10 +66,12 @@ export default class AddOnList extends Component {
         }
 
         this.state.answer.push(this.state.componentAnswers);
-        this.props.onChange({[this.props.question.name]: this.state.answer});
-
-        const componentAnswers = {};
-        this.setState({componentAnswers});
+        this.props.onChange({
+            [this.props.question.name]: this.state.answer
+        });
+        this.setState(() => ({
+            componentAnswers: {}
+        }));
     }
 
     deleteRow(index) {
@@ -62,45 +84,61 @@ export default class AddOnList extends Component {
                 text: 'Eliminar',
                 onPress: () => {
                     this.state.answer.splice(index, 1);
-                    this.props.onChange({[this.props.question.name]: this.state.answer});
+                    this.props.onChange({
+                        [this.props.question.name]: this.state.answer
+                    });
                 }
             }]
         );
     }
 
     render() {
+        const {question, textStyle, badgeStyle} = this.props;
+        const styles = Utilities.setStyles(defaultStyles, this.props.style);
+        const mapper = new ComponentsMapper();
         return (
-            <View style={defaultStyles.container}>
+            <View style={styles.container}>
+                {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
                 <Row>
-                    {this.props.question.childQuestions.map(question => (
-                        <ComponentsMapper
-                            key={question.name.toString()}
-                            chapter={this.state.componentAnswers}
-                            question={question}
-                            onChange={componentAnswers => this.setState(() => ({componentAnswers}))}
-                        />
-                    ))}
+                    {question.childQuestions.map(childQuestion => {
+                        const QuestionComponent = mapper.getComponent(childQuestion.type);
+                        return (
+                            <QuestionComponent
+                                key={childQuestion.name.toString()}
+                                answer={this.state.componentAnswers[childQuestion.name]}
+                                question={childQuestion}
+                                onChange={answer => this.setState(state => ({
+                                    componentAnswers: Object.assign({}, state.componentAnswers, answer)
+                                }))}
+                            />
+                        );
+                    })}
                 </Row>
                 <Button
                     title="AGREGAR"
                     onPress={() => this.addToList()}
                 />
-                <View style={{marginTop: 16}}>
+                <View style={styles.tableContainer}>
                     {this.state.answer && this.state.answer.map((answerRow, index) => (
-                        <TouchableOpacity onPress={() => this.deleteRow(index)}>
+                        <TouchableOpacity
+                            key={answerRow.toString()}
+                            onPress={() => this.deleteRow(index)}
+                        >
                             <Row
-                                rowStyle={[
-                                    {paddingTop: 8, paddingBottom: 8},
-                                    index % 2 === 0 ? {backgroundColor: '#e4e4e4'} : {}
+                                style={[
+                                    styles.rowStyle, index % 2 === 0 ? styles.evenRowStyle : {}
                                 ]}
                             >
-                                {this.props.question.childQuestions.map(question => (
-                                    <Col>
-                                        <Text style={{fontSize: 16}}>
-                                            {answerRow[question.name] ? getFieldValue(answerRow, question) : '-'}
-                                        </Text>
-                                    </Col>
-                                ))}
+                                {question.childQuestions.map(childQuestion => {
+                                    const value = getFieldValue(answerRow, childQuestion);
+                                    return (
+                                        <Col key={value}>
+                                            <Text style={styles.childQuestionsText}>
+                                                {answerRow[childQuestion.name] ? value : '-'}
+                                            </Text>
+                                        </Col>
+                                    );
+                                })}
                             </Row>
                         </TouchableOpacity>
                     ))}
