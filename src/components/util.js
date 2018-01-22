@@ -1,4 +1,4 @@
-import {isNaN, isNil, toString} from 'lodash';
+import {isNaN, isNil, mapKeys, toString} from 'lodash';
 
 export default class Utilities {
     static getInputValue(answer) {
@@ -11,11 +11,15 @@ export default class Utilities {
         });
     }
 
-    static isChecked(answer, value) {
-        return answer === value;
-    }
+    static setStyles(defaultStyle, customStyle) {
+        if (!customStyle) {
+            return defaultStyle;
+        }
 
-    static setStyle(defaultStyle, customStyle, name) {
-        return customStyle && customStyle[name] ? customStyle[name] : defaultStyle[name];
+        const style = {};
+        mapKeys(defaultStyle, field => {
+            style[field] = customStyle[field] || defaultStyle[field];
+        });
+        return style;
     }
 }

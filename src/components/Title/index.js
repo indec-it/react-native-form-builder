@@ -5,13 +5,16 @@ import {Text, View} from 'react-native';
 import Utilities from '../util';
 import defaultStyles from './styles';
 
-const Title = ({question, style}) => (
-    <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
-        <Text style={Utilities.setStyle(defaultStyles, style, 'text')}>
-            {question.text}
-        </Text>
-    </View>
-);
+const Title = ({question, style}) => {
+    const styles = Utilities.setStyles(defaultStyles, style);
+    return (
+        <View style={styles.container}>
+            <Text style={styles.text}>
+                {question.text}
+            </Text>
+        </View>
+    );
+};
 
 Title.propTypes = {
     question: PropTypes.shape({}).isRequired,

@@ -34,31 +34,29 @@ const getSelectedValue = (answer, question) => {
 };
 
 const getRadioButtonStyle = (answer, questionValue, style) => ([
-    Utilities.setStyle(defaultStyles, style, 'radioButton'),
-    answer === questionValue ?
-        Utilities.setStyle(defaultStyles, style, 'buttonColorPressed')
-        : Utilities.setStyle(defaultStyles, style, 'buttonColorDefault')
+    style.radioButton, answer === questionValue ? style.buttonColorPressed : style.buttonColorDefault
 ]);
 
-const YesNoButtons = ({answer, question, onChange, style}) => {
+const YesNoButtons = ({answer, question, onChange, style, badgeStyle, textStyle}) => {
+    const styles = Utilities.setStyles(defaultStyles, style);
     const buttons = [
-        {element: () => <Text style={getRadioButtonStyle(answer, question.trueValue, style)}>SI</Text>},
-        {element: () => <Text style={getRadioButtonStyle(answer, question.falseValue, style)}>NO</Text>}
+        {element: () => <Text style={getRadioButtonStyle(answer, question.trueValue, styles)}>SI</Text>},
+        {element: () => <Text style={getRadioButtonStyle(answer, question.falseValue, styles)}>NO</Text>}
     ];
+
     if (question.dkValue) {
         buttons.push({
-            element: () => <Text style={getRadioButtonStyle(answer, question.dkValue, style)}>{question.dkLabel}</Text>
+            element: () => <Text style={getRadioButtonStyle(answer, question.dkValue, styles)}>{question.dkLabel}</Text>
         });
     }
-
     return (
-        <View style={Utilities.setStyle(defaultStyles, style, 'container')}>
-            <TextWithBadge question={question} style={Utilities.setStyle(defaultStyles, style, 'text')}/>
+        <View style={styles.container}>
+            {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
             <ButtonGroup
                 onPress={index => Utilities.handleChange(question.name, getValue(index, question), onChange)}
                 selectedIndex={getSelectedValue(answer, question)}
                 buttons={buttons}
-                containerStyle={Utilities.setStyle(defaultStyles, style, 'radioGroup')}
+                containerStyle={styles.radioGroup}
                 selectedBackgroundColor="#3f53b5"
             />
         </View>
@@ -76,12 +74,24 @@ YesNoButtons.propTypes = {
         PropTypes.shape({}),
         PropTypes.array,
         PropTypes.number
+    ]),
+    badgeStyle: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
+    ]),
+    textStyle: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.array,
+        PropTypes.number
     ])
 };
 
 YesNoButtons.defaultProps = {
     answer: null,
-    style: null
+    style: null,
+    badgeStyle: null,
+    textStyle: null
 };
 
 export default YesNoButtons;
