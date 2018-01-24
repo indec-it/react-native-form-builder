@@ -10,7 +10,12 @@ import FontAwesome from 'react-fontawesome';
 
 const BLANK_VALUE = '*';
 
-const handleChange = (value, callback, question) => callback({target: {name: question.name, value}});
+const handleChange = (value, callback, question) => {
+    if (value && question.maxLength && value.length > question.maxLength) {
+        return;
+    }
+    return callback({target: {name: question.name, value}})
+};
 
 const handleChangeBlankButton = (currentAnswerValue, callback, question) => {
     if (currentAnswerValue === BLANK_VALUE) {

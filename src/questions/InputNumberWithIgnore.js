@@ -25,7 +25,12 @@ const handleChangeCheckbox = (value, callback, question) => {
     return callback({target: {name: question.name, value: answerValue}});
 };
 
-const handleChangeInput = (value, callback, question) => callback({target: {name: question.name, value}});
+const handleChangeInput = (value, callback, question) => {
+    if (value && question.maxLength && value.length > question.maxLength) {
+        return;
+    }
+    return callback({target: {name: question.name, value}})
+};
 
 const InputNumberWithIgnore = ({answer, question, onChange}) => {
     const inputDisabledByBlank = answer === BLANK_VALUE;
