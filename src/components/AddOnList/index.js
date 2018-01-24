@@ -22,27 +22,17 @@ export default class AddOnList extends Component {
             childQuestions: PropTypes.arrayOf(PropTypes.shape({}))
         }).isRequired,
         onChange: PropTypes.func.isRequired,
-        style: PropTypes.oneOfType([
-            PropTypes.shape({}),
-            PropTypes.array,
-            PropTypes.number
-        ]),
-        badgeStyle: PropTypes.oneOfType([
-            PropTypes.shape({}),
-            PropTypes.array,
-            PropTypes.number
-        ]),
-        textStyle: PropTypes.oneOfType([
-            PropTypes.shape({}),
-            PropTypes.array,
-            PropTypes.number
-        ])
+        style: Utilities.getStyleProps(),
+        badgeStyle: Utilities.getStyleProps(),
+        textStyle: Utilities.getStyleProps(),
+        textBoxStyle: Utilities.getStyleProps()
     };
 
     static defaultProps = {
         style: null,
         badgeStyle: null,
-        textStyle: null
+        textStyle: null,
+        textBoxStyle: null
     };
 
     constructor(props) {
@@ -93,12 +83,17 @@ export default class AddOnList extends Component {
     }
 
     render() {
-        const {question, textStyle, badgeStyle} = this.props;
+        const {question, textStyle, badgeStyle, textBoxStyle} = this.props;
         const styles = Utilities.setStyles(defaultStyles, this.props.style);
         const mapper = new ComponentsMapper();
         return (
             <View style={styles.container}>
-                {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+                {question.text && <TextWithBadge
+                    question={question}
+                    style={textStyle}
+                    badgeStyle={badgeStyle}
+                    textBoxStyle={textBoxStyle}
+                />}
                 <Row>
                     {question.childQuestions.map(childQuestion => {
                         const QuestionComponent = mapper.getComponent(childQuestion.type);

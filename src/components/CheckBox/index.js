@@ -7,13 +7,18 @@ import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
 import defaultStyles from './styles';
 
-const Checkbox = ({answer, onChange, question, style, badgeStyle, textStyle}) => {
+const Checkbox = ({answer, onChange, question, style, badgeStyle, textStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
-            {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+            {question.text && <TextWithBadge
+                question={question}
+                style={textStyle}
+                badgeStyle={badgeStyle}
+                textBoxStyle={textBoxStyle}
+            />}
             <CheckBox
-                title={question.text}
+                title={question.checkBoxTitle}
                 style={styles.checkBox}
                 onPress={() => Utilities.handleChange(question.name, !answer, onChange)}
                 checked={answer}
@@ -25,29 +30,19 @@ const Checkbox = ({answer, onChange, question, style, badgeStyle, textStyle}) =>
 Checkbox.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps(),
     answer: PropTypes.bool
 };
 
 Checkbox.defaultProps = {
-    answer: null,
     style: null,
     badgeStyle: null,
-    textStyle: null
+    textStyle: null,
+    textBoxStyle: null,
+    answer: null
 };
 
 export default Checkbox;

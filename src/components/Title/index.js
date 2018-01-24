@@ -18,11 +18,7 @@ const Title = ({question, style}) => {
 
 Title.propTypes = {
     question: PropTypes.shape({}).isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ])
+    style: Utilities.getStyleProps()
 };
 
 Title.defaultProps = {

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
+import {Row} from '@indec/react-native-commons';
+import InputField from '@indec/react-native-md-textinput';
 import {CheckBox} from 'react-native-elements';
 
 import Utilities from '../util';
-import TextInput from '../TextInput';
 import TextWithBadge from '../TextWithBadge';
 import defaultStyles from './styles';
 
@@ -14,31 +15,42 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const TextInputOrIgnore = ({answer, question, onChange, style, inputStyle, badgeStyle, textStyle}) => {
+const TextInputOrIgnore = ({answer, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
-            {isIgnored(question, answer) ?
-                <View>
-                    {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+            {question.text && <TextWithBadge
+                question={question}
+                style={textStyle}
+                badgeStyle={badgeStyle}
+                textBoxStyle={textBoxStyle}
+            />}
+            <Row>
+                {isIgnored(question, answer) ?
                     <Text>(Deshabilitado)</Text>
-                </View>
-                :
-                <TextInput
-                    answer={answer}
-                    question={question}
-                    onChange={num => onChange(num)}
-                    style={inputStyle}
-                    textStyle={textStyle}
-                    badgeStyle={badgeStyle}
+                    :
+                    <InputField
+                        inputStyle={styles.field}
+                        wrapperStyle={styles.wrapper}
+                        labelStyle={styles.label}
+                        maxLength={question.maxLength}
+                        keyboardType="default"
+                        value={Utilities.getInputValue(answer)}
+                        onChangeText={text => Utilities.handleChange(question.name, text, onChange)}
+                        label={question.floatingLabel || ''}
+                        highlightColor="#ff4281"
+                    />
+                }
+                {question.inputUnit &&
+                <Text style={styles.inputUnit}>
+                    {question.inputUnit}
+                </Text>}
+                <CheckBox
+                    style={styles.checkBox}
+                    onPress={() => handlePress(question, !answer, onChange)}
+                    checked={isIgnored(question, answer)}
                 />
-            }
-            {question.inputUnit && <Text>{question.inputUnit}</Text>}
-            <CheckBox
-                style={styles.checkBox}
-                onPress={() => handlePress(question, !answer, onChange)}
-                checked={isIgnored(question, answer)}
-            />
+            </Row>
         </View>
     );
 };
@@ -46,38 +58,22 @@ const TextInputOrIgnore = ({answer, question, onChange, style, inputStyle, badge
 TextInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps(),
     answer: PropTypes.oneOfType([
         PropTypes.bool,
-        PropTypes.number
-    ]),
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    inputStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
         PropTypes.number
     ])
 };
 
 TextInputOrIgnore.defaultProps = {
-    answer: null,
     style: null,
-    inputStyle: null,
     badgeStyle: null,
-    textStyle: null
+    textStyle: null,
+    textBoxStyle: null,
+    answer: null
 };
 
 export default TextInputOrIgnore;

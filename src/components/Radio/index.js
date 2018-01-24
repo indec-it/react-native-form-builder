@@ -8,11 +8,16 @@ import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
 import defaultStyles from './styles';
 
-const Radio = ({answer, question, onChange, style, badgeStyle, textStyle}) => {
+const Radio = ({answer, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
-            {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+            {question.text && <TextWithBadge
+                question={question}
+                style={textStyle}
+                badgeStyle={badgeStyle}
+                textBoxStyle={textBoxStyle}
+            />}
             {question.options.map(
                 option => (option.text ? (
                     <Text key={option.text} style={styles.text}>
@@ -36,24 +41,13 @@ const Radio = ({answer, question, onChange, style, badgeStyle, textStyle}) => {
 Radio.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps(),
     answer: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string
-    ]),
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
     ])
 };
 
@@ -61,7 +55,8 @@ Radio.defaultProps = {
     answer: null,
     style: null,
     badgeStyle: null,
-    textStyle: null
+    textStyle: null,
+    textBoxStyle: null
 };
 
 export default Radio;

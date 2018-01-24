@@ -11,11 +11,16 @@ import defaultStyles from './styles';
 const addPlaceholder = (options, placeholder) =>
     (placeholder ? concat({label: placeholder, value: null}, options) : options);
 
-const Select = ({answer, question, onChange, style, badgeStyle, textStyle}) => {
+const Select = ({answer, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
-            {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+            {question.text && <TextWithBadge
+                question={question}
+                style={textStyle}
+                badgeStyle={badgeStyle}
+                textBoxStyle={textBoxStyle}
+            />}
             <Picker
                 selectedValue={answer}
                 style={styles.picker}
@@ -36,29 +41,19 @@ const Select = ({answer, question, onChange, style, badgeStyle, textStyle}) => {
 Select.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps(),
     answer: PropTypes.number
 };
 
 Select.defaultProps = {
-    answer: null,
     style: null,
     badgeStyle: null,
-    textStyle: null
+    textStyle: null,
+    textBoxStyle: null,
+    answer: null
 };
 
 export default Select;

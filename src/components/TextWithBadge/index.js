@@ -25,7 +25,7 @@ const getBadge = (number, badgeStyle) => {
     );
 };
 
-const TextWithBadge = ({question: {number, text, infoAfterText}, style, badgeStyle}) => {
+const TextWithBadge = ({question: {number, text, infoAfterText}, style, badgeStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
@@ -35,7 +35,7 @@ const TextWithBadge = ({question: {number, text, infoAfterText}, style, badgeSty
                     {text}
                 </Text>
             </View>
-            {infoAfterText && <TextBox text={infoAfterText}/>}
+            {infoAfterText && <TextBox text={infoAfterText} style={textBoxStyle}/>}
         </View>
     );
 };
@@ -46,21 +46,15 @@ TextWithBadge.propTypes = {
         number: PropTypes.number,
         infoAfterText: PropTypes.string
     }).isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ])
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps()
 };
 
 TextWithBadge.defaultProps = {
     style: null,
-    badgeStyle: null
+    badgeStyle: null,
+    textBoxStyle: null
 };
 
 export default TextWithBadge;

@@ -9,6 +9,11 @@ export default StyleSheet.create({
     rowLabel: {
         paddingTop: 15
     },
+    row: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    text: {},
     column: {
         justifyContent: 'center',
         alignItems: 'center'

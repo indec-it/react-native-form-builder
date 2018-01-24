@@ -4,7 +4,7 @@ export default StyleSheet.create({
     container: {
         padding: 8,
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'column'
     },
     field: {
         height: 40

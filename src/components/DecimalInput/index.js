@@ -8,17 +8,22 @@ import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
 import defaultStyles from './styles';
 
-const DecimalInput = ({answer, question, onChange, style, badgeStyle, textStyle}) => {
+const DecimalInput = ({answer, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
-            {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+            {question.text && <TextWithBadge
+                question={question}
+                style={textStyle}
+                badgeStyle={badgeStyle}
+                textBoxStyle={textBoxStyle}
+            />}
             <InputField
                 inputStyle={styles.field}
                 wrapperStyle={styles.wrapper}
                 labelStyle={styles.label}
-                max={question.max}
                 maxLength={question.maxLength}
+                max={question.max}
                 min={question.min}
                 keyboardType="numeric"
                 value={Utilities.getInputValue(answer)}
@@ -37,29 +42,19 @@ const DecimalInput = ({answer, question, onChange, style, badgeStyle, textStyle}
 DecimalInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps(),
     answer: PropTypes.number
 };
 
 DecimalInput.defaultProps = {
-    answer: null,
     style: null,
     badgeStyle: null,
-    textStyle: null
+    textStyle: null,
+    textBoxStyle: null,
+    answer: null
 };
 
 export default DecimalInput;
