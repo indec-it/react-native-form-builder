@@ -16,13 +16,12 @@ const setRowQuestion = (question, section, rowQuestion, onChange, style) => {
         <Row key={questionName}>
             <Col size={4}>
                 <Text style={style.rowLabel}>
-                    {question.text}
+                    {rowQuestion.text}
                 </Text>
             </Col>
             {question.options.map(option => (
-                <Col style={style.column}>
+                <Col key={option.text + questionName} style={style.column}>
                     <CheckBox
-                        key={option.value}
                         containerStyle={style.checkBoxContainer}
                         checkedIcon="dot-circle-o"
                         onPress={() => Utilities.handleChange(questionName, option.value, onChange)}
@@ -35,25 +34,26 @@ const setRowQuestion = (question, section, rowQuestion, onChange, style) => {
     );
 };
 
-const RadioTable = ({section, question, onChange, style, badgeStyle, textStyle}) => {
+const RadioTable = ({section, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
-            {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+            {question.text && <TextWithBadge
+                question={question}
+                style={textStyle}
+                badgeStyle={badgeStyle}
+                textBoxStyle={textBoxStyle}
+            />}
             <Grid>
-                <Row>
-                    <Col size={4}>
-                        {question.options.map(option => (
-                            <Col
-                                key={option.text}
-                                style={styles.column}
-                            >
-                                <Text>
-                                    {option.text}
-                                </Text>
-                            </Col>
-                        ))}
-                    </Col>
+                <Row style={styles.row}>
+                    <Col size={4}/>
+                    {question.options.map(option => (
+                        <Col key={option.text} style={styles.column}>
+                            <Text style={option.text}>
+                                {option.text}
+                            </Text>
+                        </Col>
+                    ))}
                 </Row>
                 {question.questions.map(rowQuestion => (
                     setRowQuestion(question, section, rowQuestion, onChange, styles)
@@ -67,27 +67,17 @@ RadioTable.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ])
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps()
 };
 
 RadioTable.defaultProps = {
     style: null,
     badgeStyle: null,
-    textStyle: null
+    textStyle: null,
+    textBoxStyle: null
 };
 
 export default RadioTable;

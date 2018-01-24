@@ -28,11 +28,16 @@ const getTotal = (section, question, callback) => {
     return total;
 };
 
-const Total = ({section, question, onChange, style, badgeStyle, textStyle}) => {
+const Total = ({section, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
-            {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+            {question.text && <TextWithBadge
+                question={question}
+                style={textStyle}
+                badgeStyle={badgeStyle}
+                textBoxStyle={textBoxStyle}
+            />}
             <Text style={styles.totalLabel}>
                 {getTotal(section, question, onChange)}
             </Text>
@@ -44,27 +49,17 @@ Total.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ])
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps()
 };
 
 Total.defaultProps = {
     style: null,
     badgeStyle: null,
-    textStyle: null
+    textStyle: null,
+    textBoxStyle: null
 };
 
 export default Total;

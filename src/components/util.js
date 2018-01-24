@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {isNaN, isNil, mapKeys, toString} from 'lodash';
 
 export default class Utilities {
@@ -17,9 +18,17 @@ export default class Utilities {
         }
 
         const style = {};
-        mapKeys(defaultStyle, field => {
-            style[field] = customStyle[field] || defaultStyle[field];
+        mapKeys(defaultStyle, (value, field) => {
+            style[field] = customStyle[field] || value;
         });
         return style;
+    }
+
+    static getStyleProps() {
+        return PropTypes.oneOfType([
+            PropTypes.shape({}),
+            PropTypes.array,
+            PropTypes.number
+        ]);
     }
 }

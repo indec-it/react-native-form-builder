@@ -7,11 +7,16 @@ import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
 import defaultStyles from './styles';
 
-const DateInput = ({answer, question, onChange, style, badgeStyle, textStyle}) => {
+const DateInput = ({answer, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
     const styles = Utilities.setStyles(defaultStyles, style);
     return (
         <View style={styles.container}>
-            {question.text && <TextWithBadge question={question} style={textStyle} badgeStyle={badgeStyle}/>}
+            {question.text && <TextWithBadge
+                question={question}
+                style={textStyle}
+                badgeStyle={badgeStyle}
+                textBoxStyle={textBoxStyle}
+            />}
             <DatePicker
                 style={styles.datePicker}
                 date={answer}
@@ -30,21 +35,10 @@ const DateInput = ({answer, question, onChange, style, badgeStyle, textStyle}) =
 DateInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    badgeStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ]),
+    style: Utilities.getStyleProps(),
+    badgeStyle: Utilities.getStyleProps(),
+    textStyle: Utilities.getStyleProps(),
+    textBoxStyle: Utilities.getStyleProps(),
     answer: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string
@@ -52,10 +46,11 @@ DateInput.propTypes = {
 };
 
 DateInput.defaultProps = {
-    answer: null,
     style: null,
     badgeStyle: null,
-    textStyle: null
+    textStyle: null,
+    textBoxStyle: null,
+    answer: null
 };
 
 export default DateInput;

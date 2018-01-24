@@ -18,11 +18,7 @@ const TextBox = ({text, style}) => {
 
 TextBox.propTypes = {
     text: PropTypes.string.isRequired,
-    style: PropTypes.oneOfType([
-        PropTypes.shape({}),
-        PropTypes.array,
-        PropTypes.number
-    ])
+    style: Utilities.getStyleProps()
 };
 
 TextBox.defaultProps = {
