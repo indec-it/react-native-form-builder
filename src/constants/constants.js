@@ -31,7 +31,8 @@ export const types = {
     TEXT_AREA: 'textarea',
     TITLE: 'title',
     YEAR: 'Year',
-    YES_NO: 'YesNoQuestion'
+    YES_NO: 'YesNoQuestion',
+    LAPEL_GROUP: 'lapelGroup'
 };
 
 // operator enum will be moved to another package in a future.

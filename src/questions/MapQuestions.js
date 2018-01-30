@@ -22,6 +22,7 @@ import Title from './Title';
 import YesNoQuestion from './YesNoQuestion';
 import Total from './Total';
 import AddOnList from './AddOnList';
+import LapelGroup from './LapelGroup';
 
 const getQuestionComponent = questionType => {
     switch (questionType) {
@@ -61,6 +62,8 @@ const getQuestionComponent = questionType => {
             return Total;
         case types.ADDON_LIST:
             return AddOnList;
+        case types.LAPEL_GROUP:
+            return LapelGroup;
         default:
             throw Error(`Question type not implemented: ${questionType}`);
     }
