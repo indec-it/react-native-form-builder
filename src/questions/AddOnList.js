@@ -9,10 +9,13 @@ import MapQuestions from './MapQuestions';
 import {types} from '../constants/constants';
 
 const getFieldValue = (answerRow, question) => {
-    const value = answerRow[question.name];
+    let value = answerRow[question.name];
+    if(typeof(value)==='string' && !isNaN(parseInt(value))){
+        value = parseInt(value);
+    }
     switch (question.type) {
         case types.SELECT:
-            return find(question.options, {value}).label;
+            return find(question.options, {"value":value}).label;
         default:
             return value;
     }
