@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
-import Utilities from '../util';
-import defaultStyles from './styles';
+import styles from './styles';
 
 const TextBox = ({text, style}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
+    const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>
+        <View style={computedStyles.container}>
+            <Text style={computedStyles.text}>
                 {text}
             </Text>
         </View>
@@ -18,7 +18,7 @@ const TextBox = ({text, style}) => {
 
 TextBox.propTypes = {
     text: PropTypes.string.isRequired,
-    style: Utilities.getStyleProps()
+    style: stylePropType
 };
 
 TextBox.defaultProps = {

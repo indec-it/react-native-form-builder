@@ -1,23 +1,35 @@
 import {StyleSheet} from 'react-native';
 
-export default StyleSheet.create({
-    container: {
-        padding: 8,
-        flex: 1,
-        flexDirection: 'column'
+export default {
+    component: {
+        style: StyleSheet.create({
+            container: {
+                padding: 8,
+                flex: 1,
+                flexDirection: 'column'
+            },
+            field: {
+                height: 40
+            },
+            wrapper: {
+                paddingTop: 5,
+                position: 'relative'
+            },
+            label: {
+                height: 50,
+                marginTop: -15
+            },
+            blockedText: {
+                color: 'grey'
+            }
+        }),
+        highlightColor: '#ff4281',
+        buttonTitle: 'S/N',
+        buttonColor: '#1194f6'
     },
-    field: {
-        height: 40
-    },
-    wrapper: {
-        paddingTop: 5,
-        position: 'relative'
-    },
-    label: {
-        height: 50,
-        marginTop: -15
-    },
-    blockedText: {
-        color: 'grey'
+    textWithBadge: {
+        badge: StyleSheet.create({}),
+        text: StyleSheet.create({}),
+        textBox: StyleSheet.create({})
     }
-});
+};

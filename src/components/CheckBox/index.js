@@ -2,25 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
-import Utilities from '../util';
-import TextWithBadge from '../TextWithBadge';
-import defaultStyles from './styles';
+import {TextWithBadge} from '..';
+import {handleChange} from '../../util';
+import styles from './styles';
 
-const Checkbox = ({answer, onChange, question, style, badgeStyle, textStyle, textBoxStyle}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
+const Checkbox = ({answer, onChange, question, style}) => {
+    const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={styles.container}>
+        <View style={computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={textStyle}
-                badgeStyle={badgeStyle}
-                textBoxStyle={textBoxStyle}
+                style={computedStyles.textWithBadge}
             />}
             <CheckBox
                 title={question.checkBoxTitle}
-                style={styles.checkBox}
-                onPress={() => Utilities.handleChange(question.name, !answer, onChange)}
+                style={computedStyles.component.checkBox}
+                onPress={() => handleChange(question.name, !answer, onChange)}
                 checked={answer}
             />
         </View>
@@ -30,18 +29,15 @@ const Checkbox = ({answer, onChange, question, style, badgeStyle, textStyle, tex
 Checkbox.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: Utilities.getStyleProps(),
-    badgeStyle: Utilities.getStyleProps(),
-    textStyle: Utilities.getStyleProps(),
-    textBoxStyle: Utilities.getStyleProps(),
+    style: PropTypes.shape({
+        component: stylePropType,
+        textWithBadge: stylePropType
+    }),
     answer: PropTypes.bool
 };
 
 Checkbox.defaultProps = {
     style: null,
-    badgeStyle: null,
-    textStyle: null,
-    textBoxStyle: null,
     answer: null
 };
 

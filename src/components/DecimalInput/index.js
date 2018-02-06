@@ -2,37 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 import InputField from '@indec/react-native-md-textinput';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {toNumber} from 'lodash';
 
-import Utilities from '../util';
-import TextWithBadge from '../TextWithBadge';
-import defaultStyles from './styles';
+import {TextWithBadge} from '..';
+import {getInputValue, handleChange} from '../../util';
+import styles from './styles';
 
-const DecimalInput = ({answer, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
+const DecimalInput = ({answer, question, onChange, style}) => {
+    const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={styles.container}>
+        <View style={computedStyles.component.style.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={textStyle}
-                badgeStyle={badgeStyle}
-                textBoxStyle={textBoxStyle}
+                style={computedStyles.textWithBadge}
             />}
             <InputField
-                inputStyle={styles.field}
-                wrapperStyle={styles.wrapper}
-                labelStyle={styles.label}
+                inputStyle={computedStyles.component.style.field}
+                wrapperStyle={computedStyles.component.style.wrapper}
+                labelStyle={computedStyles.component.style.label}
                 maxLength={question.maxLength}
                 max={question.max}
                 min={question.min}
                 keyboardType="numeric"
-                value={Utilities.getInputValue(answer)}
-                onChangeText={text => Utilities.handleChange(question.name, text, onChange, toNumber)}
+                value={getInputValue(answer)}
+                onChangeText={text => handleChange(question.name, text, onChange, toNumber)}
                 label={question.floatingLabel || ''}
-                highlightColor="#ff4281"
+                highlightColor={computedStyles.component.highlightColor}
             />
             {question.textAfterInput &&
-            <Text style={styles.textAfterInput}>
+            <Text style={computedStyles.component.style.textAfterInput}>
                 {question.textAfterInput}
             </Text>}
         </View>
@@ -42,18 +41,15 @@ const DecimalInput = ({answer, question, onChange, style, badgeStyle, textStyle,
 DecimalInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: Utilities.getStyleProps(),
-    badgeStyle: Utilities.getStyleProps(),
-    textStyle: Utilities.getStyleProps(),
-    textBoxStyle: Utilities.getStyleProps(),
+    style: PropTypes.shape({
+        component: stylePropType,
+        textWithBadge: stylePropType
+    }),
     answer: PropTypes.number
 };
 
 DecimalInput.defaultProps = {
     style: null,
-    badgeStyle: null,
-    textStyle: null,
-    textBoxStyle: null,
     answer: null
 };
 

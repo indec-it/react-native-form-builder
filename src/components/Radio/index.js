@@ -2,34 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 import {CheckBox} from 'react-native-elements';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {isEqual} from 'lodash';
 
-import Utilities from '../util';
-import TextWithBadge from '../TextWithBadge';
-import defaultStyles from './styles';
+import {TextWithBadge} from '..';
+import {handleChange} from '../../util';
+import styles from './styles';
 
-const Radio = ({answer, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
+const Radio = ({answer, question, onChange, style}) => {
+    const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={styles.container}>
+        <View style={computedStyles.component.style.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={textStyle}
-                badgeStyle={badgeStyle}
-                textBoxStyle={textBoxStyle}
+                style={computedStyles.textWithBadge}
             />}
             {question.options.map(
                 option => (option.text ? (
-                    <Text key={option.text} style={styles.text}>
+                    <Text key={option.text} style={computedStyles.component.style.text}>
                         {option.text}
                     </Text>
                 ) : (
                     <CheckBox
                         key={option.value}
                         title={option.label}
-                        checkedIcon="dot-circle-o"
-                        onPress={() => Utilities.handleChange(question.name, option.value, onChange)}
-                        uncheckedIcon="circle-o"
+                        onPress={() => handleChange(question.name, option.value, onChange)}
+                        checkedIcon={computedStyles.component.checkedIcon}
+                        uncheckedIcon={computedStyles.component.uncheckedIcon}
                         checked={isEqual(answer, option.value)}
                     />
                 ))
@@ -41,10 +40,10 @@ const Radio = ({answer, question, onChange, style, badgeStyle, textStyle, textBo
 Radio.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: Utilities.getStyleProps(),
-    badgeStyle: Utilities.getStyleProps(),
-    textStyle: Utilities.getStyleProps(),
-    textBoxStyle: Utilities.getStyleProps(),
+    style: PropTypes.shape({
+        component: stylePropType,
+        textWithBadge: stylePropType
+    }),
     answer: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string
@@ -53,10 +52,7 @@ Radio.propTypes = {
 
 Radio.defaultProps = {
     answer: null,
-    style: null,
-    badgeStyle: null,
-    textStyle: null,
-    textBoxStyle: null
+    style: null
 };
 
 export default Radio;

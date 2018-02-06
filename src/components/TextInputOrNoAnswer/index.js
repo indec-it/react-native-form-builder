@@ -3,28 +3,25 @@ import PropTypes from 'prop-types';
 import {Text, View, Button} from 'react-native';
 import {Row} from '@indec/react-native-commons';
 import InputField from '@indec/react-native-md-textinput';
-import {keys} from 'lodash';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
-import Utilities from '../util';
-import TextWithBadge from '../TextWithBadge';
-import defaultStyles from './styles';
+import {TextWithBadge} from '..';
+import {getInputValue} from '../../util';
+import styles from './styles';
 
 class TextInputOrNoAnswer extends Component {
     static propTypes = {
         question: PropTypes.shape({}).isRequired,
         onChange: PropTypes.func.isRequired,
-        style: Utilities.getStyleProps(),
-        badgeStyle: Utilities.getStyleProps(),
-        textStyle: Utilities.getStyleProps(),
-        textBoxStyle: Utilities.getStyleProps(),
+        style: PropTypes.shape({
+            component: stylePropType,
+            textWithBadge: stylePropType
+        }),
         answer: PropTypes.string
     };
 
     static defaultProps = {
         style: null,
-        badgeStyle: null,
-        textStyle: null,
-        textBoxStyle: null,
         answer: null
     };
 
@@ -34,43 +31,43 @@ class TextInputOrNoAnswer extends Component {
     }
 
     handleChange(obj) {
-        const {onChange, question} = this.props;
-        if (keys(obj)[0] !== question.name) {
-            this.setState(() => ({block: !this.state.block}));
-        }
-        return onChange(obj);
+        this.props.onChange(obj);
+    }
+
+    handleBlock(obj) {
+        this.setState(() => ({block: !this.state.block}));
+        this.props.onChange(obj);
     }
 
     render() {
-        const {question, answer, style, textStyle, badgeStyle, textBoxStyle} = this.props;
-        const styles = Utilities.setStyles(defaultStyles, style);
+        const {question, answer, style} = this.props;
+        const computedStyles = mergeStyles(styles, style);
         return (
-            <View style={styles.container}>
+            <View style={computedStyles.component.style.container}>
                 {question.text && <TextWithBadge
                     question={question}
-                    style={textStyle}
-                    badgeStyle={badgeStyle}
-                    textBoxStyle={textBoxStyle}
+                    style={computedStyles.textWithBadge}
                 />}
                 <Row>
                     {!this.state.block && <InputField
-                        inputStyle={styles.field}
-                        wrapperStyle={styles.wrapper}
-                        labelStyle={styles.label}
+                        inputStyle={computedStyles.component.style.field}
+                        wrapperStyle={computedStyles.component.style.wrapper}
+                        labelStyle={computedStyles.component.style.label}
                         maxLength={question.maxLength}
                         keyboardType="default"
-                        value={Utilities.getInputValue(answer)}
+                        value={getInputValue(answer)}
                         onChangeText={text => this.handleChange({[question.name]: text})}
                         label={question.floatingLabel || ''}
-                        highlightColor="#ff4281"
+                        highlightColor={computedStyles.component.highlightColor}
                     />}
                     {this.state.block &&
-                    <Text style={styles.blockedText}>
+                    <Text style={computedStyles.component.style.blockedText}>
                         (Sin Nombre)
                     </Text>}
                     <Button
-                        title="S/N"
-                        onPress={() => this.handleChange({[`${question.name}NoAnswer`]: !this.state.block})}
+                        title={computedStyles.component.buttonTitle}
+                        color={computedStyles.component.buttonColor}
+                        onPress={() => this.handleBlock({[`${question.name}NoAnswer`]: !this.state.block})}
                     />
                 </Row>
             </View>

@@ -3,29 +3,33 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Row, Col, Grid} from '@indec/react-native-commons';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {isEqual} from 'lodash';
 
-import Utilities from '../util';
-import TextWithBadge from '../TextWithBadge';
-import defaultStyles from './styles';
+import {TextWithBadge} from '..';
+import {handleChange} from '../../util';
+import styles from './styles';
 
-const setRowQuestion = (question, section, rowQuestion, onChange, style) => {
+const renderRowQuestion = (question, section, rowQuestion, onChange, style) => {
     const questionName = question.name + rowQuestion.name;
     const questionValue = section[questionName];
     return (
         <Row key={questionName}>
             <Col size={4}>
-                <Text style={style.rowLabel}>
+                <Text style={style.component.style.rowLabel}>
                     {rowQuestion.text}
                 </Text>
             </Col>
             {question.options.map(option => (
-                <Col key={option.text + questionName} style={style.column}>
+                <Col
+                    key={option.id}
+                    style={style.component.style.column}
+                >
                     <CheckBox
-                        containerStyle={style.checkBoxContainer}
-                        checkedIcon="dot-circle-o"
-                        onPress={() => Utilities.handleChange(questionName, option.value, onChange)}
-                        uncheckedIcon="circle-o"
+                        onPress={() => handleChange(questionName, option.value, onChange)}
+                        containerStyle={style.component.style.checkBoxContainer}
+                        checkedIcon={style.component.checkedIcon}
+                        uncheckedIcon={style.component.uncheckedIcon}
                         checked={isEqual(questionValue, option.value)}
                     />
                 </Col>
@@ -34,21 +38,22 @@ const setRowQuestion = (question, section, rowQuestion, onChange, style) => {
     );
 };
 
-const RadioTable = ({section, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
+const RadioTable = ({section, question, onChange, style}) => {
+    const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={styles.container}>
+        <View style={computedStyles.component.style.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={textStyle}
-                badgeStyle={badgeStyle}
-                textBoxStyle={textBoxStyle}
+                style={computedStyles.textWithBadge}
             />}
             <Grid>
-                <Row style={styles.row}>
+                <Row style={computedStyles.component.style.row}>
                     <Col size={4}/>
                     {question.options.map(option => (
-                        <Col key={option.text} style={styles.column}>
+                        <Col
+                            key={option.text}
+                            style={computedStyles.component.style.column}
+                        >
                             <Text style={option.text}>
                                 {option.text}
                             </Text>
@@ -56,7 +61,7 @@ const RadioTable = ({section, question, onChange, style, badgeStyle, textStyle, 
                     ))}
                 </Row>
                 {question.questions.map(rowQuestion => (
-                    setRowQuestion(question, section, rowQuestion, onChange, styles)
+                    renderRowQuestion(question, section, rowQuestion, onChange, computedStyles)
                 ))}
             </Grid>
         </View>
@@ -67,17 +72,14 @@ RadioTable.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: Utilities.getStyleProps(),
-    badgeStyle: Utilities.getStyleProps(),
-    textStyle: Utilities.getStyleProps(),
-    textBoxStyle: Utilities.getStyleProps()
+    style: PropTypes.shape({
+        component: stylePropType,
+        textWithBadge: stylePropType
+    })
 };
 
 RadioTable.defaultProps = {
-    style: null,
-    badgeStyle: null,
-    textStyle: null,
-    textBoxStyle: null
+    style: null
 };
 
 export default RadioTable;
