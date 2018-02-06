@@ -10,12 +10,12 @@ import {types} from '../constants/constants';
 
 const getFieldValue = (answerRow, question) => {
     let value = answerRow[question.name];
-    if(typeof(value)==='string' && !isNaN(parseInt(value))){
-        value = parseInt(value);
+    if (typeof (value) === 'string' && !Number.isNaN(parseInt(value, 10))) {
+        value == parseInt(value, 10);
     }
     switch (question.type) {
         case types.SELECT:
-            return find(question.options, {"value":value}).label;
+            return find(question.options, {value: value}).label;
         default:
             return value;
     }
