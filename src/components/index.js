@@ -16,22 +16,20 @@ import Title from './Title';
 import Total from './Total';
 import YesNoButtons from './YesNoButtons';
 
-export default {
-    addOnList: AddOnList,
-    checkBox: CheckBox,
-    dateInput: DateInput,
-    decimalInput: DecimalInput,
-    decimalInputOrIgnore: DecimalInputOrIgnore,
-    radio: Radio,
-    radioSections: RadioSections,
-    radioTable: RadioTable,
-    select: Select,
-    textBox: TextBox,
-    textInput: TextInput,
-    textInputOrIgnore: TextInputOrIgnore,
-    textInputOrNoAnswer: TextInputOrNoAnswer,
-    textWithBadge: TextWithBadge,
-    title: Title,
-    total: Total,
-    yesNoButtons: YesNoButtons
-};
+export {AddOnList};
+export {CheckBox};
+export {DateInput};
+export {DecimalInput};
+export {DecimalInputOrIgnore};
+export {Radio};
+export {RadioSections};
+export {RadioTable};
+export {Select};
+export {TextBox};
+export {TextInput};
+export {TextInputOrIgnore};
+export {TextInputOrNoAnswer};
+export {TextWithBadge};
+export {Title};
+export {Total};
+export {YesNoButtons};

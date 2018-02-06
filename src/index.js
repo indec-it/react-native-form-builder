@@ -1,6 +1,6 @@
-import ComponentsMapper from './ComponentsMapper';
+import ComponentsRegistry from './ComponentsRegistry';
 import {operators, types} from './enums';
 
-export {ComponentsMapper};
+export {ComponentsRegistry};
 export {operators};
 export {types};

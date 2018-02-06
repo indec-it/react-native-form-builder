@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-native';
 import {Row, Col} from '@indec/react-native-commons';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {find, get, isNil, some, toNumber} from 'lodash';
 
-import ComponentsMapper from '../../ComponentsMapper';
-import Utilities from '../util';
-import TextWithBadge from '../TextWithBadge';
-import defaultStyles from './styles';
+import ComponentsRegistry from '../../ComponentsRegistry';
+import {TextWithBadge} from '..';
 import {types} from '../../enums';
+import styles from './styles';
 
-const getFieldValue = (answerRow, {name, options, type}) => (
-    type === types.SELECT ? find(options, option => option.value === toNumber(answerRow[name])).label : answerRow[name]
-);
+const getFieldValue = (answerRow, {name, options, type}) => {
+    const value = toNumber(answerRow[name]);
+    return (
+        type === types.SELECT ? find(options, option => option.value === value).label : answerRow[name]
+    );
+};
 
 export default class AddOnList extends Component {
     static propTypes = {
@@ -22,17 +25,14 @@ export default class AddOnList extends Component {
             childQuestions: PropTypes.arrayOf(PropTypes.shape({}))
         }).isRequired,
         onChange: PropTypes.func.isRequired,
-        style: Utilities.getStyleProps(),
-        badgeStyle: Utilities.getStyleProps(),
-        textStyle: Utilities.getStyleProps(),
-        textBoxStyle: Utilities.getStyleProps()
+        style: PropTypes.shape({
+            component: stylePropType,
+            textWithBadge: stylePropType
+        })
     };
 
     static defaultProps = {
-        style: null,
-        badgeStyle: null,
-        textStyle: null,
-        textBoxStyle: null
+        style: null
     };
 
     constructor(props) {
@@ -83,20 +83,18 @@ export default class AddOnList extends Component {
     }
 
     render() {
-        const {question, textStyle, badgeStyle, textBoxStyle} = this.props;
-        const styles = Utilities.setStyles(defaultStyles, this.props.style);
-        const mapper = new ComponentsMapper();
+        const {question, style} = this.props;
+        const computedStyles = mergeStyles(styles, style);
+        const registry = new ComponentsRegistry();
         return (
-            <View style={styles.container}>
+            <View style={computedStyles.component.container}>
                 {question.text && <TextWithBadge
                     question={question}
-                    style={textStyle}
-                    badgeStyle={badgeStyle}
-                    textBoxStyle={textBoxStyle}
+                    style={computedStyles.textWithBadge}
                 />}
                 <Row>
                     {question.childQuestions.map(childQuestion => {
-                        const QuestionComponent = mapper.getComponent(childQuestion.type);
+                        const QuestionComponent = registry.get(childQuestion.type);
                         return (
                             <QuestionComponent
                                 key={childQuestion.name.toString()}
@@ -113,7 +111,7 @@ export default class AddOnList extends Component {
                     title="AGREGAR"
                     onPress={() => this.addToList()}
                 />
-                <View style={styles.tableContainer}>
+                <View style={computedStyles.component.tableContainer}>
                     {this.state.answer && this.state.answer.map((answerRow, index) => (
                         <TouchableOpacity
                             key={answerRow.toString()}
@@ -121,14 +119,15 @@ export default class AddOnList extends Component {
                         >
                             <Row
                                 style={[
-                                    styles.rowStyle, index % 2 === 0 ? styles.evenRowStyle : {}
+                                    computedStyles.component.rowStyle,
+                                    index % 2 === 0 ? computedStyles.component.evenRowStyle : {}
                                 ]}
                             >
                                 {question.childQuestions.map(childQuestion => {
                                     const value = getFieldValue(answerRow, childQuestion);
                                     return (
                                         <Col key={value}>
-                                            <Text style={styles.childQuestionsText}>
+                                            <Text style={computedStyles.component.childrenQuestionsText}>
                                                 {answerRow[childQuestion.name] ? value : '-'}
                                             </Text>
                                         </Col>

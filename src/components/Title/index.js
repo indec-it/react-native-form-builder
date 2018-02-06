@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
-import Utilities from '../util';
-import defaultStyles from './styles';
+import styles from './styles';
 
 const Title = ({question, style}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
+    const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>
+        <View style={computedStyles.container}>
+            <Text style={computedStyles.text}>
                 {question.text}
             </Text>
         </View>
@@ -18,7 +18,10 @@ const Title = ({question, style}) => {
 
 Title.propTypes = {
     question: PropTypes.shape({}).isRequired,
-    style: Utilities.getStyleProps()
+    style: PropTypes.shape({
+        container: stylePropType,
+        text: stylePropType
+    })
 };
 
 Title.defaultProps = {

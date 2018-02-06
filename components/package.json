@@ -1,0 +1,5 @@
+{
+  "name": "@indec/react-native-form-builder/components",
+  "private": true,
+  "main": "../src/components/index.js"
+}

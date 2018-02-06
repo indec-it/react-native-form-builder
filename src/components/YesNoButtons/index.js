@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {Row} from '@indec/react-native-commons';
 import {ButtonGroup} from 'react-native-elements';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
-import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
-import defaultStyles from './styles';
+import {handleChange} from '../../util';
+import styles from './styles';
 
 const getValue = (index, question) => {
     switch (index) {
@@ -24,11 +25,11 @@ const getValue = (index, question) => {
 const getSelectedValue = (answer, question) => {
     switch (answer) {
         case question.trueValue:
-            return 0;
-        case question.falseValue:
             return 1;
-        case question.dkValue:
+        case question.falseValue:
             return 2;
+        case question.dkValue:
+            return 3;
         default:
             return null;
     }
@@ -38,33 +39,45 @@ const getRadioButtonStyle = (answer, questionValue, style) => ([
     style.radioButton, answer === questionValue ? style.buttonColorPressed : style.buttonColorDefault
 ]);
 
-const YesNoButtons = ({answer, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
-    const buttons = [
-        {element: () => <Text style={getRadioButtonStyle(answer, question.trueValue, styles)}>SI</Text>},
-        {element: () => <Text style={getRadioButtonStyle(answer, question.falseValue, styles)}>NO</Text>}
-    ];
+const YesNoButtons = ({answer, question, onChange, style}) => {
+    const computedStyles = mergeStyles(styles, style);
+
+    const buttons = [{
+        element: () => (
+            <Text style={getRadioButtonStyle(answer, question.trueValue, computedStyles.component.style)}>
+                SI
+            </Text>
+        )
+    }, {
+        element: () => (
+            <Text style={getRadioButtonStyle(answer, question.falseValue, computedStyles.component.style)}>
+                NO
+            </Text>
+        )
+    }];
 
     if (question.dkValue) {
         buttons.push({
-            element: () => <Text style={getRadioButtonStyle(answer, question.dkValue, styles)}>{question.dkLabel}</Text>
+            element: () => (
+                <Text style={getRadioButtonStyle(answer, question.dkValue, computedStyles.component.style)}>
+                    {question.dkLabel}
+                </Text>
+            )
         });
     }
     return (
-        <View style={styles.container}>
+        <View style={computedStyles.component.style.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={textStyle}
-                badgeStyle={badgeStyle}
-                textBoxStyle={textBoxStyle}
+                style={computedStyles.textWithBadge}
             />}
             <Row>
                 <ButtonGroup
-                    onPress={index => Utilities.handleChange(question.name, getValue(index, question), onChange)}
+                    onPress={index => handleChange(question.name, getValue(index, question), onChange)}
                     selectedIndex={getSelectedValue(answer, question)}
                     buttons={buttons}
-                    containerStyle={styles.radioGroup}
-                    selectedBackgroundColor="#3f53b5"
+                    containerStyle={computedStyles.component.style.radioGroup}
+                    selectedBackgroundColor={computedStyles.component.selectedBackgroundColor}
                 />
             </Row>
         </View>
@@ -74,10 +87,10 @@ const YesNoButtons = ({answer, question, onChange, style, badgeStyle, textStyle,
 YesNoButtons.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: Utilities.getStyleProps(),
-    badgeStyle: Utilities.getStyleProps(),
-    textStyle: Utilities.getStyleProps(),
-    textBoxStyle: Utilities.getStyleProps(),
+    style: PropTypes.shape({
+        component: stylePropType,
+        textWithBadge: stylePropType
+    }),
     answer: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number
@@ -86,9 +99,6 @@ YesNoButtons.propTypes = {
 
 YesNoButtons.defaultProps = {
     style: null,
-    badgeStyle: null,
-    textStyle: null,
-    textBoxStyle: null,
     answer: null
 };
 

@@ -2,40 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {Badge} from 'react-native-elements';
-import {includes} from 'lodash';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
+import {includes, toString} from 'lodash';
 
-import Utilities from '../util';
-import TextBox from '../TextBox';
-import defaultStyles from './styles';
+import {TextBox} from '..';
+import styles from './styles';
 
 const getBadge = (number, badgeStyle) => {
-    const styles = Utilities.setStyles(defaultStyles, badgeStyle);
+    const parsedNumber = toString(number);
     return (
-        !includes(number, '.') ?
+        !includes(parsedNumber, '.') ? (
             <Badge
-                containerStyle={styles.primaryBadgeContainer}
-                textStyle={styles.primaryBadgeText}
-                value={number}
-            /> :
-            <Badge
-                containerStyle={styles.secondaryBadgeContainer}
-                textStyle={styles.secondaryBadgeText}
+                containerStyle={badgeStyle.primaryContainer}
+                text={badgeStyle.primaryText}
                 value={number}
             />
+        ) : (
+            <Badge
+                containerStyle={badgeStyle.secondaryContainer}
+                text={badgeStyle.secondaryText}
+                value={number}
+            />
+        )
     );
 };
 
-const TextWithBadge = ({question: {number, text, infoAfterText}, style, badgeStyle, textBoxStyle}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
+const TextWithBadge = ({question: {number, text, infoAfterText}, style}) => {
+    const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={styles.container}>
-            <View style={styles.textWithBadgeContainer}>
-                {number && getBadge(number, badgeStyle)}
-                <Text style={styles.text}>
+        <View style={computedStyles.text.container}>
+            <View style={computedStyles.text.textWithBadgeContainer}>
+                {number && getBadge(number, computedStyles.badge)}
+                <Text style={computedStyles.text.text}>
                     {text}
                 </Text>
             </View>
-            {infoAfterText && <TextBox text={infoAfterText} style={textBoxStyle}/>}
+            {infoAfterText && <TextBox text={infoAfterText} style={computedStyles.textBox}/>}
         </View>
     );
 };
@@ -46,15 +48,15 @@ TextWithBadge.propTypes = {
         number: PropTypes.number,
         infoAfterText: PropTypes.string
     }).isRequired,
-    style: Utilities.getStyleProps(),
-    badgeStyle: Utilities.getStyleProps(),
-    textBoxStyle: Utilities.getStyleProps()
+    style: PropTypes.shape({
+        text: stylePropType,
+        badge: stylePropType,
+        textBox: stylePropType
+    })
 };
 
 TextWithBadge.defaultProps = {
-    style: null,
-    badgeStyle: null,
-    textBoxStyle: null
+    style: null
 };
 
 export default TextWithBadge;

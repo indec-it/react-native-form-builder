@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {filter, toNumber, isNil, sum, isNaN} from 'lodash';
 
-import Utilities from '../util';
 import TextWithBadge from '../TextWithBadge';
-import defaultStyles from './styles';
+import styles from './styles';
 
 const getTotal = (section, question, callback) => {
     const addends = filter(
@@ -28,17 +28,15 @@ const getTotal = (section, question, callback) => {
     return total;
 };
 
-const Total = ({section, question, onChange, style, badgeStyle, textStyle, textBoxStyle}) => {
-    const styles = Utilities.setStyles(defaultStyles, style);
+const Total = ({section, question, onChange, style}) => {
+    const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={styles.container}>
+        <View style={computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={textStyle}
-                badgeStyle={badgeStyle}
-                textBoxStyle={textBoxStyle}
+                style={computedStyles.textWithBadge}
             />}
-            <Text style={styles.totalLabel}>
+            <Text style={computedStyles.component.totalLabel}>
                 {getTotal(section, question, onChange)}
             </Text>
         </View>
@@ -49,17 +47,14 @@ Total.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: Utilities.getStyleProps(),
-    badgeStyle: Utilities.getStyleProps(),
-    textStyle: Utilities.getStyleProps(),
-    textBoxStyle: Utilities.getStyleProps()
+    style: PropTypes.shape({
+        component: stylePropType,
+        textWithBadge: stylePropType
+    })
 };
 
 Total.defaultProps = {
-    style: null,
-    badgeStyle: null,
-    textStyle: null,
-    textBoxStyle: null
+    style: null
 };
 
 export default Total;
