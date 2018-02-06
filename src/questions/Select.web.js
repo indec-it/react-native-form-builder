@@ -13,6 +13,7 @@ const Select = ({answer, question, onChange}) => (
                 value={answer}
                 onChange={e => onChange({[question.name]: e.target.value})}
             >
+                {question.placeholder && <option value="">{question.placeholder}</option>}
                 {question.options.map(option => (
                     <option key={option.value} value={option.value}>
                         {option.label}
