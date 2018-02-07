@@ -48,11 +48,7 @@ TextWithBadge.propTypes = {
         number: PropTypes.number,
         infoAfterText: PropTypes.string
     }).isRequired,
-    style: PropTypes.shape({
-        text: stylePropType,
-        badge: stylePropType,
-        textBox: stylePropType
-    })
+    style: stylePropType
 };
 
 TextWithBadge.defaultProps = {

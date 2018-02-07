@@ -19,20 +19,20 @@ const getFieldValue = (answerRow, {name, options, type}) => {
 
 export default class AddOnList extends Component {
     static propTypes = {
-        answer: PropTypes.shape({}).isRequired,
         question: PropTypes.shape({
             name: PropTypes.string,
             childQuestions: PropTypes.arrayOf(PropTypes.shape({}))
         }).isRequired,
         onChange: PropTypes.func.isRequired,
-        style: PropTypes.shape({
-            component: stylePropType,
-            textWithBadge: stylePropType
-        })
+        answer: PropTypes.shape({}),
+        style: stylePropType,
+        textWithBadgeStyle: stylePropType
     };
 
     static defaultProps = {
-        style: null
+        answer: null,
+        style: null,
+        textWithBadgeStyle: null
     };
 
     constructor(props) {
@@ -83,14 +83,14 @@ export default class AddOnList extends Component {
     }
 
     render() {
-        const {question, style} = this.props;
+        const {question, style, textWithBadgeStyle} = this.props;
         const computedStyles = mergeStyles(styles, style);
         const registry = new ComponentsRegistry();
         return (
-            <View style={computedStyles.component.container}>
+            <View style={computedStyles.container}>
                 {question.text && <TextWithBadge
                     question={question}
-                    style={computedStyles.textWithBadge}
+                    style={textWithBadgeStyle}
                 />}
                 <Row>
                     {question.childQuestions.map(childQuestion => {
@@ -111,7 +111,7 @@ export default class AddOnList extends Component {
                     title="AGREGAR"
                     onPress={() => this.addToList()}
                 />
-                <View style={computedStyles.component.tableContainer}>
+                <View style={computedStyles.tableContainer}>
                     {this.state.answer && this.state.answer.map((answerRow, index) => (
                         <TouchableOpacity
                             key={answerRow.toString()}
@@ -119,15 +119,15 @@ export default class AddOnList extends Component {
                         >
                             <Row
                                 style={[
-                                    computedStyles.component.rowStyle,
-                                    index % 2 === 0 ? computedStyles.component.evenRowStyle : {}
+                                    computedStyles.row,
+                                    index % 2 === 0 ? computedStyles.evenRow : {}
                                 ]}
                             >
                                 {question.childQuestions.map(childQuestion => {
                                     const value = getFieldValue(answerRow, childQuestion);
                                     return (
                                         <Col key={value}>
-                                            <Text style={computedStyles.component.childrenQuestionsText}>
+                                            <Text style={computedStyles.childrenQuestionsText}>
                                                 {answerRow[childQuestion.name] ? value : '-'}
                                             </Text>
                                         </Col>

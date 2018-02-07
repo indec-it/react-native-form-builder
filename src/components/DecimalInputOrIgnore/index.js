@@ -17,13 +17,13 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const DecimalInputOrIgnore = ({answer, question, onChange, style}) => {
+const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.style.container}>
+        <View style={computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
             <Row>
                 {isIgnored(question, answer) ? (
@@ -31,9 +31,9 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style}) => {
                 ) : (
                     <Fragment>
                         <InputField
-                            inputStyle={computedStyles.component.style.field}
-                            wrapperStyle={computedStyles.component.style.wrapper}
-                            labelStyle={computedStyles.component.style.label}
+                            inputStyle={computedStyles.component.field}
+                            wrapperStyle={computedStyles.component.wrapper}
+                            labelStyle={computedStyles.component.label}
                             maxLength={question.maxLength}
                             max={question.max}
                             min={question.min}
@@ -41,16 +41,16 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style}) => {
                             value={getInputValue(answer)}
                             onChangeText={text => handleChange(question.name, text, onChange, toNumber)}
                             label={question.floatingLabel || ''}
-                            highlightColor={computedStyles.component.highlightColor}
+                            highlightColor={computedStyles.highlightColor}
                         />
                         {question.inputUnit &&
-                        <Text style={computedStyles.component.style.inputUnit}>
+                        <Text style={computedStyles.component.inputUnit}>
                             {question.inputUnit}
                         </Text>}
                     </Fragment>
                 )}
                 <CheckBox
-                    style={computedStyles.component.style.checkBox}
+                    style={computedStyles.component.checkBox}
                     onPress={() => handlePress(question, answer, onChange)}
                     checked={isIgnored(question, answer)}
                 />
@@ -62,19 +62,18 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style}) => {
 DecimalInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    }),
     answer: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number
-    ])
+    ]),
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 DecimalInputOrIgnore.defaultProps = {
+    answer: null,
     style: null,
-    answer: null
+    textWithBadgeStyle: null
 };
 
 export default DecimalInputOrIgnore;

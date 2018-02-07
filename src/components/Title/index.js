@@ -18,10 +18,7 @@ const Title = ({question, style}) => {
 
 Title.propTypes = {
     question: PropTypes.shape({}).isRequired,
-    style: PropTypes.shape({
-        container: stylePropType,
-        text: stylePropType
-    })
+    style: stylePropType
 };
 
 Title.defaultProps = {
