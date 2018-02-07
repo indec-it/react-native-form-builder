@@ -25,11 +25,11 @@ const getValue = (index, question) => {
 const getSelectedValue = (answer, question) => {
     switch (answer) {
         case question.trueValue:
-            return 1;
+            return 0;
         case question.falseValue:
-            return 2;
+            return 1;
         case question.dkValue:
-            return 3;
+            return 2;
         default:
             return null;
     }
@@ -39,18 +39,18 @@ const getRadioButtonStyle = (answer, questionValue, style) => ([
     style.radioButton, answer === questionValue ? style.buttonColorPressed : style.buttonColorDefault
 ]);
 
-const YesNoButtons = ({answer, question, onChange, style}) => {
+const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
 
     const buttons = [{
         element: () => (
-            <Text style={getRadioButtonStyle(answer, question.trueValue, computedStyles.component.style)}>
+            <Text style={getRadioButtonStyle(answer, question.trueValue, computedStyles.component)}>
                 SI
             </Text>
         )
     }, {
         element: () => (
-            <Text style={getRadioButtonStyle(answer, question.falseValue, computedStyles.component.style)}>
+            <Text style={getRadioButtonStyle(answer, question.falseValue, computedStyles.component)}>
                 NO
             </Text>
         )
@@ -59,25 +59,25 @@ const YesNoButtons = ({answer, question, onChange, style}) => {
     if (question.dkValue) {
         buttons.push({
             element: () => (
-                <Text style={getRadioButtonStyle(answer, question.dkValue, computedStyles.component.style)}>
+                <Text style={getRadioButtonStyle(answer, question.dkValue, computedStyles.component)}>
                     {question.dkLabel}
                 </Text>
             )
         });
     }
     return (
-        <View style={computedStyles.component.style.container}>
+        <View style={computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
             <Row>
                 <ButtonGroup
                     onPress={index => handleChange(question.name, getValue(index, question), onChange)}
                     selectedIndex={getSelectedValue(answer, question)}
                     buttons={buttons}
-                    containerStyle={computedStyles.component.style.radioGroup}
-                    selectedBackgroundColor={computedStyles.component.selectedBackgroundColor}
+                    containerStyle={computedStyles.component.radioGroup}
+                    selectedBackgroundColor={computedStyles.selectedBackgroundColor}
                 />
             </Row>
         </View>
@@ -87,19 +87,18 @@ const YesNoButtons = ({answer, question, onChange, style}) => {
 YesNoButtons.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    }),
     answer: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number
-    ])
+    ]),
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 YesNoButtons.defaultProps = {
+    answer: null,
     style: null,
-    answer: null
+    textWithBadgeStyle: null
 };
 
 export default YesNoButtons;

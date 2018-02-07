@@ -10,7 +10,7 @@
     "commitmsg": "commitlint -e"
   },
   "dependencies": {
-    "@indec/react-native-commons": "^0.1.7",
+    "@indec/react-native-commons": "indec-it/react-native-commons#merge-styles",
     "@indec/react-native-md-textinput": "^3.0.1",
     "react-native-datepicker": "^1.6.0"
   },

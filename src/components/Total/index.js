@@ -28,15 +28,15 @@ const getTotal = (section, question, callback) => {
     return total;
 };
 
-const Total = ({section, question, onChange, style}) => {
+const Total = ({section, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.container}>
+        <View style={computedStyles.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
-            <Text style={computedStyles.component.totalLabel}>
+            <Text style={computedStyles.totalLabel}>
                 {getTotal(section, question, onChange)}
             </Text>
         </View>
@@ -47,14 +47,13 @@ Total.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    })
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 Total.defaultProps = {
-    style: null
+    style: null,
+    textWithBadgeStyle: null
 };
 
 export default Total;

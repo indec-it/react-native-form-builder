@@ -9,19 +9,19 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const RadioSections = ({answer, question, onChange, style}) => {
+const RadioSections = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.style.container}>
+        <View style={computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
             {question.options.map(option => (
                 option.section ? (
                     <Text
                         key={option.section}
-                        style={computedStyles.component.style.sectionTitle}
+                        style={computedStyles.component.sectionTitle}
                     >
                         {option.section}
                     </Text>
@@ -30,8 +30,8 @@ const RadioSections = ({answer, question, onChange, style}) => {
                         key={option.value}
                         title={option.label}
                         onPress={() => handleChange(question.name, option.value, onChange)}
-                        checkedIcon={computedStyles.component.checkedIcon}
-                        uncheckedIcon={computedStyles.component.uncheckedIcon}
+                        checkedIcon={computedStyles.checkedIcon}
+                        uncheckedIcon={computedStyles.uncheckedIcon}
                         checked={isEqual(answer, option.value)}
                     />
                 )
@@ -43,19 +43,18 @@ const RadioSections = ({answer, question, onChange, style}) => {
 RadioSections.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    }),
     answer: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string
-    ])
+    ]),
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 RadioSections.defaultProps = {
+    answer: null,
     style: null,
-    answer: null
+    textWithBadgeStyle: null
 };
 
 export default RadioSections;

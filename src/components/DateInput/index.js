@@ -8,16 +8,16 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const DateInput = ({answer, question, onChange, style}) => {
+const DateInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.container}>
+        <View style={computedStyles.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
             <DatePicker
-                style={computedStyles.component.datePicker}
+                style={computedStyles.datePicker}
                 date={answer}
                 placeholder={question.placeholder}
                 format={question.format}
@@ -34,19 +34,18 @@ const DateInput = ({answer, question, onChange, style}) => {
 DateInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    }),
     answer: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string
-    ])
+    ]),
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 DateInput.defaultProps = {
+    answer: null,
     style: null,
-    answer: null
+    textWithBadgeStyle: null
 };
 
 export default DateInput;

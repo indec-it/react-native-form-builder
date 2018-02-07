@@ -16,13 +16,13 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const TextInputOrIgnore = ({answer, question, onChange, style}) => {
+const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.style.container}>
+        <View style={computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
             <Row>
                 {isIgnored(question, answer) ? (
@@ -30,18 +30,18 @@ const TextInputOrIgnore = ({answer, question, onChange, style}) => {
                 ) : (
                     <Fragment>
                         <InputField
-                            inputStyle={computedStyles.component.style.field}
-                            wrapperStyle={computedStyles.component.style.wrapper}
-                            labelStyle={computedStyles.component.style.label}
+                            inputStyle={computedStyles.component.field}
+                            wrapperStyle={computedStyles.component.wrapper}
+                            labelStyle={computedStyles.component.label}
                             maxLength={question.maxLength}
                             keyboardType="default"
                             value={getInputValue(answer)}
                             onChangeText={text => handleChange(question.name, text, onChange)}
                             label={question.floatingLabel || ''}
-                            highlightColor={computedStyles.component.highlightColor}
+                            highlightColor={computedStyles.highlightColor}
                         />
                         {question.inputUnit &&
-                        <Text style={computedStyles.component.inputUnit}>
+                        <Text style={computedStyles.inputUnit}>
                             {question.inputUnit}
                         </Text>}
                     </Fragment>
@@ -59,19 +59,18 @@ const TextInputOrIgnore = ({answer, question, onChange, style}) => {
 TextInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    }),
     answer: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number
-    ])
+    ]),
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 TextInputOrIgnore.defaultProps = {
+    answer: null,
     style: null,
-    answer: null
+    textWithBadgeStyle: null
 };
 
 export default TextInputOrIgnore;

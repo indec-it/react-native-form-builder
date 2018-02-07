@@ -8,27 +8,27 @@ import {TextWithBadge} from '..';
 import {getInputValue, handleChange} from '../../util';
 import styles from './styles';
 
-const TextInput = ({answer, question, onChange, style}) => {
+const TextInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.style.container}>
+        <View style={computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
             <InputField
-                inputStyle={computedStyles.component.style.field}
-                wrapperStyle={computedStyles.component.style.wrapper}
-                labelStyle={computedStyles.component.style.label}
+                inputStyle={computedStyles.component.field}
+                wrapperStyle={computedStyles.component.wrapper}
+                labelStyle={computedStyles.component.label}
                 maxLength={question.maxLength}
                 keyboardType="default"
                 value={getInputValue(answer)}
                 onChangeText={text => handleChange(question.name, text, onChange)}
                 label={question.floatingLabel || ''}
-                highlightColor={computedStyles.component.highlightColor}
+                highlightColor={computedStyles.highlightColor}
             />
             {question.textAfterInput &&
-            <Text style={computedStyles.component.style.textAfterInput}>
+            <Text style={computedStyles.component.textAfterInput}>
                 {question.textAfterInput}
             </Text>}
         </View>
@@ -38,16 +38,15 @@ const TextInput = ({answer, question, onChange, style}) => {
 TextInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    }),
-    answer: PropTypes.string
+    answer: PropTypes.string,
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 TextInput.defaultProps = {
+    answer: null,
     style: null,
-    answer: null
+    textWithBadgeStyle: null
 };
 
 export default TextInput;

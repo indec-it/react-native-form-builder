@@ -13,16 +13,15 @@ class TextInputOrNoAnswer extends Component {
     static propTypes = {
         question: PropTypes.shape({}).isRequired,
         onChange: PropTypes.func.isRequired,
-        style: PropTypes.shape({
-            component: stylePropType,
-            textWithBadge: stylePropType
-        }),
-        answer: PropTypes.string
+        answer: PropTypes.string,
+        style: stylePropType,
+        textWithBadgeStyle: stylePropType
     };
 
     static defaultProps = {
+        answer: null,
         style: null,
-        answer: null
+        textWithBadgeStyle: null
     };
 
     constructor(props) {
@@ -40,33 +39,33 @@ class TextInputOrNoAnswer extends Component {
     }
 
     render() {
-        const {question, answer, style} = this.props;
+        const {question, answer, style, textWithBadgeStyle} = this.props;
         const computedStyles = mergeStyles(styles, style);
         return (
-            <View style={computedStyles.component.style.container}>
+            <View style={computedStyles.component.container}>
                 {question.text && <TextWithBadge
                     question={question}
-                    style={computedStyles.textWithBadge}
+                    style={textWithBadgeStyle}
                 />}
                 <Row>
                     {!this.state.block && <InputField
-                        inputStyle={computedStyles.component.style.field}
-                        wrapperStyle={computedStyles.component.style.wrapper}
-                        labelStyle={computedStyles.component.style.label}
+                        inputStyle={computedStyles.component.field}
+                        wrapperStyle={computedStyles.component.wrapper}
+                        labelStyle={computedStyles.component.label}
                         maxLength={question.maxLength}
                         keyboardType="default"
                         value={getInputValue(answer)}
                         onChangeText={text => this.handleChange({[question.name]: text})}
                         label={question.floatingLabel || ''}
-                        highlightColor={computedStyles.component.highlightColor}
+                        highlightColor={computedStyles.highlightColor}
                     />}
                     {this.state.block &&
-                    <Text style={computedStyles.component.style.blockedText}>
+                    <Text style={computedStyles.component.blockedText}>
                         (Sin Nombre)
                     </Text>}
                     <Button
-                        title={computedStyles.component.buttonTitle}
-                        color={computedStyles.component.buttonColor}
+                        title={computedStyles.buttonTitle}
+                        color={computedStyles.buttonColor}
                         onPress={() => this.handleBlock({[`${question.name}NoAnswer`]: !this.state.block})}
                     />
                 </Row>

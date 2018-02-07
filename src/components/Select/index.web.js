@@ -7,13 +7,13 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const Select = ({answer, question, onChange, style}) => {
+const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.container}>
+        <View style={computedStyles.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
             <select
                 value={answer}
@@ -36,16 +36,15 @@ const Select = ({answer, question, onChange, style}) => {
 Select.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    }),
-    answer: PropTypes.number
+    answer: PropTypes.number,
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 Select.defaultProps = {
+    answer: null,
     style: null,
-    answer: null
+    textWithBadgeStyle: null
 };
 
 export default Select;

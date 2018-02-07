@@ -150,9 +150,9 @@
   dependencies:
     find-up "^2.1.0"
 
-"@indec/react-native-commons@^0.1.7":
+"@indec/react-native-commons@indec-it/react-native-commons#merge-styles":
   version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@indec/react-native-commons/-/react-native-commons-0.1.7.tgz#97b7ed122e7081047b0bb76c8783f0c55bf1d51d"
+  resolved "https://codeload.github.com/indec-it/react-native-commons/tar.gz/c45125a4fd60680074b250db63ab2260e48576c1"
 
 "@indec/react-native-md-textinput@^3.0.1":
   version "3.0.1"
@@ -588,11 +588,11 @@ babel-helpers@^6.24.1:
     babel-template "^6.24.1"
 
 babel-jest@^22.0.4:
-  version "22.1.0"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-22.1.0.tgz#7fae6f655fffe77e818a8c2868c754a42463fdfd"
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-22.2.0.tgz#2d04087f5d149585e14f641d529551963fc9b4f8"
   dependencies:
     babel-plugin-istanbul "^4.1.5"
-    babel-preset-jest "^22.1.0"
+    babel-preset-jest "^22.2.0"
 
 babel-loader@^7.1.2:
   version "7.1.2"
@@ -628,9 +628,9 @@ babel-plugin-istanbul@^4.1.5:
     istanbul-lib-instrument "^1.7.5"
     test-exclude "^4.1.1"
 
-babel-plugin-jest-hoist@^22.1.0:
-  version "22.1.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-22.1.0.tgz#c1281dd7887d77a1711dc760468c3b8285dde9ee"
+babel-plugin-jest-hoist@^22.2.0:
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-22.2.0.tgz#bd34f39d652406669713b8c89e23ef25c890b993"
 
 babel-plugin-lodash@^3.3.2:
   version "3.3.2"
@@ -965,11 +965,11 @@ babel-preset-fbjs@^2.1.2, babel-preset-fbjs@^2.1.4:
     babel-plugin-transform-react-display-name "^6.8.0"
     babel-plugin-transform-react-jsx "^6.8.0"
 
-babel-preset-jest@^22.1.0:
-  version "22.1.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-22.1.0.tgz#ff4e704102f9642765e2254226050561d8942ec9"
+babel-preset-jest@^22.2.0:
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-22.2.0.tgz#f77b43f06ef4d8547214b2e206cc76a25c3ba0e2"
   dependencies:
-    babel-plugin-jest-hoist "^22.1.0"
+    babel-plugin-jest-hoist "^22.2.0"
     babel-plugin-syntax-object-rest-spread "^6.13.0"
 
 babel-preset-react-native@^4.0.0:
@@ -1330,7 +1330,11 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.11.0, commander@^2.9.0, commander@~2.13.0:
+commander@^2.11.0, commander@^2.9.0:
+  version "2.14.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
+
+commander@~2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
 
@@ -1931,8 +1935,8 @@ event-target-shim@^1.0.5:
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-1.1.1.tgz#a86e5ee6bdaa16054475da797ccddf0c55698491"
 
 eventemitter3@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.0.0.tgz#fc29ecf233bd19fbd527bb4089bbf665dc90c1e3"
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.0.1.tgz#4ce66c3fc5b5a6b9f2245e359e1938f1ab10f960"
 
 exec-sh@^0.2.0:
   version "0.2.1"
@@ -2782,9 +2786,15 @@ istanbul-lib-instrument@^1.7.5:
     istanbul-lib-coverage "^1.1.1"
     semver "^5.3.0"
 
-jest-docblock@22.1.0, jest-docblock@^22.1.0:
+jest-docblock@22.1.0:
   version "22.1.0"
   resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-22.1.0.tgz#3fe5986d5444cbcb149746eb4b07c57c5a464dfd"
+  dependencies:
+    detect-newline "^2.1.0"
+
+jest-docblock@^22.1.0:
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-22.2.0.tgz#4d054eac354751e94a43a0ea2e2fe5c04cc61bbb"
   dependencies:
     detect-newline "^2.1.0"
 
@@ -2799,9 +2809,15 @@ jest-haste-map@22.1.0:
     micromatch "^2.3.11"
     sane "^2.0.0"
 
-jest-worker@22.1.0, jest-worker@^22.1.0:
+jest-worker@22.1.0:
   version "22.1.0"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-22.1.0.tgz#0987832fe58fbdc205357f4c19b992446368cafb"
+  dependencies:
+    merge-stream "^1.0.1"
+
+jest-worker@^22.1.0:
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-22.2.0.tgz#d88d6ee176d6409f206cbbf7b485250793264262"
   dependencies:
     merge-stream "^1.0.1"
 

@@ -9,18 +9,18 @@ import {TextWithBadge} from '..';
 import {getInputValue, handleChange} from '../../util';
 import styles from './styles';
 
-const DecimalInput = ({answer, question, onChange, style}) => {
+const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.style.container}>
+        <View style={computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
-                style={computedStyles.textWithBadge}
+                style={textWithBadgeStyle}
             />}
             <InputField
-                inputStyle={computedStyles.component.style.field}
-                wrapperStyle={computedStyles.component.style.wrapper}
-                labelStyle={computedStyles.component.style.label}
+                inputStyle={computedStyles.component.field}
+                wrapperStyle={computedStyles.component.wrapper}
+                labelStyle={computedStyles.component.label}
                 maxLength={question.maxLength}
                 max={question.max}
                 min={question.min}
@@ -28,10 +28,10 @@ const DecimalInput = ({answer, question, onChange, style}) => {
                 value={getInputValue(answer)}
                 onChangeText={text => handleChange(question.name, text, onChange, toNumber)}
                 label={question.floatingLabel || ''}
-                highlightColor={computedStyles.component.highlightColor}
+                highlightColor={computedStyles.highlightColor}
             />
             {question.textAfterInput &&
-            <Text style={computedStyles.component.style.textAfterInput}>
+            <Text style={computedStyles.component.textAfterInput}>
                 {question.textAfterInput}
             </Text>}
         </View>
@@ -41,16 +41,15 @@ const DecimalInput = ({answer, question, onChange, style}) => {
 DecimalInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    style: PropTypes.shape({
-        component: stylePropType,
-        textWithBadge: stylePropType
-    }),
-    answer: PropTypes.number
+    answer: PropTypes.number,
+    style: stylePropType,
+    textWithBadgeStyle: stylePropType
 };
 
 DecimalInput.defaultProps = {
+    answer: null,
     style: null,
-    answer: null
+    textWithBadgeStyle: null
 };
 
 export default DecimalInput;
