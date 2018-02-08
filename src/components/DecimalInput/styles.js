@@ -18,7 +18,8 @@ export default {
         },
         label: {
             height: 50,
-            marginTop: -15
+            marginTop: -25,
+            marginLeft: 15
         },
         textAfterInput: {}
     }),

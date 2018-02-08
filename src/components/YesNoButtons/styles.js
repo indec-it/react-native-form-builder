@@ -7,25 +7,28 @@ export default {
             flex: 1,
             flexDirection: 'column'
         },
-        radioButton: {
-            fontSize: 12
-        },
-        radioGroup: {
-            width: 155,
-            height: 32,
-            backgroundColor: '#e6e6e6',
-            borderRadius: 24
-        },
         text: {
             flex: 1
         },
+        radioButton: {
+            fontSize: 14
+        },
+        radioGroup: {
+            width: 220,
+            height: 50,
+            backgroundColor: '#eaeaea',
+            borderWidth: 1,
+            borderColor: '#8b8b8b',
+            borderRadius: 4
+        },
         buttonColorPressed: {
-            color: '#fff'
+            color: '#004E84',
+            fontWeight: 'bold'
         },
         buttonColorDefault: {
             color: '#000000'
         }
     }),
-    selectedBackgroundColor: '#ff4281'
+    selectedBackgroundColor: '#333'
 };
 

@@ -21,36 +21,38 @@ export default {
     }),
     badge: StyleSheet.create({
         primaryContainer: {
-            backgroundColor: '#3f53b5'
+            backgroundColor: '#333'
         },
         primaryText: {
-            color: '#FFF',
-            fontSize: 16
+            color: '#fff',
+            fontSize: 16,
+            fontWeight: 'bold'
         },
         secondaryContainer: {
             backgroundColor: '#e6e6e6'
         },
         secondaryText: {
-            color: '#666',
-            fontSize: 16
+            color: '#555',
+            fontSize: 16,
+            fontWeight: 'bold'
         }
     }),
     textBox: StyleSheet.create({
         container: {
             flex: 1,
             flexDirection: 'row',
-            borderWidth: 2,
-            borderColor: '#3f53b5',
+            borderWidth: 1,
+            borderColor: '#8b8b8b',
             padding: 10,
             marginLeft: 10,
             marginRight: 10,
             marginTop: 16,
             marginBottom: 16,
             alignItems: 'center',
-            backgroundColor: '#ff4281'
+            backgroundColor: '#e3e3e3'
         },
         text: {
-            color: '#FFF'
+            color: '#333'
         }
     })
 };
