@@ -5,9 +5,10 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {filter, toNumber, isNil, sum, isNaN} from 'lodash';
 
 import TextWithBadge from '../TextWithBadge';
+import {handleChange} from '../../util';
 import styles from './styles';
 
-const getTotal = (section, question, callback) => {
+const getTotal = (section, question, onChange) => {
     const addends = filter(
         question.fieldsToAdd,
         field => !isNil(section[field])
@@ -24,7 +25,7 @@ const getTotal = (section, question, callback) => {
         return total;
     }
 
-    callback({[question.name]: total});
+    handleChange(question.name, total, onChange);
     return total;
 };
 
