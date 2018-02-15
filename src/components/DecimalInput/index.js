@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 import InputField from '@indec/react-native-md-textinput';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import {toNumber} from 'lodash';
 
 import {TextWithBadge} from '..';
-import {getInputValue, handleChange} from '../../util';
+import {getInputValue, numericHandleChange} from '../../util';
 import styles from './styles';
 
 const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
@@ -26,7 +25,7 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle}) =
                 min={question.min}
                 keyboardType="numeric"
                 value={getInputValue(answer)}
-                onChangeText={text => handleChange(question.name, text, onChange, toNumber)}
+                onChangeText={text => numericHandleChange(question.name, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
             />
@@ -41,7 +40,10 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle}) =
 DecimalInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
-    answer: PropTypes.number,
+    answer: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
     style: stylePropType,
     textWithBadgeStyle: stylePropType
 };

@@ -5,10 +5,9 @@ import {Row} from '@indec/react-native-commons';
 import InputField from '@indec/react-native-md-textinput';
 import {CheckBox} from 'react-native-elements';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import {toNumber} from 'lodash';
 
 import {TextWithBadge} from '..';
-import {getInputValue, handleChange} from '../../util';
+import {getInputValue, numericHandleChange} from '../../util';
 import styles from './styles';
 
 const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
@@ -39,7 +38,7 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeS
                             min={question.min}
                             keyboardType="numeric"
                             value={getInputValue(answer)}
-                            onChangeText={text => handleChange(question.name, text, onChange, toNumber)}
+                            onChangeText={text => numericHandleChange(question.name, text, onChange)}
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
                         />
@@ -63,8 +62,9 @@ DecimalInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
-        PropTypes.bool,
-        PropTypes.number
+        PropTypes.number,
+        PropTypes.string,
+        PropTypes.bool
     ]),
     style: stylePropType,
     textWithBadgeStyle: stylePropType
