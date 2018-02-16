@@ -5,7 +5,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         marginTop: 8
     },
-    lapel: {
+    tab: {
         backgroundColor: '#e4e4e4',
         padding: 16,
         marginRight: 8,
@@ -13,12 +13,12 @@ export default StyleSheet.create({
         borderWidth: 0.5,
         marginTop: 8
     },
-    lapelSelected: {
+    selected: {
         backgroundColor: '#0088ff',
         color: 'white',
         marginTop: 0
     },
-    lapelFooter: {
+    footer: {
         backgroundColor: '#cecece',
         height: 1
     }

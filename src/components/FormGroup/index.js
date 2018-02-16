@@ -1,73 +1,61 @@
-import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
-import styles from './styles';
-import LapelGroup from '../LapelGroup';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
+import {times} from 'lodash';
+
+import {handleChange} from '../../util';
+import Tabs from '../Tabs';
 import Form from '../Form';
+import styles from './styles';
 
-export default class FormGroup extends Component {
-    static propTypes = {
-        question: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            lapelsAmount: PropTypes.string,
-            lapelsRef: PropTypes.arrayOf(PropTypes.shape({})),
-            form: PropTypes.shape({}).isRequired,
-            lapelTemplate: PropTypes.string.isRequired
-        }).isRequired,
-        onChange: PropTypes.func.isRequired,
-        style: stylePropType,
-        section: PropTypes.shape({}).isRequired
-    };
 
-    static defaultProps = {
-        style: null
-    };
+const getTabQuestion = () => {
+    const {question, section} = this.props;
+    const tabsAmount = question.tabsAmount > 0 ? question.tabsAmount : section[question.tabsRef];
+    const tabs = [];
+    times(tabsAmount - 1, () => {
+        tabs.push({id: tabs.length, name: question.tabTemplate + (tabs.length + 1)});
+    });
+    return {tabs, name: 'selected'};
+};
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            answer: props.section[props.question.name] ? props.section[props.question.name] : []
-        };
-    }
+const FormGroup = ({question, onChange, style, section}) => {
+    const currentAnswer = section[question.name] || [];
+    const questions = getTabQuestion;
+    const computedStyles = mergeStyles(styles, style);
+    return (
+        <View style={computedStyles.container}>
+            <Tabs
+                answer={currentAnswer}
+                question={questions}
+                onChange={selected => this.setState(selected)}
+            />
+            {questions.tabs && currentAnswer < questions.tabs.length &&
+            <Form
+                answer={this.state.answer[currentAnswer]}
+                question={question}
+                onChange={changes => handleChange(question.name, changes, onChange)}
+            />}
+        </View>
+    );
+};
 
-    getLapelGroupQuestion() {
-        const {question, section} = this.props;
-        const lapelsAmount = question.lapelsAmount > 0 ? question.lapelsAmount : section[question.lapelsRef];
-        const lapels = [];
-        while (lapels.length < lapelsAmount) {
-            lapels.push({id: lapels.length, name: question.lapelTemplate + (lapels.length + 1)});
-        }
-        return {lapels, name: 'selectedLapel'};
-    }
+FormGroup.propTypes = {
+    question: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        tabsAmount: PropTypes.string,
+        tabsRef: PropTypes.arrayOf(PropTypes.shape({})),
+        form: PropTypes.shape({}).isRequired,
+        tabTemplate: PropTypes.string.isRequired
+    }).isRequired,
+    onChange: PropTypes.func.isRequired,
+    style: stylePropType,
+    section: PropTypes.shape({}).isRequired
+};
 
-    handleChanges(changes) {
-        const {selectedLapel, answer} = this.state;
-        let currentAnswer = answer[selectedLapel] ? answer[selectedLapel] : {};
-        currentAnswer = Object.assign(currentAnswer, changes[this.props.question.name]);
-        answer[selectedLapel] = currentAnswer;
-        this.props.onChange({[this.props.question.name]: answer});
-    }
+FormGroup.defaultProps = {
+    style: null
+};
 
-    render() {
-        const {question, style} = this.props;
-        const {selectedLapel} = this.state;
-        const computedStyles = mergeStyles(styles, style);
-        const lapelGroup = this.getLapelGroupQuestion();
-        const currentFormAnswer = this.state.answer[selectedLapel];
-        return (
-            <View style={computedStyles.container}>
-                <LapelGroup
-                    answer={selectedLapel}
-                    question={lapelGroup}
-                    onChange={selected => this.setState(selected)}
-                />
-                {lapelGroup.lapels && selectedLapel < lapelGroup.lapels.length && <Form
-                    answer={currentFormAnswer}
-                    question={question}
-                    onChange={changes => this.handleChanges(changes)}
-                />}
-            </View>
-        );
-    }
-}
+export default FormGroup;

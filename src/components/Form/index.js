@@ -1,38 +1,44 @@
-import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
+
+import ComponentsRegistry from '../../ComponentsRegistry';
 import styles from './styles';
-import {MapQuestions} from '../../util';
 
-const handleChange = (answer = {}, question, change) => {
-    const res = Object.assign(answer, change);
-    return {[question.name]: res};
-};
 
-const Form = ({answer, question, onChange, style}) => {
+const handleChange = (
+    chapter = {}, question, answer, onChange
+) => onChange({[question.name]: Object.assign(chapter, answer)});
+
+const Form = ({chapter, question, onChange, style}) => {
     const computedStyles = mergeStyles(styles, style);
+    const registry = new ComponentsRegistry();
     return (
-        <View>
+        <Fragment>
             {question.form.map(row => (
                 <View style={computedStyles.container}>
-                    {row.questions.map(quest => (
-                        <MapQuestions
-                            key={quest.name.toString()}
-                            chapter={answer}
-                            question={quest}
-                            onChange={change => onChange(handleChange(answer, question, change))}
-                        />
-                    ))}
+                    {row.questions.map(childQuestion => {
+                        const QuestionComponent = registry.get(childQuestion.type);
+                        return (
+                            <QuestionComponent
+                                key={childQuestion.name}
+                                answer={chapter}
+                                question={childQuestion}
+                                onChange={answer => onChange(handleChange(chapter, childQuestion, answer))}
+                            />
+                        );
+                    })
+                    }
                 </View>))}
-        </View>
+        </Fragment>
     );
 };
 
 Form.propTypes = {
-    answer: PropTypes.shape([]).isRequired,
+    chapter: PropTypes.shape([]).isRequired,
     question: PropTypes.shape({
-        form: PropTypes.shape([]).isRequired
+        name: PropTypes.string.isRequired
     }).isRequired,
     onChange: PropTypes.func.isRequired,
     style: stylePropType
