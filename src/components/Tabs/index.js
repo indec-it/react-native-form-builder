@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, ScrollView} from 'react-native';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
@@ -8,7 +8,7 @@ import styles from './styles';
 const Tabs = ({answer, question, onChange, style}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <Fragment>
+        <View>
             <ScrollView horizontal>
                 <View style={computedStyles.container}>
                     {question.tabs.map(tab => (
@@ -26,7 +26,7 @@ const Tabs = ({answer, question, onChange, style}) => {
                 </View>
             </ScrollView>
             <View style={computedStyles.footer}/>
-        </Fragment>
+        </View>
     );
 };
 
