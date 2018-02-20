@@ -3,15 +3,15 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-native';
 import {Row, Col} from 'react-native-elements';
-import {find, get} from 'lodash';
+import {find, get, isString, toNumber, isNaN} from 'lodash';
 
 import MapQuestions from './MapQuestions';
 import {types} from '../constants/constants';
 
 const getFieldValue = (answerRow, question) => {
     let value = answerRow[question.name];
-    if (typeof (value) === 'string' && !Number.isNaN(parseInt(value, 10))) {
-        value = parseInt(value, 10);
+    if (isString(value) && !isNaN(toNumber(value))) {
+        value = toNumber(value);
     }
     switch (question.type) {
         case types.SELECT:
