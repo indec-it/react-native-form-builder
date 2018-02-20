@@ -12,8 +12,8 @@ const handleChange = (
 ) => onChange({[question.name]: Object.assign(chapter, answer)});
 
 const Form = ({chapter, question, onChange, style}) => {
-    const computedStyles = mergeStyles(styles, style);
     const registry = new ComponentsRegistry();
+    const computedStyles = mergeStyles(styles, style);
     return (
         <Fragment>
             {question.form.map(row => (
@@ -25,7 +25,7 @@ const Form = ({chapter, question, onChange, style}) => {
                                 key={childQuestion.name}
                                 answer={chapter}
                                 question={childQuestion}
-                                onChange={answer => onChange(handleChange(chapter, childQuestion, answer))}
+                                onChange={answer => onChange(handleChange(chapter, childQuestion, answer, onChange))}
                             />
                         );
                     })

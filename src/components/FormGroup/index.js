@@ -34,38 +34,38 @@ class FormGroup extends Component {
         };
     }
 
-    getTabQuestion() {
+    getTabQuestions = () => {
         const {question, section} = this.props;
         const tabsAmount = question.tabsAmount > 0 ? question.tabsAmount : section[question.tabsRef];
-        const tabs = [];
+        const tabQuestions = [];
         times(tabsAmount - 1, () => {
-            tabs.push({id: tabs.length, name: question.tabTemplate + (tabs.length + 1)});
+            tabQuestions.map(() => ({id: tabQuestions.length, name: question.tabTemplate + (tabQuestions.length + 1)}));
         });
-        return {tabs, name: 'selected'};
-    }
+        return {tabQuestions, name: 'selected'};
+    };
 
-    handleChanges(changes) {
+    handleChanges = changes => {
         const {selectedTab, answer} = this.state;
         let currentAnswer = answer[selectedTab] ? answer[selectedTab] : {};
         currentAnswer = Object.assign(currentAnswer, changes[this.props.question.name]);
         answer[selectedTab] = currentAnswer;
         this.props.onChange({[this.props.question.name]: answer});
-    }
+    };
 
     render() {
         const {selectedTab} = this.state;
-        const currentFormAnswer = this.state.answer[selectedTab];
-        const questions = this.getTabQuestion();
+        const currentChapter = this.state.answer[selectedTab];
+        const tabQuestions = this.getTabQuestions();
         const computedStyles = mergeStyles(styles, this.props.style);
         return (
             <View style={computedStyles.container}>
                 <Tabs
-                    answer={selectedTab}
-                    question={questions}
+                    answer={selectedTab || []}
+                    question={tabQuestions}
                     onChange={selected => this.setState(selected)}
                 />
-                {questions.tabs && currentFormAnswer < questions.tabs.length && <Form
-                    answer={currentFormAnswer}
+                {tabQuestions.tabs && currentChapter < tabQuestions.tabs.length && <Form
+                    answer={currentChapter}
                     question={this.props.question}
                     onChange={changes => this.handleChanges(changes)}
                 />}

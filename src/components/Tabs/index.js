@@ -11,7 +11,7 @@ const Tabs = ({answer, question, onChange, style}) => {
         <View>
             <ScrollView horizontal>
                 <View style={computedStyles.container}>
-                    {question.tabs.map(tab => (
+                    {question.tabQuestions.map(tab => (
                         <Text
                             key={tab.id}
                             style={[
@@ -33,7 +33,8 @@ const Tabs = ({answer, question, onChange, style}) => {
 Tabs.propTypes = {
     answer: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     question: PropTypes.shape({
-        name: PropTypes.string.isRequired
+        name: PropTypes.string.isRequired,
+        tabQuestions: PropTypes.arrayOf(PropTypes.shape({})).isRequired
     }).isRequired,
     onChange: PropTypes.func.isRequired,
     style: stylePropType
