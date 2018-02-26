@@ -54,7 +54,7 @@ export default class AddOnList extends Component {
     }
 
     addToList() {
-        if (!this.canAddToList()) return;
+        if (!this.canAddToList()) { return; }
         this.state.answer.push(this.state.componentAnswers);
         this.props.onChange({[this.props.question.name]: this.state.answer});
         const componentAnswers = {};
