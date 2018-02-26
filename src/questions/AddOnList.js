@@ -19,7 +19,7 @@ const getFieldValue = (answerRow, question) => {
 };
 
 export default class AddOnList extends Component {
-    propTypes = {
+    static propTypes = {
         answer: PropTypes.shape({}).isRequired,
         question: PropTypes.shape({
             name: PropTypes.string,
@@ -27,8 +27,6 @@ export default class AddOnList extends Component {
         }).isRequired,
         onChange: PropTypes.func.isRequired
     };
-
-    defaultProps = {};
 
     constructor(props) {
         super(props);
