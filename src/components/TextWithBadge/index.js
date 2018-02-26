@@ -1,0 +1,58 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Text, View} from 'react-native';
+import {Badge} from 'react-native-elements';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
+import {includes, toString} from 'lodash';
+
+import {TextBox} from '..';
+import styles from './styles';
+
+const getBadge = (number, badgeStyle) => {
+    const parsedNumber = toString(number);
+    return (
+        !includes(parsedNumber, '.') ? (
+            <Badge
+                containerStyle={badgeStyle.primaryContainer}
+                text={badgeStyle.primaryText}
+                value={number}
+            />
+        ) : (
+            <Badge
+                containerStyle={badgeStyle.secondaryContainer}
+                text={badgeStyle.secondaryText}
+                value={number}
+            />
+        )
+    );
+};
+
+const TextWithBadge = ({question: {number, text, infoAfterText}, style}) => {
+    const computedStyles = mergeStyles(styles, style);
+    return (
+        <View style={computedStyles.text.container}>
+            <View style={computedStyles.text.textWithBadgeContainer}>
+                {number && getBadge(number, computedStyles.badge)}
+                <Text style={computedStyles.text.text}>
+                    {text}
+                </Text>
+            </View>
+            {infoAfterText && <TextBox text={infoAfterText} style={computedStyles.textBox}/>}
+        </View>
+    );
+};
+
+TextWithBadge.propTypes = {
+    question: PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        number: PropTypes.number,
+        infoAfterText: PropTypes.string
+    }).isRequired,
+    style: stylePropType
+};
+
+TextWithBadge.defaultProps = {
+    style: null
+};
+
+export default TextWithBadge;
