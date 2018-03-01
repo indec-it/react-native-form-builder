@@ -68,6 +68,8 @@ const RadioTable = ({section, question, onChange, style, textWithBadgeStyle}) =>
     );
 };
 
+RadioTable.displayName = 'radioTable';
+
 RadioTable.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,

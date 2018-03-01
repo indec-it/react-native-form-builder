@@ -31,6 +31,8 @@ const DateInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     );
 };
 
+DateInput.displayName = 'dateInput';
+
 DateInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,

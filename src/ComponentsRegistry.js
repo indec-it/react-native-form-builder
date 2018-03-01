@@ -1,4 +1,4 @@
-import {camelCase, forEach} from 'lodash';
+import {forEach} from 'lodash';
 
 import * as builtInComponents from './components';
 
@@ -9,7 +9,7 @@ export default class ComponentsRegistry {
     }
 
     add(component, key = null) {
-        this.components[key || camelCase(component.name)] = component;
+        this.components[key || component.displayName] = component;
     }
 
     get(key) {

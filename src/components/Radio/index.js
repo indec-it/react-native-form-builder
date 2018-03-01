@@ -37,6 +37,8 @@ const Radio = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     );
 };
 
+Radio.displayName = 'radio';
+
 Radio.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,

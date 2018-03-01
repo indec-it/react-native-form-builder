@@ -84,6 +84,8 @@ const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle}) =
     );
 };
 
+YesNoButtons.displayName = 'yesNoButtons';
+
 YesNoButtons.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
