@@ -33,6 +33,8 @@ const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     );
 };
 
+Select.displayName = 'select';
+
 Select.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
