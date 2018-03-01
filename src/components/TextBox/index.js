@@ -16,6 +16,8 @@ const TextBox = ({text, style}) => {
     );
 };
 
+TextBox.displayName = 'textBox';
+
 TextBox.propTypes = {
     text: PropTypes.string.isRequired,
     style: stylePropType

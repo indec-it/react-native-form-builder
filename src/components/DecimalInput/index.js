@@ -37,6 +37,8 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle}) =
     );
 };
 
+DecimalInput.displayName = 'decimalInput';
+
 DecimalInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,

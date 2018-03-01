@@ -44,6 +44,8 @@ const Total = ({section, question, onChange, style, textWithBadgeStyle}) => {
     );
 };
 
+Total.displayName = 'total';
+
 Total.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({}).isRequired,

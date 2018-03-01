@@ -58,6 +58,8 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeS
     );
 };
 
+DecimalInputOrIgnore.displayName = 'decimalInputOrIgnore';
+
 DecimalInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,

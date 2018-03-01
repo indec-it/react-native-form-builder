@@ -16,6 +16,8 @@ const Title = ({question, style}) => {
     );
 };
 
+Title.displayName = 'title';
+
 Title.propTypes = {
     question: PropTypes.shape({}).isRequired,
     style: stylePropType

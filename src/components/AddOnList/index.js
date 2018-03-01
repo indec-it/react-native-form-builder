@@ -17,7 +17,8 @@ const getFieldValue = (answerRow, {name, options, type}) => {
     );
 };
 
-export default class AddOnList extends Component {
+class AddOnList extends Component {
+    static displayName = 'addOnList';
     static propTypes = {
         question: PropTypes.shape({
             name: PropTypes.string,
@@ -141,3 +142,5 @@ export default class AddOnList extends Component {
         );
     }
 }
+
+export default AddOnList;

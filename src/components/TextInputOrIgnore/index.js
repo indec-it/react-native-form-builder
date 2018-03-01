@@ -56,6 +56,8 @@ const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyl
     );
 };
 
+TextInputOrIgnore.displayName = 'textInputOrIgnore';
+
 TextInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,

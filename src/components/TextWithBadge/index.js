@@ -42,6 +42,8 @@ const TextWithBadge = ({question: {number, text, infoAfterText}, style}) => {
     );
 };
 
+TextWithBadge.displayName = 'textWithBadge';
+
 TextWithBadge.propTypes = {
     question: PropTypes.shape({
         text: PropTypes.string.isRequired,

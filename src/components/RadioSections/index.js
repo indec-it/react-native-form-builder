@@ -40,6 +40,8 @@ const RadioSections = ({answer, question, onChange, style, textWithBadgeStyle}) 
     );
 };
 
+RadioSections.displayName = 'radioSections';
+
 RadioSections.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,

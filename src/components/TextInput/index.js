@@ -35,6 +35,8 @@ const TextInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     );
 };
 
+TextInput.displayName = 'textInput';
+
 TextInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,

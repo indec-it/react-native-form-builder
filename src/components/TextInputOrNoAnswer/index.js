@@ -10,6 +10,7 @@ import {getInputValue} from '../../util';
 import styles from './styles';
 
 class TextInputOrNoAnswer extends Component {
+    static displayName = 'textInputOrNoAnswer';
     static propTypes = {
         question: PropTypes.shape({}).isRequired,
         onChange: PropTypes.func.isRequired,

@@ -26,6 +26,8 @@ const Checkbox = ({answer, onChange, question, style, textWithBadgeStyle}) => {
     );
 };
 
+Checkbox.displayName = 'checkbox';
+
 Checkbox.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
