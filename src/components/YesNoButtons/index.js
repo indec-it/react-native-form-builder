@@ -7,6 +7,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import TextWithBadge from '../TextWithBadge';
 import {handleChange} from '../../util';
+import commonStyles from '../commonStyles';
 import styles from './styles';
 
 const getValue = (index, question) => {
@@ -66,7 +67,7 @@ const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle, di
         });
     }
     return (
-        <View style={computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
