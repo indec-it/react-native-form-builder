@@ -68,6 +68,8 @@ const canDrawQuestion = ({parents}, chapter) => {
 
 
 export default class AddOnList extends Component {
+    static displayName = 'addOnList';
+
     static propTypes = {
         question: PropTypes.shape({
             name: PropTypes.string,
@@ -168,7 +170,6 @@ export default class AddOnList extends Component {
                 <View style={computedStyles.tableContainer}>
                     {this.state.answer && this.state.answer.map((answerRow, index) => {
                         const indexKey = `answerRow-${index}`;
-
                         return (
                             <TouchableOpacity
                                 key={indexKey}
@@ -194,8 +195,7 @@ export default class AddOnList extends Component {
                                 </Row>
                             </TouchableOpacity>
                         );
-                    }
-                    )}
+                    })}
                 </View>
             </View>
         );
