@@ -39,7 +39,7 @@ const getRadioButtonStyle = (answer, questionValue, style) => ([
     style.radioButton, answer === questionValue ? style.buttonColorPressed : style.buttonColorDefault
 ]);
 
-const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle}) => {
+const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
 
     const buttons = [{
@@ -78,6 +78,7 @@ const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle}) =
                     buttons={buttons}
                     containerStyle={computedStyles.component.radioGroup}
                     selectedBackgroundColor={computedStyles.selectedBackgroundColor}
+                    disabled={disabled}
                 />
             </Row>
         </View>
@@ -94,13 +95,15 @@ YesNoButtons.propTypes = {
         PropTypes.number
     ]),
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 YesNoButtons.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default YesNoButtons;

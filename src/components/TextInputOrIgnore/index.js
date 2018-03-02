@@ -16,7 +16,7 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle}) => {
+const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.component.container}>
@@ -39,6 +39,7 @@ const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyl
                             onChangeText={text => handleChange(question.name, text, onChange)}
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
+                            disabled={disabled}
                         />
                         {question.inputUnit &&
                         <Text style={computedStyles.inputUnit}>
@@ -50,6 +51,7 @@ const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyl
                     style={computedStyles.component.checkBox}
                     onPress={() => handlePress(question, answer, onChange)}
                     checked={isIgnored(question, answer)}
+                    disabled={disabled}
                 />
             </Row>
         </View>
@@ -66,13 +68,15 @@ TextInputOrIgnore.propTypes = {
         PropTypes.number
     ]),
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 TextInputOrIgnore.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default TextInputOrIgnore;

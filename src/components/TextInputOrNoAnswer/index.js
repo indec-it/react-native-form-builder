@@ -16,13 +16,15 @@ class TextInputOrNoAnswer extends Component {
         onChange: PropTypes.func.isRequired,
         answer: PropTypes.string,
         style: stylePropType,
-        textWithBadgeStyle: stylePropType
+        textWithBadgeStyle: stylePropType,
+        disabled: PropTypes.bool
     };
 
     static defaultProps = {
         answer: null,
         style: null,
-        textWithBadgeStyle: null
+        textWithBadgeStyle: null,
+        disabled: false
     };
 
     constructor(props) {
@@ -40,7 +42,7 @@ class TextInputOrNoAnswer extends Component {
     }
 
     render() {
-        const {question, answer, style, textWithBadgeStyle} = this.props;
+        const {question, answer, style, textWithBadgeStyle, disabled} = this.props;
         const computedStyles = mergeStyles(styles, style);
         return (
             <View style={computedStyles.component.container}>
@@ -59,6 +61,7 @@ class TextInputOrNoAnswer extends Component {
                         onChangeText={text => this.handleChange({[question.name]: text})}
                         label={question.floatingLabel || ''}
                         highlightColor={computedStyles.highlightColor}
+                        disabled={disabled}
                     />}
                     {this.state.block &&
                     <Text style={computedStyles.component.blockedText}>
@@ -68,6 +71,7 @@ class TextInputOrNoAnswer extends Component {
                         title={computedStyles.buttonTitle}
                         color={computedStyles.buttonColor}
                         onPress={() => this.handleBlock({[`${question.name}NoAnswer`]: !this.state.block})}
+                        disabled={disabled}
                     />
                 </Row>
             </View>

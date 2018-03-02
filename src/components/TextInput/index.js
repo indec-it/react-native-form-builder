@@ -8,7 +8,7 @@ import {TextWithBadge} from '..';
 import {getInputValue, handleChange} from '../../util';
 import styles from './styles';
 
-const TextInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
+const TextInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.component.container}>
@@ -26,6 +26,7 @@ const TextInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
                 onChangeText={text => handleChange(question.name, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
+                disabled={disabled}
             />
             {question.textAfterInput &&
             <Text style={computedStyles.component.textAfterInput}>
@@ -42,13 +43,15 @@ TextInput.propTypes = {
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.string,
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 TextInput.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default TextInput;

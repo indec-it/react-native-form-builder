@@ -16,7 +16,7 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle}) => {
+const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.component.container}>
@@ -41,6 +41,7 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeS
                             onChangeText={text => numericHandleChange(question.name, text, onChange)}
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
+                            disabled={disabled}
                         />
                         {question.inputUnit &&
                         <Text style={computedStyles.component.inputUnit}>
@@ -69,13 +70,15 @@ DecimalInputOrIgnore.propTypes = {
         PropTypes.bool
     ]),
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 DecimalInputOrIgnore.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default DecimalInputOrIgnore;

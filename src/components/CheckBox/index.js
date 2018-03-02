@@ -8,7 +8,7 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const Checkbox = ({answer, onChange, question, style, textWithBadgeStyle}) => {
+const Checkbox = ({answer, onChange, question, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.container}>
@@ -21,6 +21,7 @@ const Checkbox = ({answer, onChange, question, style, textWithBadgeStyle}) => {
                 style={computedStyles.checkBox}
                 onPress={() => handleChange(question.name, !answer, onChange)}
                 checked={answer}
+                disabled={disabled}
             />
         </View>
     );
@@ -33,13 +34,15 @@ Checkbox.propTypes = {
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.bool,
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 Checkbox.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default Checkbox;

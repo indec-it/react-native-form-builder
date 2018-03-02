@@ -10,7 +10,7 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const renderRowQuestion = (question, section, rowQuestion, onChange, computedStyles) => {
+const renderRowQuestion = (question, section, rowQuestion, onChange, computedStyles, disabled) => {
     const questionName = question.name + rowQuestion.name;
     const questionValue = section[questionName];
     return (
@@ -31,6 +31,7 @@ const renderRowQuestion = (question, section, rowQuestion, onChange, computedSty
                         checkedIcon={computedStyles.checkedIcon}
                         uncheckedIcon={computedStyles.uncheckedIcon}
                         checked={isEqual(questionValue, option.value)}
+                        disabled={disabled}
                     />
                 </Col>
             ))}
@@ -38,7 +39,7 @@ const renderRowQuestion = (question, section, rowQuestion, onChange, computedSty
     );
 };
 
-const RadioTable = ({section, question, onChange, style, textWithBadgeStyle}) => {
+const RadioTable = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.component.container}>
@@ -61,7 +62,7 @@ const RadioTable = ({section, question, onChange, style, textWithBadgeStyle}) =>
                     ))}
                 </Row>
                 {question.questions.map(rowQuestion => (
-                    renderRowQuestion(question, section, rowQuestion, onChange, computedStyles)
+                    renderRowQuestion(question, section, rowQuestion, onChange, computedStyles, disabled)
                 ))}
             </Grid>
         </View>
@@ -75,12 +76,14 @@ RadioTable.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 RadioTable.defaultProps = {
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default RadioTable;
