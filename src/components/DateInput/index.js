@@ -6,12 +6,13 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import commonStyles from '../commonStyles';
 import styles from './styles';
 
 const DateInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.container}>
+        <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
