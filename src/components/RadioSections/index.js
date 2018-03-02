@@ -9,7 +9,7 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const RadioSections = ({answer, question, onChange, style, textWithBadgeStyle}) => {
+const RadioSections = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.component.container}>
@@ -33,6 +33,7 @@ const RadioSections = ({answer, question, onChange, style, textWithBadgeStyle}) 
                         checkedIcon={computedStyles.checkedIcon}
                         uncheckedIcon={computedStyles.uncheckedIcon}
                         checked={isEqual(answer, option.value)}
+                        disabled={disabled}
                     />
                 )
             ))}
@@ -50,13 +51,15 @@ RadioSections.propTypes = {
         PropTypes.string
     ]),
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 RadioSections.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default RadioSections;

@@ -8,7 +8,7 @@ import {TextWithBadge} from '..';
 import {getInputValue, numericHandleChange} from '../../util';
 import styles from './styles';
 
-const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
+const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.component.container}>
@@ -28,6 +28,7 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle}) =
                 onChangeText={text => numericHandleChange(question.name, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
+                disabled={disabled}
             />
             {question.textAfterInput &&
             <Text style={computedStyles.component.textAfterInput}>
@@ -47,13 +48,15 @@ DecimalInput.propTypes = {
         PropTypes.string
     ]),
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 DecimalInput.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default DecimalInput;

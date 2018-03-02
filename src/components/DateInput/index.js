@@ -8,7 +8,7 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const DateInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
+const DateInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.container}>
@@ -26,6 +26,7 @@ const DateInput = ({answer, question, onChange, style, textWithBadgeStyle}) => {
                 confirmBtnText="Confirmar"
                 cancelBtnText="Cancelar"
                 onDateChange={date => handleChange(question.name, date, onChange)}
+                disabled={disabled}
             />
         </View>
     );
@@ -41,13 +42,15 @@ DateInput.propTypes = {
         PropTypes.string
     ]),
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 DateInput.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default DateInput;
