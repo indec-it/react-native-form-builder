@@ -30,6 +30,8 @@ const Tabs = ({answer, question, onChange, style}) => {
     );
 };
 
+Tabs.displayName = 'tabs';
+
 Tabs.propTypes = {
     answer: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     question: PropTypes.shape({

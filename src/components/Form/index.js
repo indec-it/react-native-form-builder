@@ -35,6 +35,8 @@ const Form = ({chapter, question, onChange, style}) => {
     );
 };
 
+Form.displayName = 'form';
+
 Form.propTypes = {
     chapter: PropTypes.shape([]).isRequired,
     question: PropTypes.shape({

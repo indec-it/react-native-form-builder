@@ -26,6 +26,10 @@ class FormGroup extends Component {
         style: null
     };
 
+    static get displayName() {
+        return 'formGroup';
+    }
+
     constructor(props) {
         super(props);
         this.state = {
