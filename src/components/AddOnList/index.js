@@ -119,7 +119,7 @@ export default class AddOnList extends Component {
     deleteRow(index) {
         Alert.alert(
             'Eliminar',
-            '¿Desea eliminar esta declaracion?',
+            '¿Desea eliminar esta declaración?',
             [{
                 text: 'Cancelar'
             }, {
