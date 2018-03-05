@@ -10,7 +10,7 @@ import styles from './styles';
 const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.component.container}>
+        <View style={computedStyles.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
