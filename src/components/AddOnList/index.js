@@ -153,7 +153,7 @@ export default class AddOnList extends Component {
                         const QuestionComponent = registry.get(childQuestion.type);
                         return (
                             <QuestionComponent
-                                key={childQuestion.name.toString()}
+                                key={childQuestion.name}
                                 answer={this.state.componentAnswers[childQuestion.name]}
                                 question={childQuestion}
                                 onChange={answer => this.setState(state => ({
