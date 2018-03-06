@@ -6,7 +6,7 @@ export default {
     DECIMAL_INPUT_OR_IGNORE: 'decimalInputOrIgnore',
     FORM: 'form',
     FORM_GROUP: 'formGroup',
-    LAPEL_GROUP: 'lapelGroup',
+    TABS: 'tabs',
     RADIO: 'radio',
     RADIO_SECTIONS: 'radioSections',
     RADIO_TABLE: 'radioTable',
