@@ -14,7 +14,9 @@ import styles from './styles';
 const getFieldValue = (answerRow, question) => {
     let value = answerRow[question.name];
     switch (question.type) {
+        case types.RADIO:
         case types.SELECT:
+
             if (isNumber(question.options[0].value) && isString(value) && !isNaN(toNumber(value))) {
                 value = toNumber(value);
             }
