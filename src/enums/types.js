@@ -4,6 +4,7 @@ export default {
     DATE_INPUT: 'dateInput',
     DECIMAL_INPUT: 'decimalInput',
     DECIMAL_INPUT_OR_IGNORE: 'decimalInputOrIgnore',
+    MULTI_SELECT: 'multiSelect',
     RADIO: 'radio',
     RADIO_SECTIONS: 'radioSections',
     RADIO_TABLE: 'radioTable',
