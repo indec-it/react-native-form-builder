@@ -96,9 +96,10 @@ export default class AddOnList extends Component {
     }
 
     someQuestionsAreNil() {
-        return some(this.props.question.childQuestions, question => isNil(
-            get(this.state.componentAnswers, question.name, null)
-        ));
+        return some(this.props.question.childQuestions, question =>
+            canDrawQuestion(question, this.state.componentAnswers) && isNil(
+                get(this.state.componentAnswers, question.name, null)
+            ));
     }
 
     addToList() {
