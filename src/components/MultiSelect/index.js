@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import {concat, contains, filter, isNil} from 'lodash';
+import {concat, includes, filter, isNil} from 'lodash';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
@@ -14,7 +14,7 @@ const getSelectedValues = (optionValue, answer) => {
     if (isNil(answer)) {
         return [optionValue];
     }
-    const answerValue = contains(answer, value => value === optionValue);
+    const answerValue = includes(answer, optionValue);
     return answerValue ? filter(answer, value => value !== optionValue) : concat(answer, optionValue);
 };
 
@@ -38,7 +38,7 @@ const MultiSelect = ({answer, question, onChange, style, textWithBadgeStyle, dis
                         onPress={() => handleChange(question.name, getSelectedValues(option.value, answer), onChange)}
                         checkedIcon={computedStyles.checkedIcon}
                         uncheckedIcon={computedStyles.uncheckedIcon}
-                        checked={contains(answer, value => value === option.value)}
+                        checked={includes(answer, option.value)}
                         disabled={disabled}
                     />
                 ))
