@@ -459,9 +459,9 @@
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@indec/react-native-commons/-/react-native-commons-0.1.7.tgz#97b7ed122e7081047b0bb76c8783f0c55bf1d51d"
 
-"@indec/react-native-md-textinput@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@indec/react-native-md-textinput/-/react-native-md-textinput-3.1.0.tgz#933027fc2914c4d7b2b5101b7f4b9e88c7ff05b0"
+"@indec/react-native-md-textinput@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@indec/react-native-md-textinput/-/react-native-md-textinput-3.1.1.tgz#6db6dc3b4533a49952e5446f68fc161c7cc6b060"
 
 "@marionebl/sander@^0.6.0":
   version "0.6.1"
