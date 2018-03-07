@@ -8,7 +8,8 @@ export default {
             flexDirection: 'column'
         },
         field: {
-            height: 40
+            height: 40,
+            padding: 0
         },
         wrapper: {
             paddingTop: 5,
@@ -22,7 +23,7 @@ export default {
             color: 'grey'
         }
     }),
-    highlightColor: '#ff4281',
+    highlightColor: '#ff0000',
     buttonTitle: 'S/N',
     buttonColor: '#1194f6'
 };
