@@ -10,7 +10,8 @@ export default {
             paddingTop: 0
         },
         field: {
-            height: 40
+            height: 40,
+            padding: 0
         },
         wrapper: {
             paddingTop: 5,
@@ -22,5 +23,5 @@ export default {
         },
         textAfterInput: {}
     }),
-    highlightColor: '#ff4281'
+    highlightColor: '#ff0000'
 };
