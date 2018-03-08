@@ -4,7 +4,7 @@ import {View, Text, Button, TouchableOpacity, Alert, ToastAndroid} from 'react-n
 import {Row, Col} from '@indec/react-native-commons';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import lang from 'lodash/lang';
-import {filter, find, get, isString, isNumber, toNumber, isNaN, some, every, isNil} from 'lodash';
+import {filter, find, get, isString, isNumber, toNumber, isNaN, some, every, isNil, isUndefined} from 'lodash';
 
 import ComponentsRegistry from '../../ComponentsRegistry';
 import {TextWithBadge} from '..';
@@ -13,6 +13,11 @@ import styles from './styles';
 
 const getFieldValue = (answerRow, question) => {
     let value = answerRow[question.name];
+
+    if (isUndefined(value)) {
+        return value;
+    }
+
     switch (question.type) {
         case types.RADIO:
         case types.SELECT:
