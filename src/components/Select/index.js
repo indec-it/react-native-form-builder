@@ -20,7 +20,6 @@ const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
                 style={computedStyles.picker}
                 onValueChange={itemValue => handleChange(question.name, itemValue, onChange)}
             >
-                {question.placeholder && <Picker.Item label={question.placeholder} value={null}/>}
                 {question.options.map(option => (
                     <Picker.Item
                         key={option.value}
