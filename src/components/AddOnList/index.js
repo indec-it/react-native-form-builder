@@ -195,7 +195,7 @@ export default class AddOnList extends Component {
                                         return (
                                             <Col key={childQuestionKey}>
                                                 <Text style={computedStyles.childrenQuestionsText}>
-                                                    {answerRow[childQuestion.name] ? value : '-'}
+                                                    {(answerRow[childQuestion.name] || value === 0) ? value : '-'}
                                                 </Text>
                                             </Col>
                                         );
