@@ -18,5 +18,6 @@ export default {
     TEXT_WITH_BADGE: 'textWithBadge',
     TITLE: 'title',
     TOTAL: 'total',
-    YES_NO_BUTTONS: 'yesNoButtons'
+    YES_NO_BUTTONS: 'yesNoButtons',
+    TEXT_INPUT_AUTO_CALCULATED: 'textInputAutoCalculated'
 };

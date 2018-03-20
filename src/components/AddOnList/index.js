@@ -164,6 +164,7 @@ export default class AddOnList extends Component {
                                 key={childQuestion.name}
                                 answer={this.state.componentAnswers[childQuestion.name]}
                                 question={childQuestion}
+                                section={this.state.componentAnswers}
                                 onChange={answer => this.setState(state => ({
                                     componentAnswers: Object.assign({}, state.componentAnswers, answer)
                                 }))}

@@ -15,6 +15,7 @@ import TextWithBadge from './TextWithBadge';
 import Title from './Title';
 import Total from './Total';
 import YesNoButtons from './YesNoButtons';
+import TextInputAutoCalculated from './TextInputAutoCalculated';
 
 export {AddOnList};
 export {CheckBox};
@@ -33,3 +34,4 @@ export {TextWithBadge};
 export {Title};
 export {Total};
 export {YesNoButtons};
+export {TextInputAutoCalculated};
