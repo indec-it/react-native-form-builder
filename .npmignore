@@ -4,3 +4,4 @@ coverage/
 .*
 commitlint.config.js
 yarn.lock
+*.log
