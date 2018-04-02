@@ -7,7 +7,7 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
+const Select = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.container}>
@@ -18,6 +18,7 @@ const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
             <select
                 value={answer}
                 onChange={e => handleChange(question.name, e.target.value, onChange)}
+                disabled={disabled}
             >
                 {question.placeholder &&
                 <option value={null}>
@@ -40,13 +41,15 @@ Select.propTypes = {
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.number,
     style: stylePropType,
-    textWithBadgeStyle: stylePropType
+    textWithBadgeStyle: stylePropType,
+    disabled: PropTypes.bool
 };
 
 Select.defaultProps = {
     answer: null,
     style: null,
-    textWithBadgeStyle: null
+    textWithBadgeStyle: null,
+    disabled: false
 };
 
 export default Select;
