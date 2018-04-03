@@ -5,7 +5,7 @@ import InputField from '@indec/react-native-md-textinput';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {getInputValue, numericHandleChange} from '../../util';
+import {getInputValue, handleChangeNumber} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -26,7 +26,7 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, di
                 min={question.min}
                 keyboardType="numeric"
                 value={getInputValue(answer)}
-                onChangeText={text => numericHandleChange(question.name, text, onChange)}
+                onChangeText={text => handleChangeNumber(question.name, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
                 disabled={disabled}

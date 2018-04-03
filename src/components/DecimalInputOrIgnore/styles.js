@@ -13,7 +13,8 @@ export default {
         field: {
             flex: 3,
             height: 40,
-            width: 250
+            width: 250,
+            padding: 0
         },
         wrapper: {
             paddingTop: 5,
@@ -28,5 +29,5 @@ export default {
             width: 20
         }
     }),
-    highlightColor: '#ff4281'
+    highlightColor: '#ff0000'
 };

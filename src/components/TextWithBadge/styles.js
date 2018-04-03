@@ -15,6 +15,7 @@ export default {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'flex-start',
+            flexWrap: 'wrap',
             paddingBottom: 0,
             marginBottom: 0
         }

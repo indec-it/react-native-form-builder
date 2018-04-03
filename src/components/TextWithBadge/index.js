@@ -7,6 +7,7 @@ import {includes, toString} from 'lodash';
 
 import {TextBox} from '..';
 import styles from './styles';
+import commonStyles from '../commonStyles';
 
 const getBadge = (number, badgeStyle) => {
     const parsedNumber = toString(number);
@@ -27,10 +28,10 @@ const getBadge = (number, badgeStyle) => {
     );
 };
 
-const TextWithBadge = ({question: {number, text, infoAfterText}, style}) => {
+const TextWithBadge = ({question: {number, text, infoAfterText}, style, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={computedStyles.text.container}>
+        <View style={disabled ? commonStyles.disabledContainer : computedStyles.text.container}>
             <View style={computedStyles.text.textWithBadgeContainer}>
                 {number && getBadge(number, computedStyles.badge)}
                 <Text style={computedStyles.text.text}>
@@ -50,11 +51,13 @@ TextWithBadge.propTypes = {
         number: PropTypes.number,
         infoAfterText: PropTypes.string
     }).isRequired,
-    style: stylePropType
+    style: stylePropType,
+    disabled: PropTypes.bool
 };
 
 TextWithBadge.defaultProps = {
-    style: null
+    style: null,
+    disabled: false
 };
 
 export default TextWithBadge;
