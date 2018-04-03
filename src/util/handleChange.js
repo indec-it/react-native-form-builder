@@ -1,3 +1,3 @@
-export default (name, value, change, parser) => change({
-    [name]: parser ? parser(value) : value
-});
+const handleChange = (name, value, onChange) => onChange({[name]: value});
+
+export default handleChange;
