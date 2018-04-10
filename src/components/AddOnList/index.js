@@ -102,6 +102,13 @@ export default class AddOnList extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            answer: nextProps.answer || [],
+            componentAnswers: {}
+        });
+    }
+
     someQuestionsAreNil() {
         return some(this.props.question.childQuestions, question =>
             canDrawQuestion(question, this.state.componentAnswers) && isNil(
