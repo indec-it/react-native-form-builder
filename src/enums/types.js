@@ -13,6 +13,7 @@ export default {
     TEXT_INPUT_OR_IGNORE: 'textInputOrIgnore',
     TEXT_INPUT_OR_NO_ANSWER: 'textInputOrNoAnswer',
     TEXT_WITH_BADGE: 'textWithBadge',
+    TIME_PICKER: 'timePicker',
     TITLE: 'title',
     TOTAL: 'total',
     YES_NO_BUTTONS: 'yesNoButtons'
