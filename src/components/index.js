@@ -1,4 +1,3 @@
-import AddOnList from './AddOnList';
 import CheckBox from './CheckBox';
 import DateInput from './DateInput';
 import DecimalInput from './DecimalInput';
@@ -17,7 +16,6 @@ import Total from './Total';
 import YesNoButtons from './YesNoButtons';
 import TextInputAutoCalculated from './TextInputAutoCalculated';
 
-export {AddOnList};
 export {CheckBox};
 export {DateInput};
 export {DecimalInput};
