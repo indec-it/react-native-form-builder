@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import {isEmpty, filter, toNumber, isNil, sum} from 'lodash';
 
 import TextWithBadge from '../TextWithBadge';
 import {handleChange} from '../../util';
@@ -10,29 +9,23 @@ import commonStyles from '../commonStyles';
 import styles from './styles';
 
 /**
- * Perform sum and save it.
+ * Perform calculation and save it.
  * @param {Object} section Answers of the chapter.
  * @param {Object} question Question's data.
  * @param {String} question.name The name of question field.
- * @param {Array<String>} question.fieldsToAdd Answers to sum.
+ * @param {Function} question.calc A function that generates the field value.
  * @param {Function} onChange Handle when the result has changed.
- * @returns {Number} Returns result of the sum.
+ * @returns {Number} Returns result of the calculation.
  */
-const getSum = (section, {name, fieldsToAdd}, onChange) => {
-    const addends = filter(
-        fieldsToAdd,
-        field => !isNil(section[field])
-    ).map(
-        field => toNumber(section[field])
-    );
-    const result = sum(addends);
-    if (section[name] !== result && !isEmpty(addends)) {
+const getResult = (section, {name, calc}, onChange) => {
+    const result = calc(section);
+    if (result !== section[name]) {
         handleChange(name, result, onChange);
     }
     return result;
 };
 
-const Sum = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Calc = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
@@ -42,20 +35,24 @@ const Sum = ({section, question, onChange, style, textWithBadgeStyle, disabled})
                 style={textWithBadgeStyle}
             />}
             {!disabled &&
-            <Text style={computedStyles.sumLabel}>
-                {getSum(section, question, onChange)}
+            <Text style={computedStyles.calcLabel}>
+                {getResult(section, question, onChange)}
+            </Text>}
+            {question.textAfterCalc &&
+            <Text style={computedStyles.textAfterCalc}>
+                {question.textAfterCalc}
             </Text>}
         </View>
     );
 };
 
-Sum.displayName = 'sum';
+Calc.displayName = 'calc';
 
-Sum.propTypes = {
+Calc.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        fieldsToAdd: PropTypes.arrayOf(PropTypes.string).isRequired
+        calc: PropTypes.func.isRequired
     }).isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
@@ -63,10 +60,10 @@ Sum.propTypes = {
     textWithBadgeStyle: stylePropType
 };
 
-Sum.defaultProps = {
+Calc.defaultProps = {
     style: null,
     textWithBadgeStyle: null,
     disabled: false
 };
 
-export default Sum;
+export default Calc;

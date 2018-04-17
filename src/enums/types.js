@@ -1,5 +1,6 @@
 export default {
     ADD_ON_LIST: 'addOnList',
+    CALC: 'calc',
     CHECKBOX: 'checkbox',
     DATE_INPUT: 'dateInput',
     DECIMAL_INPUT: 'decimalInput',
