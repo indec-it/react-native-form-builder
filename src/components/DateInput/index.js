@@ -28,6 +28,7 @@ const DateInput = ({answer, question, onChange, style, textWithBadgeStyle, disab
                 cancelBtnText="Cancelar"
                 onDateChange={date => handleChange(question.name, date, onChange)}
                 disabled={disabled}
+                mode={question.mode}
             />
         </View>
     );
