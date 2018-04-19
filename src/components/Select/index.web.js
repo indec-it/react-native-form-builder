@@ -8,6 +8,8 @@ import {handleChange} from '../../util';
 import {types} from '../../enums';
 import styles from './styles';
 
+const PLACEHOLDER_VALUE = 'placeholder';
+
 const Select = ({
     answer, question, onChange, style, textWithBadgeStyle, disabled
 }) => {
@@ -19,12 +21,12 @@ const Select = ({
                 style={textWithBadgeStyle}
             />}
             <select
-                value={answer}
+                value={answer || (question.placeholder ? PLACEHOLDER_VALUE : question.options[0].value)}
                 onChange={e => handleChange(question.name, e.target.value, onChange)}
                 disabled={disabled}
             >
                 {question.placeholder &&
-                <option value={null}>
+                <option value={PLACEHOLDER_VALUE}>
                     {question.placeholder}
                 </option>}
                 {question.options.map(option => (
