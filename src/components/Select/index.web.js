@@ -7,7 +7,6 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const PLACEHOLDER_VALUE = 'placeholder';
 const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
@@ -17,11 +16,11 @@ const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
                 style={textWithBadgeStyle}
             />}
             <select
-                value={answer || (question.placeholder ? PLACEHOLDER_VALUE : question.options[0].value)}
+                value={answer}
                 onChange={e => handleChange(question.name, e.target.value, onChange)}
             >
                 {question.placeholder &&
-                <option value={PLACEHOLDER_VALUE}>
+                <option value={null}>
                     {question.placeholder}
                 </option>}
                 {question.options.map(option => (
