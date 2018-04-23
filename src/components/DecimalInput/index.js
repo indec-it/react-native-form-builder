@@ -26,7 +26,7 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, di
                 min={question.min}
                 keyboardType="numeric"
                 value={getInputValue(answer)}
-                onChangeText={text => handleChangeNumber(question.name, text, onChange)}
+                onChangeText={text => handleChangeNumber(question, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
                 disabled={disabled}
