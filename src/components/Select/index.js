@@ -10,10 +10,11 @@ import styles from './styles';
 
 const placeholderValue = null;
 const generateList = ({options, placeholder}) => {
-    const placeholderOption = placeholder ?
-        {value: placeholderValue, label: placeholder} : undefined;
+    const placeholderOption = placeholder
+        ? {value: placeholderValue, label: placeholder}
+        : undefined;
 
-    return concat((placeholderOption || {}), options);
+    return placeholder ? concat(placeholderOption, options) : options;
 };
 
 const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
