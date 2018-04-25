@@ -9,7 +9,7 @@ import {handleChange} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const TimePicker = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const DateTimePicker = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
@@ -21,19 +21,22 @@ const TimePicker = ({answer, question, onChange, style, textWithBadgeStyle, disa
                 style={computedStyles.datePicker}
                 date={answer}
                 placeholder={question.placeholder}
+                format={question.format}
+                minDate={question.minDate}
+                maxDate={question.maxDate}
                 confirmBtnText="Confirmar"
                 cancelBtnText="Cancelar"
                 onDateChange={date => handleChange(question.name, date, onChange)}
                 disabled={disabled}
-                mode="time"
+                mode="datetime"
             />
         </View>
     );
 };
 
-TimePicker.displayName = 'timePicker';
+DateTimePicker.displayName = 'dateTimePicker';
 
-TimePicker.propTypes = {
+DateTimePicker.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
@@ -45,11 +48,11 @@ TimePicker.propTypes = {
     disabled: PropTypes.bool
 };
 
-TimePicker.defaultProps = {
+DateTimePicker.defaultProps = {
     answer: null,
     style: null,
     textWithBadgeStyle: null,
     disabled: false
 };
 
-export default TimePicker;
+export default DateTimePicker;
