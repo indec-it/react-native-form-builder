@@ -5,12 +5,13 @@ import Datepicker from 'react-native-datepicker';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {handleChange} from '../../util';
+import {handleChangeDate} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
 const DateTimePicker = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
+    const dateFormat = question.format || 'DD/MM/YYYY HH:mm';
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
             {question.text && <TextWithBadge
@@ -19,14 +20,14 @@ const DateTimePicker = ({answer, question, onChange, style, textWithBadgeStyle, 
             />}
             <Datepicker
                 style={computedStyles.datePicker}
-                date={answer}
+                date={new Date(answer)}
                 placeholder={question.placeholder}
-                format={question.format}
+                format={dateFormat}
                 minDate={question.minDate}
                 maxDate={question.maxDate}
                 confirmBtnText="Confirmar"
                 cancelBtnText="Cancelar"
-                onDateChange={date => handleChange(question.name, date, onChange)}
+                onDateChange={date => handleChangeDate(question.name, date, dateFormat, onChange)}
                 disabled={disabled}
                 mode="datetime"
             />
@@ -40,7 +41,7 @@ DateTimePicker.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
-        PropTypes.number,
+        PropTypes.instanceOf(Date),
         PropTypes.string
     ]),
     style: stylePropType,
@@ -49,7 +50,7 @@ DateTimePicker.propTypes = {
 };
 
 DateTimePicker.defaultProps = {
-    answer: null,
+    answer: new Date(),
     style: null,
     textWithBadgeStyle: null,
     disabled: false
