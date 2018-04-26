@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
-import DatePicker from 'react-native-datepicker';
+import Datepicker from 'react-native-datepicker';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
@@ -9,7 +9,7 @@ import {handleChange} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const DateInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const DatePicker = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
@@ -17,7 +17,7 @@ const DateInput = ({answer, question, onChange, style, textWithBadgeStyle, disab
                 question={question}
                 style={textWithBadgeStyle}
             />}
-            <DatePicker
+            <Datepicker
                 style={computedStyles.datePicker}
                 date={answer}
                 placeholder={question.placeholder}
@@ -33,9 +33,9 @@ const DateInput = ({answer, question, onChange, style, textWithBadgeStyle, disab
     );
 };
 
-DateInput.displayName = 'dateInput';
+DatePicker.displayName = 'datePicker';
 
-DateInput.propTypes = {
+DatePicker.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
@@ -47,11 +47,11 @@ DateInput.propTypes = {
     disabled: PropTypes.bool
 };
 
-DateInput.defaultProps = {
+DatePicker.defaultProps = {
     answer: null,
     style: null,
     textWithBadgeStyle: null,
     disabled: false
 };
 
-export default DateInput;
+export default DatePicker;

@@ -12,7 +12,7 @@
   "dependencies": {
     "@indec/react-native-commons": "^0.1.7",
     "@indec/react-native-md-textinput": "^3.1.1",
-    "react-native-datepicker": "^1.6.0"
+    "react-native-datepicker": "^1.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.1.2",
