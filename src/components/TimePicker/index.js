@@ -19,7 +19,7 @@ const TimePicker = ({answer, question, onChange, style, textWithBadgeStyle, disa
             />}
             <Datepicker
                 style={computedStyles.datePicker}
-                date={answer}
+                date={new Date(answer)}
                 placeholder={question.placeholder}
                 confirmBtnText="Confirmar"
                 cancelBtnText="Cancelar"
@@ -37,7 +37,7 @@ TimePicker.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
-        PropTypes.number,
+        PropTypes.instanceOf(Date),
         PropTypes.string
     ]),
     style: stylePropType,
@@ -46,7 +46,7 @@ TimePicker.propTypes = {
 };
 
 TimePicker.defaultProps = {
-    answer: null,
+    answer: new Date(),
     style: null,
     textWithBadgeStyle: null,
     disabled: false
