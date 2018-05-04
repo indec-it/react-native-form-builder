@@ -1,13 +1,17 @@
 import getInputValue from './getInputValue';
 import handleChange from './handleChange';
 import handleChangeDate from './handleChangeDate';
-import handleChangeNumber from './handleChangeNumber';
+import handleChangeDecimalNumber from './handleChangeDecimalNumber';
+import handleChangeIntNumber from './handleChangeIntNumber';
 import handleChangeText from './handleChangeText';
+import handleEndEditingNumber from './handleEndEditingNumber';
 import questionPropType from './questionPropType';
 
 export {getInputValue};
 export {handleChange};
 export {handleChangeDate};
-export {handleChangeNumber};
+export {handleChangeDecimalNumber};
+export {handleChangeIntNumber};
 export {handleChangeText};
+export {handleEndEditingNumber};
 export {questionPropType};

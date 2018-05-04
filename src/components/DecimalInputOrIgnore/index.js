@@ -7,7 +7,7 @@ import {CheckBox} from 'react-native-elements';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {getInputValue, handleChangeNumber} from '../../util';
+import {getInputValue, handleChangeDecimalNumber, handleEndEditingNumber} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -35,11 +35,10 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeS
                             wrapperStyle={computedStyles.component.wrapper}
                             labelStyle={computedStyles.component.label}
                             maxLength={question.maxLength}
-                            max={question.max}
-                            min={question.min}
                             keyboardType="numeric"
                             value={getInputValue(answer)}
-                            onChangeText={text => handleChangeNumber(question, text, onChange)}
+                            onChangeText={text => handleChangeDecimalNumber(question, text, onChange)}
+                            onEndEditing={() => handleEndEditingNumber(question, answer, onChange)}
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
                             disabled={disabled}
