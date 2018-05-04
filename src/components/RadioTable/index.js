@@ -6,12 +6,13 @@ import {Row, Col, Grid} from '@indec/react-native-commons';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {isEqual} from 'lodash';
 
+import TextBox from '../TextBox';
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const renderRowQuestion = (question, section, rowQuestion, onChange, computedStyles, disabled) => {
+const renderRowQuestion = (question, section, rowQuestion, onChange, computedStyles, disabled, infoAfterText) => {
     const questionName = question.name + rowQuestion.name;
     const questionValue = section[questionName];
     return (
@@ -20,6 +21,7 @@ const renderRowQuestion = (question, section, rowQuestion, onChange, computedSty
                 <Text style={computedStyles.component.rowLabel}>
                     {rowQuestion.text}
                 </Text>
+                {infoAfterText && <TextBox text={infoAfterText} style={computedStyles.infoAfterText}/>}
             </Col>
             {question.options.map(option => (
                 <Col
@@ -63,7 +65,15 @@ const RadioTable = ({section, question, onChange, style, textWithBadgeStyle, dis
                     ))}
                 </Row>
                 {question.questions.map(rowQuestion => (
-                    renderRowQuestion(question, section, rowQuestion, onChange, computedStyles, disabled)
+                    renderRowQuestion(
+                        question,
+                        section,
+                        rowQuestion,
+                        onChange,
+                        computedStyles,
+                        disabled,
+                        rowQuestion.infoAfterText
+                    )
                 ))}
             </Grid>
         </View>
