@@ -1,9 +1,11 @@
 import {toNumber} from 'lodash';
 
+import isEmptyAnswer from './isEmptyAnswer';
+
 const handleEndEditingNumber = ({name, allowZero}, answer, onChange) => {
     const parsedAnswer = toNumber(answer);
-    onChange({
-        [name]: parsedAnswer !== 0 || allowZero ? parsedAnswer : undefined
+    return onChange({
+        [name]: isEmptyAnswer(allowZero, answer, parsedAnswer) ? undefined : parsedAnswer
     });
 };
 

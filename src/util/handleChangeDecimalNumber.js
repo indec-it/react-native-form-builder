@@ -1,4 +1,6 @@
-import {includes, isEmpty, isNaN, last, size, split, toNumber} from 'lodash';
+import {last, toNumber} from 'lodash';
+
+import isEmptyAnswer from './isEmptyAnswer';
 
 /**
  * Handle text of inputs and perform to decimal conversion.
@@ -11,16 +13,18 @@ import {includes, isEmpty, isNaN, last, size, split, toNumber} from 'lodash';
  * @param {Function} onChange Handle when the answer has changed.
  */
 const handleChangeDecimalNumber = ({name, allowZero, max, min}, value, onChange) => {
-    const splittedValue = split(value, '.');
     const parsedValue = toNumber(value);
+    const lastChar = last(value);
 
-    if (includes(value, '.') && size(splittedValue) === 2) {
-        return onChange({
-            [name]: isEmpty(last(splittedValue)) ? value : parsedValue
-        });
-    }
-    if (isEmpty(value) || isNaN(parsedValue)) {
-        return onChange({[name]: undefined});
+
+    if (lastChar === '.' || lastChar === ',') {
+        /**
+         * In this case, the 'onChange' does not propagate the 'parsedValue'.
+         * Because, for example, if the 'value' is '2.' or '2,' when we apply
+         * 'toNumber', the characters '.' and ',' are deleted. Only if these
+         * are the 'lastChar' of our 'value'.
+         * */
+        return null;
     }
     if (parsedValue < min) {
         return onChange({[name]: min});
@@ -28,7 +32,7 @@ const handleChangeDecimalNumber = ({name, allowZero, max, min}, value, onChange)
     if (parsedValue > max) {
         return onChange({[name]: max});
     }
-    if (parsedValue === 0 && !allowZero) {
+    if (isEmptyAnswer(allowZero, value, parsedValue)) {
         return onChange({[name]: undefined});
     }
     return onChange({[name]: parsedValue});
