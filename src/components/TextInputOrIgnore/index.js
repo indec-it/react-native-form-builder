@@ -7,7 +7,7 @@ import {CheckBox} from 'react-native-elements';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {getInputValue, handleChange} from '../../util';
+import {getInputValue, handleChangeText} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -37,7 +37,7 @@ const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyl
                             maxLength={question.maxLength}
                             keyboardType="default"
                             value={getInputValue(answer)}
-                            onChangeText={text => handleChange(question.name, text, onChange)}
+                            onChangeText={text => handleChangeText(question, text, onChange)}
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
                             disabled={disabled}
