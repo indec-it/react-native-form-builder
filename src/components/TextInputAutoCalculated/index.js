@@ -10,15 +10,15 @@ class TextInputAutoCalculated extends Component {
     }
 
     componentWillMount() {
-        const {section, question} = this.props;
-        const calculatedValue = question.calculator(section) || null;
+        const {section, data, question} = this.props;
+        const calculatedValue = question.calculator(section, data) || null;
         this.setState({value: calculatedValue});
     }
 
     componentWillReceiveProps(nextProps) {
-        const {section, question, onChange} = nextProps;
+        const {section, data, question, onChange} = nextProps;
 
-        const calculatedValue = question.calculator(section) || null;
+        const calculatedValue = question.calculator(section, data) || null;
         if (this.state.value !== calculatedValue) {
             this.setState({value: calculatedValue});
             onChange({[question.name]: calculatedValue});
