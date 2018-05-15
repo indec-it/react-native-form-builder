@@ -74,7 +74,7 @@ const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle, di
             />}
             <Row>
                 <ButtonGroup
-                    onPress={index => handleChange(question.name, getValue(index, question), onChange)}
+                    onPress={index => handleChange(question.name, getValue(index, question), onChange, false, answer)}
                     selectedIndex={getSelectedValue(answer, question)}
                     buttons={buttons}
                     containerStyle={computedStyles.component.radioGroup}

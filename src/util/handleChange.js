@@ -1,3 +1,7 @@
-export default (name, value, change, parser) => change({
-    [name]: parser ? parser(value) : value
-});
+export default (name, value, change, parser, oldValue) => {
+    if (value !== oldValue) {
+        change({
+            [name]: parser ? parser(value) : value
+        });
+    }
+}
