@@ -8,6 +8,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {getInputValue, handleChangeDecimalNumber, handleEndEditingNumber} from '../../util';
+import questionPropType from '../../util/questionPropType';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -49,11 +50,13 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeS
                         </Text>}
                     </Fragment>
                 )}
-                <CheckBox
-                    style={computedStyles.component.checkBox}
-                    onPress={() => handlePress(question, answer, onChange)}
-                    checked={isIgnored(question, answer)}
-                />
+                <View>
+                    <Text>{question.ignoreQuestionText}</Text>
+                    <CheckBox
+                        onPress={() => handlePress(question, answer, onChange)}
+                        checked={isIgnored(question, answer)}
+                    />
+                </View>
             </Row>
         </View>
     );
@@ -62,7 +65,7 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeS
 DecimalInputOrIgnore.displayName = 'decimalInputOrIgnore';
 
 DecimalInputOrIgnore.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: questionPropType.isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.number,
