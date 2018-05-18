@@ -30,7 +30,7 @@ export default (question, value, change) => {
     }
 
     // Parse the string
-    if (decimalPart) {
+    if (decimalPart && maxDecimalsLength) {
         parsedValue = toNumber(`${integerPart}.${decimalPart}`);
     } else {
         parsedValue = toNumber(integerPart);
