@@ -21,12 +21,9 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, di
                 inputStyle={computedStyles.component.field}
                 wrapperStyle={computedStyles.component.wrapper}
                 labelStyle={computedStyles.component.label}
-                maxLength={question.maxLength}
-                max={question.max}
-                min={question.min}
                 keyboardType="numeric"
                 value={getInputValue(answer)}
-                onChangeText={text => numericHandleChange(question.name, text, onChange)}
+                onChangeText={text => numericHandleChange(question, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
                 disabled={disabled}
