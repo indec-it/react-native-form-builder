@@ -24,7 +24,7 @@ const TextInput = ({answer, question, onChange, style, textWithBadgeStyle, disab
                 maxLength={question.maxLength}
                 keyboardType="default"
                 value={getInputValue(answer)}
-                onChangeText={text => handleChangeText(question.name, text, onChange)}
+                onChangeText={text => handleChangeText(question, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
                 disabled={disabled}
