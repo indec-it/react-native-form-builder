@@ -42,7 +42,9 @@ const renderRowQuestion = (question, section, rowQuestion, onChange, computedSty
     );
 };
 
-const RadioTable = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const RadioTable = ({
+    section, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>

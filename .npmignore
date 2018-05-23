@@ -1,7 +1,9 @@
 **/.*/
 node_modules/
 coverage/
+test/
 .*
+codealike.json
 commitlint.config.js
 yarn.lock
 *.log

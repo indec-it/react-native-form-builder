@@ -25,7 +25,9 @@ const getResult = (section, {name, calc}, onChange) => {
     return result;
 };
 
-const Calc = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Calc = ({
+    section, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>

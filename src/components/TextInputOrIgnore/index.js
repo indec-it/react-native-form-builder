@@ -17,7 +17,9 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const TextInputOrIgnore = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>

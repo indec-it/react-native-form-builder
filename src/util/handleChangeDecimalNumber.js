@@ -12,7 +12,9 @@ import isEmptyAnswer from './isEmptyAnswer';
  * @param {String|Number} value The new answer to be handled.
  * @param {Function} onChange Handle when the answer has changed.
  */
-const handleChangeDecimalNumber = ({name, allowZero, max, min}, value, onChange) => {
+const handleChangeDecimalNumber = ({
+    name, allowZero, max, min
+}, value, onChange) => {
     const parsedValue = toNumber(value);
     const lastChar = last(value);
 

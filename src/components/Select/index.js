@@ -8,7 +8,9 @@ import {handleChange} from '../../util';
 import styles from './styles';
 import commonStyles from '../commonStyles';
 
-const Select = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Select = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>

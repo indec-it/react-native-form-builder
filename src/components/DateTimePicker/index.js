@@ -9,7 +9,9 @@ import {handleChangeDate} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const DateTimePicker = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const DateTimePicker = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     const dateFormat = question.format || 'DD/MM/YYYY HH:mm';
     return (
