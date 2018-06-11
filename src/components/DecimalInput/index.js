@@ -9,7 +9,9 @@ import {getInputValue, handleChangeDecimalNumber, handleEndEditingNumber} from '
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const DecimalInput = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>

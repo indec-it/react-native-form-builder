@@ -43,7 +43,9 @@ class TextInputOrNoAnswer extends Component {
     }
 
     render() {
-        const {answer, disabled, onChange, question, style, textWithBadgeStyle} = this.props;
+        const {
+            answer, disabled, onChange, question, style, textWithBadgeStyle
+        } = this.props;
         const {block} = this.state;
         const computedStyles = mergeStyles(styles, style);
         return (

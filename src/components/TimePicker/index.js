@@ -9,7 +9,9 @@ import {handleChange} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const TimePicker = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const TimePicker = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>

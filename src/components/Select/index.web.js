@@ -7,7 +7,9 @@ import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const Select = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Select = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.container}>

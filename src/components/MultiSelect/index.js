@@ -38,7 +38,9 @@ const handleChangeAnswer = (question, option, answer, onChange) => {
     handleChange(question.name, answers, onChange);
 };
 
-const MultiSelect = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const MultiSelect = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>

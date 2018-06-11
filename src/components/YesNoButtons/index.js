@@ -40,7 +40,9 @@ const getRadioButtonStyle = (answer, questionValue, style) => ([
     style.radioButton, answer === questionValue ? style.buttonColorPressed : style.buttonColorDefault
 ]);
 
-const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const YesNoButtons = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
 
     const buttons = [{

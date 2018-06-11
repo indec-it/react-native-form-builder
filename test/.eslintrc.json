@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": "../.eslintrc-node.json",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018
+  },
+  "env": {
+    "mocha": true
+  }
+}

@@ -10,7 +10,9 @@ import {isEmpty, isNaN, isNumber, toNumber} from 'lodash';
  * @param {String|Number} value The new answer to be handled.
  * @param {Function} onChange Handle when the answer has changed.
  */
-const handleChangeIntNumber = ({name, allowZero, max, min}, value, onChange) => {
+const handleChangeIntNumber = ({
+    name, allowZero, max, min
+}, value, onChange) => {
     const parsedValue = toNumber(value);
 
     if (isNumber(value)) {

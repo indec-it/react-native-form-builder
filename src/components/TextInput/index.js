@@ -9,7 +9,9 @@ import {getInputValue, handleChangeText} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const TextInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const TextInput = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>

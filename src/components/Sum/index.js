@@ -32,7 +32,9 @@ const getSum = (section, {name, fieldsToAdd}, onChange) => {
     return result;
 };
 
-const Sum = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Sum = ({
+    section, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
