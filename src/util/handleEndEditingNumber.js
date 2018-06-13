@@ -4,7 +4,7 @@ import isEmptyAnswer from './isEmptyAnswer';
 
 const handleEndEditingNumber = ({name, allowZero}, answer, onChange) => {
     const parsedAnswer = toNumber(answer);
-    return onChange({
+    onChange({
         [name]: isEmptyAnswer(allowZero, answer, parsedAnswer) ? undefined : parsedAnswer
     });
 };

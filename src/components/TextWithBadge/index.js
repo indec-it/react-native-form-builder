@@ -31,7 +31,7 @@ const getBadge = (number, badgeStyle) => {
 const TextWithBadge = ({question: {number, text, infoAfterText}, style, disabled}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.text.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.text.container}>
             <View style={computedStyles.text.textWithBadgeContainer}>
                 {number && getBadge(number, computedStyles.badge)}
                 <Text style={computedStyles.text.text}>

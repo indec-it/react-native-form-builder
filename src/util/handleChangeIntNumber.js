@@ -1,36 +1,15 @@
-import {isEmpty, isNaN, isNumber, toNumber} from 'lodash';
+import {split, join} from 'lodash';
+
+import handleChangeNumber from './handleChangeNumber';
 
 /**
- * Handle text of inputs and perform to decimal conversion.
+ * Handles inputs and performs the conversion to decimal.
  * @param {Object} question Question's data.
- * @param {String} question.name The name of question field.
- * @param {Boolean} question.allowZero The name of question field.
- * @param {Number} question.max The max number can be answered.
- * @param {Number} question.min The min number can be answered.
  * @param {String|Number} value The new answer to be handled.
  * @param {Function} onChange Handle when the answer has changed.
  */
-const handleChangeIntNumber = ({
-    name, allowZero, max, min
-}, value, onChange) => {
-    const parsedValue = toNumber(value);
-
-    if (isNumber(value)) {
-        return onChange({[name]: value});
-    }
-    if (isEmpty(value) || isNaN(parsedValue)) {
-        return onChange({[name]: undefined});
-    }
-    if (parsedValue < min) {
-        return onChange({[name]: min});
-    }
-    if (parsedValue > max) {
-        return onChange({[name]: max});
-    }
-    if (parsedValue === 0 && !allowZero) {
-        return onChange({[name]: undefined});
-    }
-    return onChange({[name]: parsedValue});
+const handleChangeIntNumber = (question, value, onChange) => {
+    handleChangeNumber(question, join(split(value, '.'), ''), onChange);
 };
 
 export default handleChangeIntNumber;
