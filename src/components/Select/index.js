@@ -1,24 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Picker, View} from 'react-native';
-import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {concat} from 'lodash';
+import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
 import styles from './styles';
 
-const placeholderValue = null;
+const PLACEHOLDER_VALUE = null;
 const generateList = ({options, placeholder}) => {
-    const placeholderOption = placeholder
-        ? {value: placeholderValue, label: placeholder}
-        : undefined;
-
+    const placeholderOption = {value: PLACEHOLDER_VALUE, label: placeholder};
     return placeholder ? concat(placeholderOption, options) : options;
 };
-
 const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
     const computedStyles = mergeStyles(styles, style);
+    if (!question.placeholder && !answer) {
+        handleChange(question.name, question.options[0].value, onChange);
+    }
     return (
         <View style={computedStyles.container}>
             {question.text && <TextWithBadge
@@ -26,7 +25,7 @@ const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
                 style={textWithBadgeStyle}
             />}
             <Picker
-                selectedValue={answer || (question.placeholder ? placeholderValue : question.options[0].value)}
+                selectedValue={answer || (question.placeholder ? PLACEHOLDER_VALUE : question.options[0].value)}
                 style={computedStyles.picker}
                 onValueChange={itemValue => handleChange(question.name, itemValue, onChange)}
             >
