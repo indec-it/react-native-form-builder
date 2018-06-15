@@ -1,5 +1,6 @@
-import handleChangeDecimalNumber from '../../src/util/handleChangeDecimalNumber';
 import should from 'should';
+
+import handleChangeDecimalNumber from '../../src/util/handleChangeDecimalNumber';
 
 describe('handleChangeDecimalNumber', () => {
     context('when the input value is not a valid decimal string', () => {
@@ -81,7 +82,7 @@ describe('handleChangeDecimalNumber', () => {
         });
     });
 
-    context('when the input value is over min', () => {
+    context('when the input value is greater than the min', () => {
         let result = 'old answer';
         handleChangeDecimalNumber(
             {
@@ -98,7 +99,7 @@ describe('handleChangeDecimalNumber', () => {
         });
     });
 
-    context('when the input value is under max', () => {
+    context('when the input value is lower than the max', () => {
         let result = 'old answer';
         handleChangeDecimalNumber(
             {name: 'answer', max: 3},
@@ -115,18 +116,18 @@ describe('handleChangeDecimalNumber', () => {
     context('with a number lower than the minimum', () => {
         let result = 'old answer';
         handleChangeDecimalNumber(
-            {name: 'answer', min: 1},
-            '0',
+            {name: 'answer', min: 10},
+            '5',
             value => result = value
         );
 
-        it('should get a min value', () => {
+        it('should get the min value', () => {
             result.answer.should.be.Number();
-            result.answer.should.be.equal(1);
+            result.answer.should.be.equal(10);
         });
     });
 
-    context('with a number greather than the maximum', () => {
+    context('with a number greater than the maximum', () => {
         let result = 'old answer';
         handleChangeDecimalNumber(
             {name: 'answer', max: 1},
@@ -149,7 +150,7 @@ describe('handleChangeDecimalNumber', () => {
             value => result = value
         );
 
-        it('should get a max value', () => {
+        it('should get the max value', () => {
             result.answer.should.be.Number();
             result.answer.should.be.equal(1);
         });
@@ -167,13 +168,13 @@ describe('handleChangeDecimalNumber', () => {
             value => result = value
         );
 
-        it('should get a min value', () => {
+        it('should get the min value', () => {
             result.answer.should.be.Number();
             result.answer.should.be.equal(1);
         });
     });
 
-    context('when the input value is equals to 0', () => {
+    context('when the input allows zero and value is equals to 0', () => {
         let result = 'old answer';
         handleChangeDecimalNumber(
             {name: 'answer', allowZero: true},
@@ -184,5 +185,9 @@ describe('handleChangeDecimalNumber', () => {
         it('should get a number', () =>
             result.answer.should.be.Number()
         );
+
+        it('should get 0', () => {
+            result.answer.should.be.equal(0);
+        });
     });
 });

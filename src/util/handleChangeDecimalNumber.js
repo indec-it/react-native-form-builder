@@ -28,14 +28,14 @@ const handleChangeDecimalNumber = ({
          * */
         return null;
     }
+    if (isEmptyAnswer(allowZero, value, parsedValue)) {
+        return onChange({[name]: undefined});
+    }
     if (parsedValue < min) {
         return onChange({[name]: min});
     }
     if (parsedValue > max) {
         return onChange({[name]: max});
-    }
-    if (isEmptyAnswer(allowZero, value, parsedValue)) {
-        return onChange({[name]: undefined});
     }
     return onChange({[name]: parsedValue});
 };
