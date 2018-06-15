@@ -30,7 +30,7 @@ describe('isEmptyAnswer', () => {
             })
         );
 
-        context('and parsed answer is greather than 0', () =>
+        context('and parsed answer is greater than 0', () =>
             it('should return false', () => {
                 const result = isEmptyAnswer(
                     {
