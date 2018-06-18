@@ -1,11 +1,11 @@
-import isEmptyAnswer from '../../src/util/isEmptyAnswer';
+import isEmptyNumberAnswer from '../../src/util/isEmptyNumberAnswer';
 
 const parsedAnswer = 'answer';
 
-describe('isEmptyAnswer', () => {
+describe('isEmptyNumberAnswer', () => {
     context('when the input value is null', () =>
         it('should return true', () => {
-            const result = isEmptyAnswer(
+            const result = isEmptyNumberAnswer(
                 {
                     allowZero: true,
                     answer: null,
@@ -19,7 +19,7 @@ describe('isEmptyAnswer', () => {
     context('when the flag allowZero is disabled', () => {
         context('and parsed answer is equals to 0', () =>
             it('should return true', () => {
-                const result = isEmptyAnswer(
+                const result = isEmptyNumberAnswer(
                     {
                         allowZero: false,
                         answer: 'answer',
@@ -32,7 +32,7 @@ describe('isEmptyAnswer', () => {
 
         context('and parsed answer is greater than 0', () =>
             it('should return false', () => {
-                const result = isEmptyAnswer(
+                const result = isEmptyNumberAnswer(
                     {
                         allowZero: false,
                         answer: 'answer',
@@ -46,7 +46,7 @@ describe('isEmptyAnswer', () => {
 
     context('when the flag allowZero is enabled', () =>
         it('should return true for an empty answer', () => {
-            const result = isEmptyAnswer(
+            const result = isEmptyNumberAnswer(
                 {
                     allowZero: true,
                     answer: '',
