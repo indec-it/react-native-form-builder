@@ -43,6 +43,7 @@ const TextInputOrIgnore = ({
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
                             disabled={disabled}
+                            autoFocus={question.autoFocus}
                         />
                         {question.inputUnit &&
                         <Text style={computedStyles.inputUnit}>

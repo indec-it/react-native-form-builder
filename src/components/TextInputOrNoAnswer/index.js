@@ -66,6 +66,7 @@ class TextInputOrNoAnswer extends Component {
                         label={question.floatingLabel || ''}
                         highlightColor={computedStyles.highlightColor}
                         disabled={disabled}
+                        autoFocus={question.autoFocus}
                     />}
                     {block &&
                     <Text style={computedStyles.component.blockedText}>

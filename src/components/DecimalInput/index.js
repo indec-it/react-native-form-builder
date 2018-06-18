@@ -30,6 +30,7 @@ const DecimalInput = ({
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
                 disabled={disabled}
+                autoFocus={question.autoFocus}
             />
             {question.textAfterInput &&
             <Text style={computedStyles.component.textAfterInput}>
