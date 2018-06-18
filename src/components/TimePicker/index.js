@@ -14,7 +14,7 @@ const TimePicker = ({
 }) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}

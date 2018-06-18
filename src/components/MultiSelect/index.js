@@ -43,7 +43,7 @@ const MultiSelect = ({
 }) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge question={question} style={textWithBadgeStyle}/>}
             {question.options.map(
                 option => (option.text ? (

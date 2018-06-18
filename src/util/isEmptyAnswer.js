@@ -1,7 +1,7 @@
-import {isNaN, isNil} from 'lodash';
+import {isEmpty, isNaN, isNil} from 'lodash';
 
 const isEmptyAnswer = (allowZero, answer, parsedAnswer) => (
-    isNil(answer) || isNaN(parsedAnswer) || (parsedAnswer === 0 && !allowZero) || answer === ''
+    isNil(answer) || isNaN(parsedAnswer) || (parsedAnswer === 0 && !allowZero) || isEmpty(answer)
 );
 
 export default isEmptyAnswer;

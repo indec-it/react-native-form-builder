@@ -1,6 +1,6 @@
-import {last, toNumber} from 'lodash';
+import {last} from 'lodash';
 
-import isEmptyAnswer from './isEmptyAnswer';
+import handleChangeNumber from './handleChangeNumber';
 
 /**
  * Handle text of inputs and perform to decimal conversion.
@@ -12,32 +12,17 @@ import isEmptyAnswer from './isEmptyAnswer';
  * @param {String|Number} value The new answer to be handled.
  * @param {Function} onChange Handle when the answer has changed.
  */
-const handleChangeDecimalNumber = ({
-    name, allowZero, max, min
-}, value, onChange) => {
-    const parsedValue = toNumber(value);
+const handleChangeDecimalNumber = (question, value, onChange) => {
     const lastChar = last(value);
-
-
-    if (lastChar === '.' || lastChar === ',') {
+    if (lastChar !== '.' && lastChar !== ',') {
         /**
          * In this case, the 'onChange' does not propagate the 'parsedValue'.
          * Because, for example, if the 'value' is '2.' or '2,' when we apply
          * 'toNumber', the characters '.' and ',' are deleted. Only if these
          * are the 'lastChar' of our 'value'.
          * */
-        return null;
+        handleChangeNumber(question, value, onChange);
     }
-    if (isEmptyAnswer(allowZero, value, parsedValue)) {
-        return onChange({[name]: undefined});
-    }
-    if (parsedValue < min) {
-        return onChange({[name]: min});
-    }
-    if (parsedValue > max) {
-        return onChange({[name]: max});
-    }
-    return onChange({[name]: parsedValue});
 };
 
 export default handleChangeDecimalNumber;

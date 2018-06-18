@@ -6,6 +6,7 @@ export default {
     DATE_TIME_PICKER: 'dateTimePicker',
     DECIMAL_INPUT: 'decimalInput',
     DECIMAL_INPUT_OR_IGNORE: 'decimalInputOrIgnore',
+    INTEGER_INPUT: 'integerInput',
     MULTI_SELECT: 'multiSelect',
     RADIO: 'radio',
     RADIO_SECTIONS: 'radioSections',

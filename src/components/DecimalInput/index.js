@@ -7,14 +7,13 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {TextWithBadge} from '..';
 import {getInputValue, handleChangeDecimalNumber, handleEndEditingNumber} from '../../util';
 import commonStyles from '../commonStyles';
-import styles from './styles';
 
 const DecimalInput = ({
     answer, question, onChange, style, textWithBadgeStyle, disabled
 }) => {
-    const computedStyles = mergeStyles(styles, style);
+    const computedStyles = mergeStyles(commonStyles.numberInput, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}

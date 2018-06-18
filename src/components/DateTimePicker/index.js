@@ -15,7 +15,7 @@ const DateTimePicker = ({
     const computedStyles = mergeStyles(styles, style);
     const dateFormat = question.format || 'DD/MM/YYYY HH:mm';
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
