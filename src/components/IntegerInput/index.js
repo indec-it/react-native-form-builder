@@ -30,6 +30,7 @@ const IntegerInput = ({
                 label={question.label || ''}
                 highlightColor={computedStyles.highlightColor}
                 disabled={disabled}
+                autoFocus={question.autoFocus}
             />
             {question.textAfterInput &&
             <Text style={computedStyles.component.textAfterInput}>
