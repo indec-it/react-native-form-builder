@@ -8,10 +8,6 @@
     "node": true
   },
   "rules": {
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
     "promise/always-return": "error",
     "promise/no-return-wrap": "error",
     "promise/param-names": "error",

@@ -35,6 +35,10 @@
       "error",
       "always"
     ],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
     "lodash/import-scope": [
       "error",
       "member"
