@@ -1,6 +1,6 @@
 import {size, toNumber} from 'lodash';
 
-import isEmptyAnswer from './isEmptyAnswer';
+import {isEmptyNumberAnswer} from '.';
 
 /**
  * Handle inputs.
@@ -22,7 +22,7 @@ const handleChangeNumber = ({
     }
     const parsedValue = toNumber(newValue || value);
     let answer;
-    if (isEmptyAnswer(allowZero, value, parsedValue)) {
+    if (isEmptyNumberAnswer(allowZero, value, parsedValue)) {
         answer = undefined;
     } else if (parsedValue < min) {
         answer = min;
