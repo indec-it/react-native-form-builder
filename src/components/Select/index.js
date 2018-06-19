@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Picker, View} from 'react-native';
+import {Picker, View, Text} from 'react-native';
 import {concat} from 'lodash';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
@@ -24,19 +24,22 @@ const Select = ({answer, question, onChange, style, textWithBadgeStyle}) => {
                 question={question}
                 style={textWithBadgeStyle}
             />}
-            <Picker
-                selectedValue={answer || (question.placeholder ? PLACEHOLDER_VALUE : question.options[0].value)}
-                style={computedStyles.picker}
-                onValueChange={itemValue => handleChange(question.name, itemValue, onChange)}
-            >
-                {generateList(question).map(option => (
-                    <Picker.Item
-                        key={option.value}
-                        label={option.label}
-                        value={option.value}
-                    />
-                ))}
-            </Picker>
+            <Text style={computedStyles.label}>{question.floatingLabel || ''}</Text>
+            <View style={computedStyles.pickerWrapper}>
+                <Picker
+                    selectedValue={answer || (question.placeholder ? PLACEHOLDER_VALUE : question.options[0].value)}
+                    style={computedStyles.picker}
+                    onValueChange={itemValue => handleChange(question.name, itemValue, onChange)}
+                >
+                    {generateList(question).map(option => (
+                        <Picker.Item
+                            key={option.value}
+                            label={option.label}
+                            value={option.value}
+                        />
+                    ))}
+                </Picker>
+            </View>
         </View>
     );
 };

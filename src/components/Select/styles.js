@@ -4,5 +4,7 @@ export default StyleSheet.create({
     container: {
         flex: 1
     },
-    picker: {}
+    picker: {},
+    pickerWrapper: {},
+    label: {}
 });
