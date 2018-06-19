@@ -29,6 +29,7 @@ const TextInput = ({
                 onChangeText={text => handleChangeText(question, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
+                autoFocus={question.autoFocus}
                 disabled={disabled}
             />
             {question.textAfterInput &&
