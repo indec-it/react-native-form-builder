@@ -29,6 +29,7 @@ const IntegerInput = ({
                 onEndEditing={() => handleEndEditingNumber(question, answer, onChange)}
                 label={question.label || ''}
                 highlightColor={computedStyles.highlightColor}
+                autoFocus={question.autoFocus}
                 disabled={disabled}
             />
             {question.textAfterInput &&

@@ -44,6 +44,7 @@ const DecimalInputOrIgnore = ({
                             onEndEditing={() => handleEndEditingNumber(question, answer, onChange)}
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
+                            autoFocus={question.autoFocus}
                             disabled={disabled}
                         />
                         {question.inputUnit &&
