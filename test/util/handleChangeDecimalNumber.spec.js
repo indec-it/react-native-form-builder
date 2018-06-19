@@ -36,13 +36,9 @@ describe('handleChangeDecimalNumber', () => {
             value => result = value
         );
 
-        it('should get a number instance', () =>
-            result.answer.should.be.Number()
-        );
+        it('should get a number instance', () => result.answer.should.be.Number());
 
-        it('should return the input value converted to number', () =>
-            result.answer.should.be.equal(2)
-        );
+        it('should return the input value converted to number', () => result.answer.should.be.equal(2));
     });
 
     context('when the input value is a float', () => {
@@ -72,122 +68,68 @@ describe('handleChangeDecimalNumber', () => {
                 value => result = value
             );
 
-            it('should call onChange handler', () =>
-                result.should.be.not.undefined()
+            it('should call onChange handler', () => result.should.be.not.undefined());
+
+            it('should return the input value converted to number', () => result.answer.should.be.equal(2.3));
+        });
+    });
+
+    context('when the input value start with dot', () => {
+        context('without decimals', () => {
+            let result;
+            handleChangeDecimalNumber(
+                {name: 'answer'},
+                '.',
+                value => result = value
             );
 
-            it('should return the input value converted to number', () => {
-                result.answer.should.be.equal(2.3);
-            });
+            it('should not call onChange handler', () => should(result).be.undefined());
+        });
+
+        context('with decimals after the dot', () => {
+            let result;
+            handleChangeDecimalNumber(
+                {name: 'answer'},
+                '.3',
+                value => result = value
+            );
+
+            it('should call onChange handler', () => should(result.answer).be.equal(0.3));
         });
     });
 
-    context('when the input value is greater than the min', () => {
-        let result = 'old answer';
-        handleChangeDecimalNumber(
-            {
-                name: 'answer',
-                min: 1
-            },
-            '2',
-            value => result = value
-        );
+    context('when the input value includes coma', () => {
+        context('without decimals', () => {
+            let result;
+            handleChangeDecimalNumber(
+                {name: 'answer'},
+                ',',
+                value => result = value
+            );
 
-        it('should return the input value converted to number', () => {
-            result.answer.should.be.Number();
-            result.answer.should.be.equal(2);
+            it('should not call onChange handler', () => should(result).be.undefined());
         });
-    });
 
-    context('when the input value is lower than the max', () => {
-        let result = 'old answer';
-        handleChangeDecimalNumber(
-            {name: 'answer', max: 3},
-            '2',
-            value => result = value
-        );
+        context('with decimals after the coma', () => {
+            let result;
+            handleChangeDecimalNumber(
+                {name: 'answer'},
+                ',3',
+                value => result = value
+            );
 
-        it('should return the input value converted to number', () => {
-            result.answer.should.be.Number();
-            result.answer.should.be.equal(2);
+            it('should not call onChange handler', () => should(result).be.undefined());
         });
-    });
 
-    context('with a number lower than the minimum', () => {
-        let result = 'old answer';
-        handleChangeDecimalNumber(
-            {name: 'answer', min: 10},
-            '5',
-            value => result = value
-        );
+        context('with decimals before and after the coma', () => {
+            let result;
+            handleChangeDecimalNumber(
+                {name: 'answer'},
+                '4,3',
+                value => result = value
+            );
 
-        it('should get the min value', () => {
-            result.answer.should.be.Number();
-            result.answer.should.be.equal(10);
-        });
-    });
-
-    context('with a number greater than the maximum', () => {
-        let result = 'old answer';
-        handleChangeDecimalNumber(
-            {name: 'answer', max: 1},
-            '2',
-            value => result = value
-        );
-
-        it('should get a max value', () => {
-            result.answer.should.be.Number();
-            result.answer.should.be.equal(1);
-        });
-    });
-
-    context('when the input value is equals to maximum', () => {
-        let result = 'old answer';
-
-        handleChangeDecimalNumber(
-            {name: 'answer', max: 1},
-            '1',
-            value => result = value
-        );
-
-        it('should get the max value', () => {
-            result.answer.should.be.Number();
-            result.answer.should.be.equal(1);
-        });
-    });
-
-    context('when the input value is equals to minimum', () => {
-        let result = 'old answer';
-
-        handleChangeDecimalNumber(
-            {
-                name: 'answer',
-                min: 1
-            },
-            '1',
-            value => result = value
-        );
-
-        it('should get the min value', () => {
-            result.answer.should.be.Number();
-            result.answer.should.be.equal(1);
-        });
-    });
-
-    context('when the input allows zero and value is equals to 0', () => {
-        let result = 'old answer';
-        handleChangeDecimalNumber(
-            {name: 'answer', allowZero: true},
-            '0',
-            value => result = value
-        );
-
-        it('should get a number', () =>
-            result.answer.should.be.Number()
-        );
-
-        it('should get 0', () => {
-            result.answer.should.be.equal(0);
+            it('should not call onChange handler', () => should(result).be.undefined());
         });
     });
 });
