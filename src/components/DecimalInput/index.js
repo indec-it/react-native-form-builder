@@ -6,6 +6,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {getInputValue, handleChangeDecimalNumber, handleEndEditingNumber} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 
 const DecimalInput = ({
@@ -40,7 +41,7 @@ const DecimalInput = ({
     );
 };
 
-DecimalInput.displayName = 'decimalInput';
+DecimalInput.displayName = types.DECIMAL_INPUT;
 
 DecimalInput.propTypes = {
     question: PropTypes.shape({}).isRequired,

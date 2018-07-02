@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
-import Datepicker from 'react-native-datepicker';
+import Datepicker from 'react-datepicker';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
+import moment from 'moment';
 
 import {TextWithBadge} from '..';
-import {handleChangeDate} from '../../util';
 import commonStyles from '../commonStyles';
-import styles from './styles';
+import styles from '../DatePicker/styles';
 
-const DateTimePicker = ({
-    answer, question, onChange, style, textWithBadgeStyle, disabled
+const DatePicker = ({
+    answer, question, onChange, style, textWithBadgeStyle, dateFormat, timeFormat, disabled, showTimeSelect,
+    showTimeSelectOnly, timeCaption
 }) => {
     const computedStyles = mergeStyles(styles, style);
-    const dateFormat = question.format || 'DD/MM/YYYY HH:mm';
     return (
         <View style={disabled ? commonStyles.disabled.container : computedStyles.container}>
             {question.text && <TextWithBadge
@@ -21,41 +21,50 @@ const DateTimePicker = ({
                 style={textWithBadgeStyle}
             />}
             <Datepicker
-                style={computedStyles.datePicker}
-                date={new Date(answer)}
-                placeholder={question.placeholder}
-                format={dateFormat}
+                selected={moment(answer)}
+                onChange={date => onChange(date)}
+                dropdownMode="select"
+                placeholderText={question.placeholder}
+                dateFormat={dateFormat}
+                timeFormat={timeFormat}
                 minDate={question.minDate}
                 maxDate={question.maxDate}
-                confirmBtnText="Confirmar"
-                cancelBtnText="Cancelar"
-                onDateChange={date => handleChangeDate(question.name, date, dateFormat, onChange)}
+                showTimeSelect={showTimeSelect}
+                showTimeSelectOnly={showTimeSelectOnly}
+                timeCaption={timeCaption}
                 disabled={disabled}
-                mode="datetime"
             />
         </View>
     );
 };
 
-DateTimePicker.displayName = 'dateTimePicker';
-
-DateTimePicker.propTypes = {
+DatePicker.propTypes = {
     question: PropTypes.shape({}).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.instanceOf(Date),
         PropTypes.string
     ]),
+    dateFormat: PropTypes.string,
+    timeFormat: PropTypes.string,
+    timeCaption: PropTypes.string,
     style: stylePropType,
     textWithBadgeStyle: stylePropType,
+    showTimeSelect: PropTypes.bool,
+    showTimeSelectOnly: PropTypes.bool,
     disabled: PropTypes.bool
 };
 
-DateTimePicker.defaultProps = {
+DatePicker.defaultProps = {
     answer: new Date(),
     style: null,
     textWithBadgeStyle: null,
+    dateFormat: 'DD/MM/YYYY',
+    timeFormat: 'HH:mm',
+    timeCaption: null,
+    showTimeSelect: false,
+    showTimeSelectOnly: false,
     disabled: false
 };
 
-export default DateTimePicker;
+export default DatePicker;

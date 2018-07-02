@@ -6,6 +6,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {getInputValue, handleChangeText} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -40,7 +41,7 @@ const TextInput = ({
     );
 };
 
-TextInput.displayName = 'textInput';
+TextInput.displayName = types.TEXT_INPUT;
 
 TextInput.propTypes = {
     question: PropTypes.shape({}).isRequired,

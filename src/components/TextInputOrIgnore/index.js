@@ -8,6 +8,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {getInputValue, handleChangeText} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -62,7 +63,7 @@ const TextInputOrIgnore = ({
     );
 };
 
-TextInputOrIgnore.displayName = 'textInputOrIgnore';
+TextInputOrIgnore.displayName = types.TEXT_INPUT_OR_IGNORE;
 
 TextInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,

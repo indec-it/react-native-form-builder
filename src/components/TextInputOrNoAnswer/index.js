@@ -7,10 +7,11 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {getInputValue, handleChangeText} from '../../util';
+import {types} from '../../enums';
 import styles from './styles';
 
 class TextInputOrNoAnswer extends Component {
-    static displayName = 'textInputOrNoAnswer';
+    static displayName = types.TEXT_INPUT_OR_NO_ANSWER;
 
     static propTypes = {
         question: PropTypes.shape({}).isRequired,

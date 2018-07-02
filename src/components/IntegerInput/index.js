@@ -6,6 +6,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {getInputValue, handleEndEditingNumber, handleChangeIntNumber} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 
 const IntegerInput = ({
@@ -40,7 +41,7 @@ const IntegerInput = ({
     );
 };
 
-IntegerInput.displayName = 'integerInput';
+IntegerInput.displayName = types.INTEGER_INPUT;
 
 IntegerInput.propTypes = {
     question: PropTypes.shape({}).isRequired,
@@ -62,3 +63,4 @@ IntegerInput.defaultProps = {
 };
 
 export default IntegerInput;
+

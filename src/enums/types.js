@@ -2,8 +2,8 @@ export default {
     ADD_ON_LIST: 'addOnList',
     CALC: 'calc',
     CHECKBOX: 'checkbox',
-    DATE_PICKER: 'datePicker',
-    DATE_TIME_PICKER: 'dateTimePicker',
+    DATE_INPUT: 'dateInput',
+    DATE_TIME_INPUT: 'dateTimeInput',
     DECIMAL_INPUT: 'decimalInput',
     DECIMAL_INPUT_OR_IGNORE: 'decimalInputOrIgnore',
     INTEGER_INPUT: 'integerInput',
@@ -18,7 +18,7 @@ export default {
     TEXT_INPUT_OR_IGNORE: 'textInputOrIgnore',
     TEXT_INPUT_OR_NO_ANSWER: 'textInputOrNoAnswer',
     TEXT_WITH_BADGE: 'textWithBadge',
-    TIME_PICKER: 'timePicker',
+    TIME_INPUT: 'timeInput',
     TITLE: 'title',
     YES_NO_BUTTONS: 'yesNoButtons'
 };
