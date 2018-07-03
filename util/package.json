@@ -1,0 +1,5 @@
+{
+  "name": "@indec/react-native-form-builder/util",
+  "private": true,
+  "main": "../src/util/index.js"
+}
