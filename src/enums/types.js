@@ -13,6 +13,7 @@ export default {
     RADIO_TABLE: 'radioTable',
     SELECT: 'select',
     SUM: 'sum',
+    TEXT_AREA: 'textArea',
     TEXT_INPUT: 'textInput',
     TEXT_INPUT_OR_IGNORE: 'textInputOrIgnore',
     TEXT_INPUT_OR_NO_ANSWER: 'textInputOrNoAnswer',
