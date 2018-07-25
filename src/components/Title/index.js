@@ -9,7 +9,7 @@ const Title = ({question, style}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.container}>
-            <Text style={computedStyles.text}>
+            <Text style={computedStyles.title}>
                 {question.text}
             </Text>
         </View>
