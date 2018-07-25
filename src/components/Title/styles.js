@@ -1,7 +1,16 @@
-// TODO Define Total's defaultStyles with designer.
 import {StyleSheet} from 'react-native';
 
-export default {
-    container: StyleSheet.create({}),
-    text: StyleSheet.create({})
-};
+export default StyleSheet.create({
+    container: {
+        margin: 5,
+        flex: 1,
+        flexDirection: 'column'
+    },
+    title: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: '#0A74A5',
+        marginTop: 40,
+        marginLeft: 15
+    }
+});
