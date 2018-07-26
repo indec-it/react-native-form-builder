@@ -7,6 +7,7 @@ import {concat, includes, isNil, filter, map, reject} from 'lodash';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import questionPropType from '../../util/questionPropType';
 import commonStyles from '../commonStyles';
 import styles from './styles';
@@ -66,7 +67,7 @@ const MultiSelect = ({
     );
 };
 
-MultiSelect.displayName = 'multiSelect';
+MultiSelect.displayName = types.MULTI_SELECT;
 
 MultiSelect.propTypes = {
     question: questionPropType.isRequired,

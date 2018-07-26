@@ -7,6 +7,7 @@ import {isEqual} from 'lodash';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -41,7 +42,7 @@ const Radio = ({
     );
 };
 
-Radio.displayName = 'radio';
+Radio.displayName = types.RADIO;
 
 Radio.propTypes = {
     question: PropTypes.shape({}).isRequired,

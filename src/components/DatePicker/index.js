@@ -5,15 +5,13 @@ import Datepicker from 'react-native-datepicker';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {handleChangeDate} from '../../util';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
 const DatePicker = ({
-    answer, question, onChange, style, textWithBadgeStyle, disabled
+    answer, question, onChange, style, textWithBadgeStyle, dateFormat, mode, disabled
 }) => {
     const computedStyles = mergeStyles(styles, style);
-    const dateFormat = question.format || 'DD/MM/YYYY HH:mm';
     return (
         <View style={disabled ? commonStyles.disabled.container : computedStyles.container}>
             {question.text && <TextWithBadge
@@ -29,14 +27,13 @@ const DatePicker = ({
                 maxDate={question.maxDate}
                 confirmBtnText="Confirmar"
                 cancelBtnText="Cancelar"
-                onDateChange={date => handleChangeDate(question.name, date, dateFormat, onChange)}
+                onDateChange={date => onChange(date)}
+                mode={mode}
                 disabled={disabled}
             />
         </View>
     );
 };
-
-DatePicker.displayName = 'datePicker';
 
 DatePicker.propTypes = {
     question: PropTypes.shape({}).isRequired,
@@ -45,14 +42,18 @@ DatePicker.propTypes = {
         PropTypes.instanceOf(Date),
         PropTypes.string
     ]),
+    dateFormat: PropTypes.string,
     style: stylePropType,
     textWithBadgeStyle: stylePropType,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    mode: PropTypes.string
 };
 
 DatePicker.defaultProps = {
     answer: new Date(),
     style: null,
+    dateFormat: 'DD/MM/YYYY',
+    mode: 'date',
     textWithBadgeStyle: null,
     disabled: false
 };

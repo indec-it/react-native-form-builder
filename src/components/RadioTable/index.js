@@ -9,6 +9,7 @@ import {isEqual} from 'lodash';
 import TextBox from '../TextBox';
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -82,7 +83,7 @@ const RadioTable = ({
     );
 };
 
-RadioTable.displayName = 'radioTable';
+RadioTable.displayName = types.RADIO_TABLE;
 
 RadioTable.propTypes = {
     section: PropTypes.shape({}).isRequired,

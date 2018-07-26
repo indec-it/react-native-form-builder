@@ -7,6 +7,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import TextWithBadge from '../TextWithBadge';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -88,7 +89,7 @@ const YesNoButtons = ({
     );
 };
 
-YesNoButtons.displayName = 'yesNoButtons';
+YesNoButtons.displayName = types.YES_NO_BUTTONS;
 
 YesNoButtons.propTypes = {
     question: PropTypes.shape({}).isRequired,

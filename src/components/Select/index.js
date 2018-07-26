@@ -5,6 +5,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import styles from './styles';
 import commonStyles from '../commonStyles';
 
@@ -36,7 +37,7 @@ const Select = ({
     );
 };
 
-Select.displayName = 'select';
+Select.displayName = types.SELECT;
 
 Select.propTypes = {
     question: PropTypes.shape({}).isRequired,

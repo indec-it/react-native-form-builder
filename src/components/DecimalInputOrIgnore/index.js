@@ -8,6 +8,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {getInputValue, handleChangeDecimalNumber, handleEndEditingNumber} from '../../util';
+import {types} from '../../enums';
 import questionPropType from '../../util/questionPropType';
 import commonStyles from '../commonStyles';
 import styles from './styles';
@@ -65,7 +66,7 @@ const DecimalInputOrIgnore = ({
     );
 };
 
-DecimalInputOrIgnore.displayName = 'decimalInputOrIgnore';
+DecimalInputOrIgnore.displayName = types.DECIMAL_INPUT_OR_IGNORE;
 
 DecimalInputOrIgnore.propTypes = {
     question: questionPropType.isRequired,

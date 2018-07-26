@@ -6,6 +6,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -30,7 +31,7 @@ const Checkbox = ({
     );
 };
 
-Checkbox.displayName = 'checkbox';
+Checkbox.displayName = types.CHECKBOX;
 
 Checkbox.propTypes = {
     question: PropTypes.shape({}).isRequired,

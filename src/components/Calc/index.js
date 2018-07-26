@@ -5,6 +5,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import TextWithBadge from '../TextWithBadge';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -48,7 +49,7 @@ const Calc = ({
     );
 };
 
-Calc.displayName = 'calc';
+Calc.displayName = types.CALC;
 
 Calc.propTypes = {
     section: PropTypes.shape({}).isRequired,
