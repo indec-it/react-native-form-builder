@@ -12,9 +12,9 @@ export default (question, value, change) => {
 
     let parsedValue = value;
 
-    // Don't trigger the change if ends with '.'
+    // Don't trigger the change if ends with '.' or '0'
     parsedValue = replace(parsedValue, ',', '.'); // Interpret ',' as '.'
-    if (last(parsedValue) === '.') {
+    if ((last(parsedValue) === '.') || (parsedValue.substr(parsedValue.length - 2) === '.0')) {
         return;
     }
 

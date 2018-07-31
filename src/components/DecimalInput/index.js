@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 import InputField from '@indec/react-native-md-textinput';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
+import {toNumber} from 'lodash';
 
 import {TextWithBadge} from '..';
 import {getInputValue, numericHandleChange} from '../../util';
@@ -24,6 +25,12 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, di
                 keyboardType="numeric"
                 value={getInputValue(answer)}
                 onChangeText={text => numericHandleChange(question, text, onChange)}
+                onBlur={text => {
+                    const parsedValue = (text || '').length ? toNumber(text) : undefined;
+                    onChange({
+                        [question.name]: parsedValue
+                    });
+                }}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
                 disabled={disabled}
