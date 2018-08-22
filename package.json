@@ -1,6 +1,6 @@
 {
   "name": "@indec/react-native-form-builder",
-  "version": "0.2.3",
+  "version": "0.2.2-cna",
   "description": "A library to generate forms in react native based on a json description",
   "private": false,
   "main": "src/index.js",
