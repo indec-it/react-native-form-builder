@@ -8,7 +8,7 @@ export default {
             flexDirection: 'column',
             paddingBottom: 0,
             paddingTop: 0,
-            borderBottomWidth: 1,
+            borderBottomWidth: 2,
             borderBottomColor: '#d9d9d9',
             borderRightWidth: 1,
             borderRightColor: '#d9d9d9',
