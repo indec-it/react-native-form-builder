@@ -15,24 +15,20 @@ const Select = ({
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
-            {question.text && <TextWithBadge
-                question={question}
-                style={textWithBadgeStyle}
-            />}
-            <Picker
-                selectedValue={answer}
-                style={computedStyles.picker}
-                onValueChange={itemValue => handleChange(question.name, itemValue, onChange)}
-                enabled={!disabled}
-            >
-                {question.options.map(option => (
-                    <Picker.Item
-                        key={option.value}
-                        label={option.label}
-                        value={option.value}
-                    />
-                ))}
-            </Picker>
+            {question.text && (
+                <TextWithBadge question={question} style={textWithBadgeStyle}/>
+            )}
+            <View style={computedStyles.component.picker}>
+                <Picker
+                    selectedValue={answer}
+                    onValueChange={itemValue => handleChange(question.name, itemValue, onChange)}
+                    enabled={!disabled}
+                >
+                    {question.options.map(option => (
+                        <Picker.Item key={option.value} label={option.label} value={option.value}/>
+                    ))}
+                </Picker>
+            </View>
         </View>
     );
 };
