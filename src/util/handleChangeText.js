@@ -1,5 +1,5 @@
 import {isEmpty, replace} from 'lodash';
-import {EMOJI_FILTER_REGEXP} from '../constants';
+import EMOJI_FILTER_REGEXP from '../constants';
 
 /**
  * Clean questions's value by removing emojis like expressions.
