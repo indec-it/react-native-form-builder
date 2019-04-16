@@ -20,5 +20,6 @@ export default {
     TEXT_WITH_BADGE: 'textWithBadge',
     TIME_INPUT: 'timeInput',
     TITLE: 'title',
+    TYPE_AHEAD: 'typeahead',
     YES_NO_BUTTONS: 'yesNoButtons'
 };

@@ -18,6 +18,7 @@ import TextInputOrNoAnswer from './TextInputOrNoAnswer';
 import TextWithBadge from './TextWithBadge';
 import TimeInput from './TimeInput';
 import Title from './Title';
+import Typeahead from './Typeahead';
 import Sum from './Sum';
 import YesNoButtons from './YesNoButtons';
 
@@ -42,4 +43,5 @@ export {TextInputOrNoAnswer};
 export {TextWithBadge};
 export {TimeInput};
 export {Title};
+export {Typeahead};
 export {YesNoButtons};
