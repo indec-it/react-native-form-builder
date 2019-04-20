@@ -6,16 +6,31 @@ export default StyleSheet.create({
         marginBottom: 5
     },
     suggestion: {
-        height: 30,
+        height: 40,
         padding: 5,
         borderBottomColor: '#ddd',
         borderBottomWidth: 1
     },
     suggestionText: {
-        fontSize: 15
+        fontSize: 20,
+        height: 40,
+        padding: 0
     },
-    input: {
-        fontSize: 15
+    inputRed: {
+        fontSize: 15,
+        height: 40,
+        padding: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+        color: '#F31212'
+    },
+    inputBlack: {
+        fontSize: 15,
+        height: 40,
+        padding: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+        color: '#000'
     },
     wrapper: {
         flex: 1
