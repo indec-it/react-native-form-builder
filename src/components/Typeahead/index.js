@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {includes, size, isEmpty, find} from 'lodash';
-import {TouchableHighlight, Text, TextInput, View} from 'react-native';
+import {TouchableOpacity, Text, TextInput, View} from 'react-native';
 import {stylePropType} from '@indec/react-native-commons/util';
 import {TextWithBadge} from '..';
 import {types} from '../../enums';
@@ -46,18 +46,13 @@ export default class Typeahead extends PureComponent {
     onChangeText = value => {
         if (this.selectedSuggestion) {
             this.selectedSuggestion = false;
-        }
-        this.valueToShow = value[this.props.question.name];
-        this.props.onChange(value);
-
-        this.suggestions = this.filterSuggestions(
-            this.props.question.options, this.valueToShow
-        );
-    };
-
-    onBlur = () => {
-        if (!this.selectedSuggestion) {
             this.clearValue();
+        } else {
+            this.valueToShow = value[this.props.question.name];
+            this.suggestions = this.filterSuggestions(
+                this.props.question.options, this.valueToShow
+            );
+            this.forceUpdate();
         }
     };
 
@@ -112,17 +107,18 @@ export default class Typeahead extends PureComponent {
         return (
             <View style={styles.suggestionsWrapper}>
                 {suggestionTexts.map(suggestion => (
-                    <TouchableHighlight
+                    <TouchableOpacity
                         suggestionText={suggestion}
                         activeOpacity={0.6}
                         style={styles.suggestion}
                         onPress={() => this.suggestionClick(suggestion)}
-                        underlayColor="white"
                     >
-                        <Text style={styles.suggestionText}>
-                            {suggestion}
-                        </Text>
-                    </TouchableHighlight>
+                        <View style={styles.wrapper}>
+                            <Text style={styles.suggestionText}>
+                                {suggestion}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 ))}
             </View>
         );
@@ -139,8 +135,7 @@ export default class Typeahead extends PureComponent {
                 <TextInput
                     value={this.valueToShow}
                     onChangeText={text => handleChangeText(question, text, this.onChangeText)}
-                    style={styles.input}
-                    onBlur={this.onBlur}
+                    style={!this.selectedSuggestion ? styles.inputRed : styles.inputBlack}
                 />
                 {this.renderSuggestions()}
             </View>
