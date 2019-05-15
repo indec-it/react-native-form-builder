@@ -5,14 +5,16 @@ import InputField from '@indec/react-native-md-textinput';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {getInputValue, handleChangeNumber} from '../../util';
+import {getInputValue, handleChangeDecimalNumber, handleEndEditingNumber} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
-import styles from './styles';
 
-const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
-    const computedStyles = mergeStyles(styles, style);
+const DecimalInput = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
+    const computedStyles = mergeStyles(commonStyles.numberInput, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
@@ -22,13 +24,13 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, di
                 wrapperStyle={computedStyles.component.wrapper}
                 labelStyle={computedStyles.component.label}
                 maxLength={question.maxLength}
-                max={question.max}
-                min={question.min}
                 keyboardType="numeric"
                 value={getInputValue(answer)}
-                onChangeText={text => handleChangeNumber(question.name, text, onChange)}
+                onChangeText={text => handleChangeDecimalNumber(question, text, onChange)}
+                onEndEditing={() => handleEndEditingNumber(question, answer, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
+                autoFocus={question.autoFocus}
                 disabled={disabled}
             />
             {question.textAfterInput &&
@@ -39,7 +41,7 @@ const DecimalInput = ({answer, question, onChange, style, textWithBadgeStyle, di
     );
 };
 
-DecimalInput.displayName = 'decimalInput';
+DecimalInput.displayName = types.DECIMAL_INPUT;
 
 DecimalInput.propTypes = {
     question: PropTypes.shape({}).isRequired,

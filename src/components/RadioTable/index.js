@@ -6,12 +6,14 @@ import {Row, Col, Grid} from '@indec/react-native-commons';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 import {isEqual} from 'lodash';
 
+import TextBox from '../TextBox';
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const renderRowQuestion = (question, section, rowQuestion, onChange, computedStyles, disabled) => {
+const renderRowQuestion = (question, section, rowQuestion, onChange, computedStyles, disabled, infoAfterText) => {
     const questionName = question.name + rowQuestion.name;
     const questionValue = section[questionName];
     return (
@@ -20,6 +22,7 @@ const renderRowQuestion = (question, section, rowQuestion, onChange, computedSty
                 <Text style={computedStyles.component.rowLabel}>
                     {rowQuestion.text}
                 </Text>
+                {infoAfterText && <TextBox text={infoAfterText} style={computedStyles.infoAfterText}/>}
             </Col>
             {question.options.map(option => (
                 <Col
@@ -40,10 +43,12 @@ const renderRowQuestion = (question, section, rowQuestion, onChange, computedSty
     );
 };
 
-const RadioTable = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const RadioTable = ({
+    section, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
@@ -63,14 +68,22 @@ const RadioTable = ({section, question, onChange, style, textWithBadgeStyle, dis
                     ))}
                 </Row>
                 {question.questions.map(rowQuestion => (
-                    renderRowQuestion(question, section, rowQuestion, onChange, computedStyles, disabled)
+                    renderRowQuestion(
+                        question,
+                        section,
+                        rowQuestion,
+                        onChange,
+                        computedStyles,
+                        disabled,
+                        rowQuestion.infoAfterText
+                    )
                 ))}
             </Grid>
         </View>
     );
 };
 
-RadioTable.displayName = 'radioTable';
+RadioTable.displayName = types.RADIO_TABLE;
 
 RadioTable.propTypes = {
     section: PropTypes.shape({}).isRequired,

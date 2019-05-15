@@ -5,14 +5,17 @@ import InputField from '@indec/react-native-md-textinput';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {getInputValue, handleChange} from '../../util';
+import {getInputValue, handleChangeText} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const TextInput = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const TextInput = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
@@ -24,9 +27,10 @@ const TextInput = ({answer, question, onChange, style, textWithBadgeStyle, disab
                 maxLength={question.maxLength}
                 keyboardType="default"
                 value={getInputValue(answer)}
-                onChangeText={text => handleChange(question.name, text, onChange)}
+                onChangeText={text => handleChangeText(question, text, onChange)}
                 label={question.floatingLabel || ''}
                 highlightColor={computedStyles.highlightColor}
+                autoFocus={question.autoFocus}
                 disabled={disabled}
             />
             {question.textAfterInput &&
@@ -37,7 +41,7 @@ const TextInput = ({answer, question, onChange, style, textWithBadgeStyle, disab
     );
 };
 
-TextInput.displayName = 'textInput';
+TextInput.displayName = types.TEXT_INPUT;
 
 TextInput.propTypes = {
     question: PropTypes.shape({}).isRequired,

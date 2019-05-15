@@ -5,6 +5,7 @@ export default PropTypes.shape({
     name: PropTypes.string,
     type: PropTypes.string,
     infoAlertText: PropTypes.string,
+    ignoreQuestionText: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.shape({
         value: PropTypes.number,
         label: PropTypes.string,

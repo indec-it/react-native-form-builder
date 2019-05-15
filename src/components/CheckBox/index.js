@@ -6,13 +6,16 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const Checkbox = ({answer, onChange, question, style, textWithBadgeStyle, disabled}) => {
+const Checkbox = ({
+    answer, onChange, question, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
@@ -28,7 +31,7 @@ const Checkbox = ({answer, onChange, question, style, textWithBadgeStyle, disabl
     );
 };
 
-Checkbox.displayName = 'checkbox';
+Checkbox.displayName = types.CHECKBOX;
 
 Checkbox.propTypes = {
     question: PropTypes.shape({}).isRequired,

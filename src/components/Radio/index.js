@@ -7,13 +7,16 @@ import {isEqual} from 'lodash';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
-const Radio = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Radio = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
@@ -39,7 +42,7 @@ const Radio = ({answer, question, onChange, style, textWithBadgeStyle, disabled}
     );
 };
 
-Radio.displayName = 'radio';
+Radio.displayName = types.RADIO;
 
 Radio.propTypes = {
     question: PropTypes.shape({}).isRequired,

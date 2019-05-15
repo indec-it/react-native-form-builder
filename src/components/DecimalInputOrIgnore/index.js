@@ -7,7 +7,9 @@ import {CheckBox} from 'react-native-elements';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {getInputValue, handleChangeNumber} from '../../util';
+import {getInputValue, handleChangeDecimalNumber, handleEndEditingNumber} from '../../util';
+import {types} from '../../enums';
+import questionPropType from '../../util/questionPropType';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -17,10 +19,12 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const DecimalInputOrIgnore = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
@@ -35,13 +39,13 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeS
                             wrapperStyle={computedStyles.component.wrapper}
                             labelStyle={computedStyles.component.label}
                             maxLength={question.maxLength}
-                            max={question.max}
-                            min={question.min}
                             keyboardType="numeric"
                             value={getInputValue(answer)}
-                            onChangeText={text => handleChangeNumber(question.name, text, onChange)}
+                            onChangeText={text => handleChangeDecimalNumber(question, text, onChange)}
+                            onEndEditing={() => handleEndEditingNumber(question, answer, onChange)}
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
+                            autoFocus={question.autoFocus}
                             disabled={disabled}
                         />
                         {question.inputUnit &&
@@ -50,20 +54,22 @@ const DecimalInputOrIgnore = ({answer, question, onChange, style, textWithBadgeS
                         </Text>}
                     </Fragment>
                 )}
-                <CheckBox
-                    style={computedStyles.component.checkBox}
-                    onPress={() => handlePress(question, answer, onChange)}
-                    checked={isIgnored(question, answer)}
-                />
+                <View>
+                    <Text>{question.ignoreQuestionText}</Text>
+                    <CheckBox
+                        onPress={() => handlePress(question, answer, onChange)}
+                        checked={isIgnored(question, answer)}
+                    />
+                </View>
             </Row>
         </View>
     );
 };
 
-DecimalInputOrIgnore.displayName = 'decimalInputOrIgnore';
+DecimalInputOrIgnore.displayName = types.DECIMAL_INPUT_OR_IGNORE;
 
 DecimalInputOrIgnore.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: questionPropType.isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.number,

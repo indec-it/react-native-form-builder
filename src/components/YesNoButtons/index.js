@@ -7,6 +7,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import TextWithBadge from '../TextWithBadge';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -40,7 +41,9 @@ const getRadioButtonStyle = (answer, questionValue, style) => ([
     style.radioButton, answer === questionValue ? style.buttonColorPressed : style.buttonColorDefault
 ]);
 
-const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const YesNoButtons = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
 
     const buttons = [{
@@ -67,7 +70,7 @@ const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle, di
         });
     }
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
@@ -86,7 +89,7 @@ const YesNoButtons = ({answer, question, onChange, style, textWithBadgeStyle, di
     );
 };
 
-YesNoButtons.displayName = 'yesNoButtons';
+YesNoButtons.displayName = types.YES_NO_BUTTONS;
 
 YesNoButtons.propTypes = {
     question: PropTypes.shape({}).isRequired,

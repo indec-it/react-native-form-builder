@@ -7,7 +7,8 @@ import {CheckBox} from 'react-native-elements';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {getInputValue, handleChange} from '../../util';
+import {getInputValue, handleChangeText} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -17,10 +18,12 @@ const handlePress = ({name, ignoreValue}, answer, onChange) => (onChange({
 
 const isIgnored = ({ignoreValue}, answer) => answer === ignoreValue;
 
-const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const TextInputOrIgnore = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge
                 question={question}
                 style={textWithBadgeStyle}
@@ -37,9 +40,10 @@ const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyl
                             maxLength={question.maxLength}
                             keyboardType="default"
                             value={getInputValue(answer)}
-                            onChangeText={text => handleChange(question.name, text, onChange)}
+                            onChangeText={text => handleChangeText(question, text, onChange)}
                             label={question.floatingLabel || ''}
                             highlightColor={computedStyles.highlightColor}
+                            autoFocus={question.autoFocus}
                             disabled={disabled}
                         />
                         {question.inputUnit &&
@@ -59,7 +63,7 @@ const TextInputOrIgnore = ({answer, question, onChange, style, textWithBadgeStyl
     );
 };
 
-TextInputOrIgnore.displayName = 'textInputOrIgnore';
+TextInputOrIgnore.displayName = types.TEXT_INPUT_OR_IGNORE;
 
 TextInputOrIgnore.propTypes = {
     question: PropTypes.shape({}).isRequired,

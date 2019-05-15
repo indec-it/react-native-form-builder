@@ -47,17 +47,14 @@ const canDrawQuestion = ({parents}, chapter) => {
                     return !isNil(chapter[parent.id]) === parent.value;
                 case operators.NOT_EQUALS:
                     return !lang.eq(chapter[parent.id], parent.value);
-
                 case operators.GREATER_THAN:
                     refValue = normalizeInt(refValue);
                     actualValue = normalizeInt(actualValue);
                     return lang.gt(actualValue, refValue);
-
                 case operators.LESS_THAN:
                     refValue = normalizeInt(refValue);
                     actualValue = normalizeInt(actualValue);
                     return lang.lt(actualValue, refValue);
-
                 default:
                     return lang[parent.type](chapter[parent.id], parent.value);
             }
@@ -68,7 +65,7 @@ const canDrawQuestion = ({parents}, chapter) => {
 
 
 export default class AddOnList extends Component {
-    static displayName = 'addOnList';
+    static displayName = types.ADD_ON_LIST;
 
     static propTypes = {
         question: PropTypes.shape({

@@ -7,6 +7,7 @@ import {concat, includes, isNil, filter, map, reject} from 'lodash';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import questionPropType from '../../util/questionPropType';
 import commonStyles from '../commonStyles';
 import styles from './styles';
@@ -38,10 +39,12 @@ const handleChangeAnswer = (question, option, answer, onChange) => {
     handleChange(question.name, answers, onChange);
 };
 
-const MultiSelect = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const MultiSelect = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.component.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.component.container}>
             {question.text && <TextWithBadge question={question} style={textWithBadgeStyle}/>}
             {question.options.map(
                 option => (option.text ? (
@@ -64,7 +67,7 @@ const MultiSelect = ({answer, question, onChange, style, textWithBadgeStyle, dis
     );
 };
 
-MultiSelect.displayName = 'multiSelect';
+MultiSelect.displayName = types.MULTI_SELECT;
 
 MultiSelect.propTypes = {
     question: questionPropType.isRequired,

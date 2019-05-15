@@ -6,11 +6,12 @@ import InputField from '@indec/react-native-md-textinput';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
-import {getInputValue} from '../../util';
+import {getInputValue, handleChangeText} from '../../util';
+import {types} from '../../enums';
 import styles from './styles';
 
 class TextInputOrNoAnswer extends Component {
-    static displayName = 'textInputOrNoAnswer';
+    static displayName = types.TEXT_INPUT_OR_NO_ANSWER;
 
     static propTypes = {
         question: PropTypes.shape({}).isRequired,
@@ -33,17 +34,20 @@ class TextInputOrNoAnswer extends Component {
         this.state = {block: false};
     }
 
-    handleChange(obj) {
-        this.props.onChange(obj);
-    }
-
-    handleBlock(obj) {
-        this.setState(() => ({block: !this.state.block}));
-        this.props.onChange(obj);
+    handleBlock() {
+        const {onChange, question} = this.props;
+        const {block} = this.state;
+        this.setState(() => ({block: !block}));
+        onChange({
+            [`${question.name}NoAnswer`]: !block
+        });
     }
 
     render() {
-        const {question, answer, style, textWithBadgeStyle, disabled} = this.props;
+        const {
+            answer, disabled, onChange, question, style, textWithBadgeStyle
+        } = this.props;
+        const {block} = this.state;
         const computedStyles = mergeStyles(styles, style);
         return (
             <View style={computedStyles.component.container}>
@@ -52,26 +56,27 @@ class TextInputOrNoAnswer extends Component {
                     style={textWithBadgeStyle}
                 />}
                 <Row>
-                    {!this.state.block && <InputField
+                    {!block && <InputField
                         inputStyle={computedStyles.component.field}
                         wrapperStyle={computedStyles.component.wrapper}
                         labelStyle={computedStyles.component.label}
                         maxLength={question.maxLength}
                         keyboardType="default"
                         value={getInputValue(answer)}
-                        onChangeText={text => this.handleChange({[question.name]: text})}
+                        onChangeText={text => handleChangeText(question, text, onChange)}
                         label={question.floatingLabel || ''}
                         highlightColor={computedStyles.highlightColor}
+                        autoFocus={question.autoFocus}
                         disabled={disabled}
                     />}
-                    {this.state.block &&
+                    {block &&
                     <Text style={computedStyles.component.blockedText}>
                         (Sin Nombre)
                     </Text>}
                     <Button
                         title={computedStyles.buttonTitle}
                         color={computedStyles.buttonColor}
-                        onPress={() => this.handleBlock({[`${question.name}NoAnswer`]: !this.state.block})}
+                        onPress={() => this.handleBlock()}
                         disabled={disabled}
                     />
                 </Row>

@@ -6,13 +6,19 @@ git:
 node_js:
   - "6"
   - "8"
+  - "10"
 before_install:
   - "export TRAVIS_COMMIT_MSG=\"`git log --format=%B --no-merges -n 1`\""
+  - if [[ `npm -v` == 3* ]]; then npm i -g npm; fi
 install:
   - yarn install
 script:
-  - yarn test
+  - npm run eslint
+  - npm test
+  - commitlint-travis
 cache:
   yarn: true
   directories:
     - node_modules
+notifications:
+  slack: indec-sistemas:U34T7wkSbzuMWCcXIw9DOY05

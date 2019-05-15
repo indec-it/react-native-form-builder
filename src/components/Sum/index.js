@@ -6,6 +6,7 @@ import {isEmpty, filter, toNumber, isNil, sum} from 'lodash';
 
 import TextWithBadge from '../TextWithBadge';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -32,10 +33,12 @@ const getSum = (section, {name, fieldsToAdd}, onChange) => {
     return result;
 };
 
-const Sum = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Sum = ({
+    section, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.container}>
             {question.text &&
             <TextWithBadge
                 question={question}
@@ -49,7 +52,7 @@ const Sum = ({section, question, onChange, style, textWithBadgeStyle, disabled})
     );
 };
 
-Sum.displayName = 'sum';
+Sum.displayName = types.SUM;
 
 Sum.propTypes = {
     section: PropTypes.shape({}).isRequired,

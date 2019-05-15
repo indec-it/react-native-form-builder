@@ -1,0 +1,48 @@
+{
+  "plugins": [
+    "lodash"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:lodash/recommended"
+  ],
+  "env": {
+    "es6": true
+  },
+  "rules": {
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "eol-last": [
+      "error"
+    ],
+    "prefer-const": [
+      "error"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "lodash/import-scope": [
+      "error",
+      "member"
+    ],
+    "lodash/prop-shorthand": "off"
+  }
+}

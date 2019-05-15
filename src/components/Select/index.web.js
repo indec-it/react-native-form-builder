@@ -5,9 +5,12 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import styles from './styles';
 
-const Select = ({answer, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Select = ({
+    answer, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
         <View style={computedStyles.container}>
@@ -34,7 +37,7 @@ const Select = ({answer, question, onChange, style, textWithBadgeStyle, disabled
     );
 };
 
-Select.displayName = 'select';
+Select.displayName = types.SELECT;
 
 Select.propTypes = {
     question: PropTypes.shape({}).isRequired,

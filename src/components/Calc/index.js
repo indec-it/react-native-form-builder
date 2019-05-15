@@ -5,6 +5,7 @@ import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
 
 import TextWithBadge from '../TextWithBadge';
 import {handleChange} from '../../util';
+import {types} from '../../enums';
 import commonStyles from '../commonStyles';
 import styles from './styles';
 
@@ -25,10 +26,12 @@ const getResult = (section, {name, calc}, onChange) => {
     return result;
 };
 
-const Calc = ({section, question, onChange, style, textWithBadgeStyle, disabled}) => {
+const Calc = ({
+    section, question, onChange, style, textWithBadgeStyle, disabled
+}) => {
     const computedStyles = mergeStyles(styles, style);
     return (
-        <View style={disabled ? commonStyles.disabledContainer : computedStyles.container}>
+        <View style={disabled ? commonStyles.disabled.container : computedStyles.container}>
             {question.text &&
             <TextWithBadge
                 question={question}
@@ -46,7 +49,7 @@ const Calc = ({section, question, onChange, style, textWithBadgeStyle, disabled}
     );
 };
 
-Calc.displayName = 'calc';
+Calc.displayName = types.CALC;
 
 Calc.propTypes = {
     section: PropTypes.shape({}).isRequired,
