@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {Badge} from 'react-native-elements';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import {includes, toString} from 'lodash';
+import {includes, toString, isEmpty} from 'lodash';
 
 import TextBox from '../TextBox';
 import {types} from '../../enums';
@@ -39,7 +39,7 @@ const TextWithBadge = ({question: {number, text, infoAfterText}, style, disabled
                     {text}
                 </Text>
             </View>
-            {infoAfterText && <TextBox text={infoAfterText} style={computedStyles.textBox}/>}
+            {!isEmpty(infoAfterText) && <TextBox text={infoAfterText} style={computedStyles.textBox}/>}
         </View>
     );
 };
