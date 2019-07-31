@@ -32,7 +32,9 @@ export default class Typeahead extends PureComponent {
         super(props);
         if (props.answer) {
             this.selectedSuggestion = true;
-            this.valueToShow = this.getSuggestionText(find(props.question.options, ['value', props.answer]));
+            this.valueToShow = this.getSuggestionText(
+                find(props.question.options, option => option.value === props.answer[props.question.name])
+            );
         } else {
             this.selectedSuggestion = false;
         }
