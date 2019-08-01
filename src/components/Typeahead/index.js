@@ -1,11 +1,12 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {includes, size, isEmpty, find} from 'lodash';
-import {TouchableOpacity, Text, TextInput, View} from 'react-native';
+import {includes, size, isEmpty, filter, get, toLower, find} from 'lodash';
+import {View} from 'react-native';
 import {stylePropType} from '@indec/react-native-commons/util';
-import {TextWithBadge} from '..';
+
+import {TextInput} from '..';
 import {types} from '../../enums';
-import {handleChangeText} from '../../util';
+import Suggestions from './Suggestions';
 import styles from './styles';
 
 export default class Typeahead extends PureComponent {
@@ -28,118 +29,55 @@ export default class Typeahead extends PureComponent {
         textWithBadgeStyle: null
     };
 
+
     constructor(props) {
         super(props);
-        if (props.answer) {
-            this.selectedSuggestion = true;
-            this.valueToShow = this.getSuggestionText(
-                find(props.question.options, option => option.value === props.answer[props.question.name])
-            );
-        } else {
-            this.selectedSuggestion = false;
-        }
-        this.suggestions = [];
+        this.state = {
+            suggestions: []
+        };
     }
 
-    componentDidMount() {
-        this.createSelectedValue(this.valueToShow, this.props.answer);
+    getSuggestions(answer) {
+        const value = get(answer, this.props.question.name);
+        const {name} = this.props.question;
+        this.props.onChange({[name]: value});
+
+        if (!isEmpty(answer) && size(get(answer, this.props.question.name)) > 2) {
+            this.setState(() => ({
+                suggestions: filter(
+                    this.props.question.options, option => includes(
+                        toLower(option.label), toLower(value)
+                    )
+                )
+            }));
+        }
     }
 
-    onChangeText = value => {
-        if (this.selectedSuggestion) {
-            this.selectedSuggestion = false;
-            this.clearValue();
-        } else {
-            this.valueToShow = value[this.props.question.name];
-            this.suggestions = this.filterSuggestions(
-                this.props.question.options, this.valueToShow
-            );
-            this.forceUpdate();
-        }
-    };
+    getAnswer() {
+        const {answer} = this.props;
+        return get(find(this.props.question.options, option => option.value === answer), 'label') || answer;
+    }
 
-    getSuggestionText = suggestion => suggestion.label;
-
-    getSuggestionValue = suggestion => suggestion.value;
-
-    clearValue = () => this.createSelectedValue('', '');
-
-    createSelectedValue = (suggestionText, suggestionValue) => {
-        this.suggestions = {};
-        const selectedValue = {};
-        selectedValue[this.props.question.name] = suggestionValue;
-        this.props.onChange(selectedValue);
-        this.valueToShow = suggestionText;
-    };
-
-    isSimilar = (value, suggestionText) => includes(suggestionText.toLowerCase(), value.toLowerCase());
-
-    shouldFilterSuggestions = (newSuggestions, value) => !isEmpty(newSuggestions) &&
-        value && !this.selectedSuggestion;
-
-    filterSuggestions = (newSuggestions, value) => {
-        if (size(value) < 2 || !this.shouldFilterSuggestions(newSuggestions, value)) {
-            return {};
-        }
-        return newSuggestions.reduce((suggestions, suggestion) => {
-            const suggestionText = this.getSuggestionText(suggestion);
-            const sgs = suggestions;
-            if (!suggestionText || !this.isSimilar(value, suggestionText)) {
-                return suggestions;
-            }
-            sgs[suggestionText] = suggestion;
-            return sgs;
-        }, {});
-    };
-
-    suggestionClick = suggestion => {
-        this.selectedSuggestion = true;
-        this.suggestions = {};
-        const value = this.getSuggestionValue(
-            find(this.props.question.options, ['label', suggestion])
-        );
-        this.createSelectedValue(suggestion, value);
-    };
-
-    renderSuggestions = () => {
-        const suggestionTexts = Object.keys(this.suggestions || {});
-        if (isEmpty(suggestionTexts)) {
-            return null;
-        }
-        return (
-            <View style={styles.suggestionsWrapper}>
-                {suggestionTexts.map(suggestion => (
-                    <TouchableOpacity
-                        suggestionText={suggestion}
-                        activeOpacity={0.6}
-                        style={styles.suggestion}
-                        onPress={() => this.suggestionClick(suggestion)}
-                    >
-                        <View style={styles.wrapper}>
-                            <Text style={styles.suggestionText}>
-                                {suggestion}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                ))}
-            </View>
-        );
-    };
+    handleSuggestion(suggestion) {
+        const {name} = this.props.question;
+        this.props.onChange({[name]: suggestion.value});
+        this.setState(() => ({suggestions: []}));
+    }
 
     render() {
         const {question, textWithBadgeStyle} = this.props;
+        const {suggestions} = this.state;
         return (
             <View style={styles.wrapper}>
-                {question.text && <TextWithBadge
-                    question={question}
-                    style={textWithBadgeStyle}
-                />}
                 <TextInput
-                    value={this.valueToShow}
-                    onChangeText={text => handleChangeText(question, text, this.onChangeText)}
-                    style={!this.selectedSuggestion ? styles.inputRed : styles.inputBlack}
+                    onChange={text => this.getSuggestions(text)}
+                    {...{question, textWithBadgeStyle}}
+                    answer={this.getAnswer()}
                 />
-                {this.renderSuggestions()}
+                {!isEmpty(suggestions) && <Suggestions
+                    suggestions={suggestions}
+                    onChangeSuggestion={suggestion => this.handleSuggestion(suggestion)}
+                />}
             </View>
         );
     }
