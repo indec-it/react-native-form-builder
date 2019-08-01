@@ -11,7 +11,7 @@ const Suggestions = ({suggestions, onChangeSuggestion}) => (
                 suggestionText={suggestion}
                 activeOpacity={0.6}
                 style={styles.suggestion}
-                onPress={onChangeSuggestion(suggestion)}
+                onPress={() => onChangeSuggestion(suggestion)}
             >
                 <View style={styles.wrapper}>
                     <Text style={styles.suggestionText}>
