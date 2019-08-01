@@ -42,7 +42,7 @@ export default class Typeahead extends PureComponent {
         const {name} = this.props.question;
         this.props.onChange({[name]: value});
 
-        if (!isEmpty(answer) && size(get(answer, this.props.question.name)) > 2) {
+        if (size(value) > 2) {
             this.setState(() => ({
                 suggestions: filter(
                     this.props.question.options, option => includes(
