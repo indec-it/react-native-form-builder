@@ -48,7 +48,7 @@ Select.propTypes = {
         )
     }).isRequired,
     onChange: PropTypes.func.isRequired,
-    answer: PropTypes.number,
+    answer: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: stylePropType,
     textWithBadgeStyle: stylePropType,
     disabled: PropTypes.bool
