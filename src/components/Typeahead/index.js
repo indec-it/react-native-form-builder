@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {includes, size, isEmpty, filter, get, toLower, find} from 'lodash';
 import {View} from 'react-native';
+import {Alert} from '@indec/react-native-commons';
 import {stylePropType} from '@indec/react-native-commons/util';
 
 import {TextInput} from '..';
@@ -13,6 +14,7 @@ export default class Typeahead extends PureComponent {
     static displayName = types.TYPE_AHEAD;
 
     static propTypes = {
+        onChange: PropTypes.func.isRequired,
         question: PropTypes.shape({
             name: PropTypes.string,
             options: PropTypes.arrayOf(PropTypes.shape({
@@ -21,12 +23,13 @@ export default class Typeahead extends PureComponent {
             }))
         }).isRequired,
         answer: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired,
-        textWithBadgeStyle: stylePropType
+        textWithBadgeStyle: stylePropType,
+        disabled: PropTypes.bool
     };
 
     static defaultProps = {
-        textWithBadgeStyle: null
+        textWithBadgeStyle: null,
+        disabled: false
     };
 
 
@@ -64,20 +67,28 @@ export default class Typeahead extends PureComponent {
         this.setState(() => ({suggestions: []}));
     }
 
+    handleOnBlur() {
+        if (!this.getAnswer()) {
+            const {name} = this.props.question;
+            this.props.onChange({[name]: null});
+        }
+    }
+
     render() {
-        const {question, textWithBadgeStyle} = this.props;
+        const {question, textWithBadgeStyle, disabled} = this.props;
         const {suggestions} = this.state;
         return (
             <View style={styles.wrapper}>
                 <TextInput
                     onChange={text => this.getSuggestions(text)}
-                    {...{question, textWithBadgeStyle}}
+                    {...{question, textWithBadgeStyle, disabled}}
                     answer={this.getAnswer()}
+                    onBlur={() => this.handleOnBlur()}
                 />
-                {!isEmpty(suggestions) && <Suggestions
+                {!isEmpty(suggestions) ? <Suggestions
                     suggestions={suggestions}
                     onChangeSuggestion={suggestion => this.handleSuggestion(suggestion)}
-                />}
+                /> : <Alert>No hay opciones</Alert>}
             </View>
         );
     }
