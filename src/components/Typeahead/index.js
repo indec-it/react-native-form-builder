@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {includes, size, isEmpty, filter, get, toLower, find} from 'lodash';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {stylePropType} from '@indec/react-native-commons/util';
 
 import {TextInput} from '..';
@@ -13,6 +13,7 @@ export default class Typeahead extends PureComponent {
     static displayName = types.TYPE_AHEAD;
 
     static propTypes = {
+        onChange: PropTypes.func.isRequired,
         question: PropTypes.shape({
             name: PropTypes.string,
             options: PropTypes.arrayOf(PropTypes.shape({
@@ -21,19 +22,21 @@ export default class Typeahead extends PureComponent {
             }))
         }).isRequired,
         answer: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired,
-        textWithBadgeStyle: stylePropType
+        textWithBadgeStyle: stylePropType,
+        disabled: PropTypes.bool
     };
 
     static defaultProps = {
-        textWithBadgeStyle: null
+        textWithBadgeStyle: null,
+        disabled: false
     };
 
 
     constructor(props) {
         super(props);
         this.state = {
-            suggestions: []
+            suggestions: [],
+            showNoOptions: false
         };
     }
 
@@ -43,13 +46,10 @@ export default class Typeahead extends PureComponent {
         this.props.onChange({[name]: value});
 
         if (size(value) > 2) {
-            this.setState(() => ({
-                suggestions: filter(
-                    this.props.question.options, option => includes(
-                        toLower(option.label), toLower(value)
-                    )
-                )
-            }));
+            const suggestions = filter(
+                this.props.question.options, option => includes(toLower(option.label), toLower(value))
+            );
+            this.setState(() => ({suggestions, showNoOptions: isEmpty(suggestions)}));
         }
     }
 
@@ -64,20 +64,31 @@ export default class Typeahead extends PureComponent {
         this.setState(() => ({suggestions: []}));
     }
 
+    handleOnBlur() {
+        const answer = !!find(this.props.question.options, option => option.value === this.props.answer);
+        if (!answer) {
+            const {name} = this.props.question;
+            this.props.onChange({[name]: null});
+        }
+        this.setState(() => ({showNoOptions: false}));
+    }
+
     render() {
-        const {question, textWithBadgeStyle} = this.props;
-        const {suggestions} = this.state;
+        const {question, textWithBadgeStyle, disabled} = this.props;
+        const {suggestions, showNoOptions} = this.state;
         return (
             <View style={styles.wrapper}>
                 <TextInput
                     onChange={text => this.getSuggestions(text)}
-                    {...{question, textWithBadgeStyle}}
+                    {...{question, textWithBadgeStyle, disabled}}
                     answer={this.getAnswer()}
+                    onBlur={() => this.handleOnBlur()}
                 />
                 {!isEmpty(suggestions) && <Suggestions
                     suggestions={suggestions}
                     onChangeSuggestion={suggestion => this.handleSuggestion(suggestion)}
                 />}
+                {showNoOptions && <Text style={styles.textStyle}>No hay opciones</Text>}
             </View>
         );
     }

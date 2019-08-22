@@ -28,7 +28,10 @@ const DateTimeInput = ({
 DateTimeInput.displayName = types.DATE_TIME_INPUT;
 
 DateTimeInput.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        format: PropTypes.string,
+        name: PropTypes.string
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.instanceOf(Date),

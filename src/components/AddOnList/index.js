@@ -69,6 +69,7 @@ export default class AddOnList extends Component {
 
     static propTypes = {
         question: PropTypes.shape({
+            text: PropTypes.string,
             name: PropTypes.string,
             childQuestions: PropTypes.arrayOf(PropTypes.shape({}))
         }).isRequired,

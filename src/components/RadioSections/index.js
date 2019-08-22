@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import {isEqual} from 'lodash';
+import {isEqual, map} from 'lodash';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
@@ -21,7 +21,7 @@ const RadioSections = ({
                 question={question}
                 style={textWithBadgeStyle}
             />}
-            {question.options.map(option => (
+            {map(question.options, option => (
                 option.section ? (
                     <Text
                         key={option.section}
@@ -48,7 +48,17 @@ const RadioSections = ({
 RadioSections.displayName = types.RADIO_SECTIONS;
 
 RadioSections.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        name: PropTypes.string,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                section: PropTypes.string,
+                value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+                label: PropTypes.string
+            })
+        )
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.number,

@@ -54,6 +54,8 @@ Calc.displayName = types.CALC;
 Calc.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({
+        text: PropTypes.string,
+        textAfterCalc: PropTypes.string,
         name: PropTypes.string.isRequired,
         calc: PropTypes.func.isRequired
     }).isRequired,

@@ -39,7 +39,12 @@ const DatePicker = ({
 };
 
 DatePicker.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        placeholder: PropTypes.string,
+        minDate: PropTypes.string,
+        maxDate: PropTypes.string
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.instanceOf(Date),
