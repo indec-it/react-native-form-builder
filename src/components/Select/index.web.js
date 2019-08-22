@@ -40,7 +40,17 @@ const Select = ({
 Select.displayName = types.SELECT;
 
 Select.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        name: PropTypes.string,
+        placeholder: PropTypes.string,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+                label: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+            })
+        )
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.number,
     style: stylePropType,

@@ -14,7 +14,13 @@ class TextInputOrNoAnswer extends Component {
     static displayName = types.TEXT_INPUT_OR_NO_ANSWER;
 
     static propTypes = {
-        question: PropTypes.shape({}).isRequired,
+        question: PropTypes.shape({
+            name: PropTypes.string,
+            text: PropTypes.string,
+            maxLength: PropTypes.number,
+            floatingLabel: PropTypes.string,
+            autoFocus: PropTypes.bool
+        }).isRequired,
         onChange: PropTypes.func.isRequired,
         answer: PropTypes.string,
         style: stylePropType,

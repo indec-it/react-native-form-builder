@@ -57,6 +57,7 @@ Sum.displayName = types.SUM;
 Sum.propTypes = {
     section: PropTypes.shape({}).isRequired,
     question: PropTypes.shape({
+        text: PropTypes.string,
         name: PropTypes.string.isRequired,
         fieldsToAdd: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired,

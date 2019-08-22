@@ -11,7 +11,7 @@ import commonStyles from '../commonStyles';
 import styles from './styles';
 
 const TextInput = ({
-    answer, question, onChange, style, textWithBadgeStyle, disabled
+    answer, question, onChange, style, textWithBadgeStyle, disabled, ...props
 }) => {
     const computedStyles = mergeStyles(styles, style);
     return (
@@ -32,6 +32,7 @@ const TextInput = ({
                 highlightColor={computedStyles.highlightColor}
                 autoFocus={question.autoFocus}
                 disabled={disabled}
+                {...props}
             />
             {question.textAfterInput &&
             <Text style={computedStyles.component.textAfterInput}>
@@ -44,7 +45,13 @@ const TextInput = ({
 TextInput.displayName = types.TEXT_INPUT;
 
 TextInput.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        maxLength: PropTypes.number,
+        floatingLabel: PropTypes.string,
+        autoFocus: PropTypes.bool,
+        textAfterInput: PropTypes.string
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.string,
     style: stylePropType,

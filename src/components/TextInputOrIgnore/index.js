@@ -66,7 +66,13 @@ const TextInputOrIgnore = ({
 TextInputOrIgnore.displayName = types.TEXT_INPUT_OR_IGNORE;
 
 TextInputOrIgnore.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        maxLength: PropTypes.number,
+        floatingLabel: PropTypes.string,
+        autoFocus: PropTypes.number,
+        inputUnit: PropTypes.string
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.bool,

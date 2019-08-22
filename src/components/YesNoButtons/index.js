@@ -92,7 +92,14 @@ const YesNoButtons = ({
 YesNoButtons.displayName = types.YES_NO_BUTTONS;
 
 YesNoButtons.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        trueValue: PropTypes.string,
+        falseValue: PropTypes.string,
+        dkValue: PropTypes.string,
+        text: PropTypes.string,
+        name: PropTypes.string,
+        dkLabel: PropTypes.string
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.bool,

@@ -20,7 +20,9 @@ const Title = ({question, style}) => {
 Title.displayName = types.TITLE;
 
 Title.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string
+    }).isRequired,
     style: stylePropType
 };
 

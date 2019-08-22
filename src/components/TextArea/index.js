@@ -41,7 +41,13 @@ const TextArea = ({
 TextArea.displayName = types.TEXT_AREA;
 
 TextArea.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        autoFocus: PropTypes.bool,
+        maxLength: PropTypes.number,
+        numberOfLines: PropTypes.number,
+        textAfterInput: PropTypes.string
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.string,
     style: stylePropType,

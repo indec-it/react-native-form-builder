@@ -44,7 +44,13 @@ const IntegerInput = ({
 IntegerInput.displayName = types.INTEGER_INPUT;
 
 IntegerInput.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        textAfterInput: PropTypes.string,
+        maxLength: PropTypes.number,
+        label: PropTypes.string,
+        autoFocus: PropTypes.bool
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([
         PropTypes.number,

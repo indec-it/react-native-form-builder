@@ -4,7 +4,7 @@ import {Text, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import {Row, Col, Grid} from '@indec/react-native-commons';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
-import {isEqual} from 'lodash';
+import {isEqual, map} from 'lodash';
 
 import TextBox from '../TextBox';
 import {TextWithBadge} from '..';
@@ -56,7 +56,7 @@ const RadioTable = ({
             <Grid>
                 <Row style={computedStyles.component.row}>
                     <Col size={4}/>
-                    {question.options.map(option => (
+                    {map(question.options, option => (
                         <Col
                             key={option.text}
                             style={computedStyles.component.column}
@@ -67,7 +67,7 @@ const RadioTable = ({
                         </Col>
                     ))}
                 </Row>
-                {question.questions.map(rowQuestion => (
+                {map(question.questions, rowQuestion => (
                     renderRowQuestion(
                         question,
                         section,
@@ -87,7 +87,17 @@ RadioTable.displayName = types.RADIO_TABLE;
 
 RadioTable.propTypes = {
     section: PropTypes.shape({}).isRequired,
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                text: PropTypes.string
+            })
+        ),
+        questions: PropTypes.arrayOf(
+            PropTypes.shape({})
+        )
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     style: stylePropType,
     textWithBadgeStyle: stylePropType,

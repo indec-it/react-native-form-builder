@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Picker, View} from 'react-native';
 import {mergeStyles, stylePropType} from '@indec/react-native-commons/util';
+import {map} from 'lodash';
 
 import {TextWithBadge} from '..';
 import {handleChange} from '../../util';
@@ -24,7 +25,7 @@ const Select = ({
                     onValueChange={itemValue => handleChange(question.name, itemValue, onChange)}
                     enabled={!disabled}
                 >
-                    {question.options.map(option => (
+                    {map(question.options, option => (
                         <Picker.Item key={option.value} label={option.label} value={option.value}/>
                     ))}
                 </Picker>
@@ -36,7 +37,16 @@ const Select = ({
 Select.displayName = types.SELECT;
 
 Select.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        name: PropTypes.string,
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                label: PropTypes.string,
+                value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+            })
+        )
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.number,
     style: stylePropType,

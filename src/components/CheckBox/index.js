@@ -34,7 +34,11 @@ const Checkbox = ({
 Checkbox.displayName = types.CHECKBOX;
 
 Checkbox.propTypes = {
-    question: PropTypes.shape({}).isRequired,
+    question: PropTypes.shape({
+        text: PropTypes.string,
+        checkBoxTitle: PropTypes.string,
+        name: PropTypes.string
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     answer: PropTypes.bool,
     style: stylePropType,
