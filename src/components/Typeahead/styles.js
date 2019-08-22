@@ -34,5 +34,8 @@ export default StyleSheet.create({
     },
     wrapper: {
         flex: 1
+    },
+    textStyle: {
+        marginTop: -15
     }
 });
