@@ -68,7 +68,8 @@ export default class Typeahead extends PureComponent {
     }
 
     handleOnBlur() {
-        if (!this.getAnswer()) {
+        const answer = !!find(this.props.question.options, option => option.value === this.props.answer);
+        if (!answer) {
             const {name} = this.props.question;
             this.props.onChange({[name]: null});
         }
