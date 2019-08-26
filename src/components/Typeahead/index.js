@@ -86,7 +86,7 @@ export default class Typeahead extends PureComponent {
                 />
                 {!isEmpty(suggestions) && <Suggestions
                     suggestions={suggestions}
-                    onChangeSuggestion={suggestion => this.handleSuggestion(suggestion)}
+                    onChange={suggestion => this.handleSuggestion(suggestion)}
                 />}
                 {showNoOptions && <Text style={styles.textStyle}>No hay opciones</Text>}
             </View>
