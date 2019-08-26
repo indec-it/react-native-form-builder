@@ -1,4 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+
+const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
     suggestionsWrapper: {
@@ -7,14 +9,13 @@ export default StyleSheet.create({
     },
     suggestion: {
         height: 40,
-        padding: 5,
-        borderBottomColor: '#ddd',
-        borderBottomWidth: 1
+        padding: 5
     },
     suggestionText: {
         fontSize: 20,
         height: 40,
-        padding: 0
+        padding: 0,
+        width
     },
     inputRed: {
         fontSize: 15,
